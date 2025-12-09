@@ -1,1 +1,1 @@
-console.log("Web de Catering Gil & Román cargada correctamente.");
+console.log("Web Eventos Málaga cargada correctamente.");
