@@ -2,81 +2,170 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <title>Pedir presupuesto | Catering Gil y Román</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eventos Málaga | Conciertos, Fiestas y Actividades</title>
 
-  <meta name="description" content="Eventos en Málaga: Conciertos, fiestas, actividades culturales y reuniones. Descubre la agenda semanal y participa en los mejores eventos de la ciudad.">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+    }
 
-  <link rel="stylesheet" href="style.css" />
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    form {
+      background: #fff;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 14px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #333;
+    }
+
+    .mensaje {
+      text-align: center;
+      margin-bottom: 15px;
+      font-weight: bold;
+      color: #0a7;
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <h1>Eventos Málaga</h1>
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#agenda">Agenda</a>
-      <a href="#galeria">Galería</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-  </header>
+  <div class="container">
+    <h1>Pedir presupuesto</h1>
+    <p>Cuéntanos los datos básicos de tu evento</p>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h2>Descubre los mejores eventos en Málaga</h2>
-    <p>Conciertos, fiestas, actividades culturales y reuniones para todos los gustos.</p>
-    <button onclick="document.getElementById('agenda').scrollIntoView({behavior:'smooth'})">
-      Ver Agenda
-    </button>
-  </section>
+    <div id="mensaje" class="mensaje"></div>
 
-  <!-- AGENDA -->
-  <section id="agenda">
-    <h2>Agenda Semanal</h2>
+    <form id="formPresupuesto">
 
-    <div class="card">
-      <h3>Concierto de Jazz</h3>
-      <p>📅 Viernes 20:00 - Plaza de la Música, Málaga</p>
-    </div>
+      <input type="text" id="nombre" placeholder="Nombre completo" required />
+      <input type="tel" id="telefono" placeholder="Teléfono" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="date" id="fechaEvento" required />
+      <input type="text" id="direccion" placeholder="Dirección del evento" required />
+      <input type="number" id="personas" placeholder="Número de personas" required min="1" />
 
-    <div class="card">
-      <h3>Fiesta Chill en La Cultural</h3>
-      <p>📅 Sábado 22:00 - Peña La Cultural, Teatinos</p>
-    </div>
+      <button type="submit">Continuar</button>
 
-    <div class="card">
-      <h3>Exposición de Arte Local</h3>
-      <p>📅 Domingo 18:00 - Centro Cultural Málaga</p>
-    </div>
-  </section>
+    </form>
+  </div>
 
-  <!-- GALERÍA -->
-  <section id="galeria">
-    <h2>Galería de Eventos</h2>
-    <div class="galeria-grid">
-      <img src="images/WhatsApp Image 2025-12-09 at 20.36.48.jpeg" alt="Catering Málaga foto 1">
-      <img src="images/WhatsApp Image 2025-12-09 at 20.42.25.jpeg" alt="Catering Málaga foto 2">
-      <img src="images/WhatsApp Image 2025-12-09 at 20.42.26 (1).jpeg" alt="Catering Málaga foto 3">
-      <img src="images/WhatsApp Image 2025-12-09 at 20.42.26 (2).jpeg" alt="Catering Málaga foto 4">
-      <img src="images/WhatsApp Image 2025-12-09 at 20.42.26.jpeg" alt="Catering Málaga foto 5">
-    </div>
-  </section>
+  <!-- FIREBASE + LÓGICA -->
+  <script type="module">
+    import { db } from "./firebase.js";
+    import {
+      doc,
+      getDoc,
+      setDoc,
+      updateDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-  <!-- CONTACTO -->
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <p>📍 Málaga, España</p>
-    <p>📞 643 213 578</p>
-    <p>📧 laculturaltelefonica@gmail.com</p>
-  </section>
+    const form = document.getElementById("formPresupuesto");
+    const mensaje = document.getElementById("mensaje");
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 Eventos Málaga | Web creada por Jesús Orellana</p>
-  </footer>
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-  <script src="script.js"></script>
+      const nombre = document.getElementById("nombre").value.trim();
+      const telefono = document.getElementById("telefono").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const fechaEvento = document.getElementById("fechaEvento").value;
+      const direccion = document.getElementById("direccion").value.trim();
+      const personas = Number(document.getElementById("personas").value);
+
+      const clienteRef = doc(db, "clientes", telefono);
+      const clienteSnap = await getDoc(clienteRef);
+
+      // 📦 Datos base del presupuesto (sesión actual)
+      const presupuestoActual = {
+        nombre,
+        telefono,
+        email,
+        fechaEvento,
+        direccion,
+        personas,
+        carrito: [],
+        extras: {},
+        creadoEn: Date.now()
+      };
+
+      // 💾 Guardamos sesión local
+      localStorage.setItem("presupuesto", JSON.stringify(presupuestoActual));
+
+      if (!clienteSnap.exists()) {
+        // 🆕 Cliente nuevo
+        await setDoc(clienteRef, {
+          nombre,
+          email,
+          telefono,
+          pedidosTotales: 0,
+          totalGastado: 0,
+          esFrecuente: false,
+          fechaPrimerPedido: serverTimestamp()
+        });
+      } else {
+        // 🔁 Cliente recurrente
+        mensaje.innerText = "¡Bienvenido de nuevo 👋!";
+        mensaje.style.display = "block";
+
+        // Pre-cargar datos si hiciera falta en el futuro
+        const data = clienteSnap.data();
+        presupuestoActual.nombre = data.nombre;
+        presupuestoActual.email = data.email;
+
+        localStorage.setItem("presupuesto", JSON.stringify(presupuestoActual));
+      }
+
+      // 👉 Siguiente paso
+      setTimeout(() => {
+        window.location.href = "selector.html";
+      }, 500);
+    });
+  </script>
+
 </body>
 </html>

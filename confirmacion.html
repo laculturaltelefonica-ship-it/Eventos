@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmación | Catering Gil y Román</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      max-width: 500px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #111;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    button {
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #111;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover {
+      background: #333;
+    }
+
+    #resumenPedido {
+      text-align: left;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      max-height: 250px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>¡Pedido confirmado!</h1>
+    <p>Gracias por confiar en <strong>Catering Gil y Román</strong>.  
+       Hemos recibido su pedido y nos pondremos en contacto con usted.</p>
+
+    <div id="resumenPedido"></div>
+
+    <button onclick="window.location.href='index.html'">Hacer otro pedido</button>
+    <button onclick="window.print()">Imprimir presupuesto</button>
+  </div>
+
+  <script>
+    // Mostrar resumen del pedido
+    const resumenDiv = document.getElementById('resumenPedido');
+    const datos = JSON.parse(localStorage.getItem('presupuesto'));
+
+    if (datos) {
+      let html = `<strong>Cliente:</strong> ${datos.nombre} <br>`;
+      html += `<strong>Teléfono:</strong> ${datos.telefono} <br>`;
+      html += `<strong>Email:</strong> ${datos.email} <br>`;
+      html += `<strong>Fecha del evento:</strong> ${datos.fechaEvento} <br>`;
+      html += `<strong>Dirección:</strong> ${datos.direccion} <br>`;
+      html += `<strong>Personas:</strong> ${datos.personas} <br>`;
+      html += `<strong>Platos seleccionados:</strong><ul>`;
+      datos.carrito.forEach(item => {
+        html += `<li>${item.nombre} – ${item.precio} € / persona</li>`;
+      });
+      html += `</ul>`;
+
+      if (datos.extras && Object.keys(datos.extras).length > 0) {
+        html += `<strong>Extras:</strong><ul>`;
+        for (let e in datos.extras) {
+          html += `<li>${e} – ${datos.extras[e]} € ${e === "Vajilla" ? "/ persona" : ""}</li>`;
+        }
+        html += `</ul>`;
+      }
+
+      html += `<strong>Total:</strong> ${datos.total} €`;
+
+      resumenDiv.innerHTML = html;
+
+      // Limpiar localStorage si quieres que empiece nuevo pedido
+      localStorage.removeItem('presupuesto');
+    } else {
+      resumenDiv.innerHTML = "No se encontró información del pedido.";
+    }
+  </script>
+
+</body>
+</html>

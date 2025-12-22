@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Resumen del pedido | Catering Gil y Román</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="selector.css">
+</head>
+
+<body>
+
+  <header class="top">
+    <h1>Resumen del pedido</h1>
+    <p id="infoCliente"></p>
+  </header>
+
+  <main class="contenedor">
+
+    <section class="resumen">
+      <h2>Detalles</h2>
+      <ul id="listaResumen"></ul>
+
+      <p id="detalleExtras"></p>
+      <p id="detallePersonas"></p>
+      <p id="detalleDistancia"></p>
+      <p id="totalFinal"></p>
+
+      <button id="confirmar">Confirmar pedido</button>
+    </section>
+
+  </main>
+
+  <script type="module">
+    import { db } from "./firebase.js";
+    import { collection, addDoc, doc, updateDoc, increment, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    import emailjs from "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
+
+    let datos = JSON.parse(localStorage.getItem("presupuesto"));
+
+    const infoCliente = document.getElementById("infoCliente");
+    const listaResumen = document.getElementById("listaResumen");
+    const detalleExtras = document.getElementById("detalleExtras");
+    const detallePersonas = document.getElementById("detallePersonas");
+    const detalleDistancia = document.getElementById("detalleDistancia");
+    const totalFinal = document.getElementById("totalFinal");
+    const confirmarBtn = document.getElementById("confirmar");
+
+    infoCliente.innerText = `${datos.nombre} · ${datos.personas} personas`;
+
+    // Función para calcular distancia (aprox, opcional)
+    async function calcularDistancia() {
+      // Ejemplo: distancia base fija 10km (puedes integrar Google Maps API)
+      const distanciaKm = 10;
+      datos.distanciaKm = distanciaKm;
+      detalleDistancia.innerText = `Distancia aproximada: ${distanciaKm} km`;
+    }
+
+    function renderResumen() {
+      listaResumen.innerHTML = "";
+      let subtotal = 0;
+
+      datos.carrito.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.nombre} – ${item.precio} € / persona`;
+        listaResumen.appendChild(li);
+        subtotal += item.precio * datos.personas;
+      });
+
+      // Extras
+      let extrasTxt = "Extras: ";
+      for (let e in datos.extras) {
+        extrasTxt += `${e} (${datos.extras[e]} €) `;
+        subtotal += datos.extras[e] * (e === "Vajilla" ? datos.personas : 1);
+      }
+      detalleExtras.innerText = extrasTxt;
+      detallePersonas.innerText = `Número de personas: ${datos.personas}`;
+      datos.total = subtotal;
+      totalFinal.innerText = `Total final: ${subtotal} €`;
+    }
+
+    async function guardarPedido() {
+      // Guardar en Firestore
+      const pedidosRef = collection(db, "pedidos");
+      await addDoc(pedidosRef, {
+        ...datos,
+        fechaCreacion: serverTimestamp()
+      });
+
+      // Actualizar métricas cliente
+      const clienteRef = doc(db, "clientes", datos.telefono);
+      const clienteSnap = await getDoc(clienteRef);
+      let pedidosTotales = clienteSnap.exists() ? clienteSnap.data().pedidosTotales : 0;
+      let totalGastado = clienteSnap.exists() ? clienteSnap.data().totalGastado : 0;
+
+      await updateDoc(clienteRef, {
+        pedidosTotales: increment(1),
+        totalGastado: increment(datos.total),
+        ultimoPedido: serverTimestamp(),
+        esFrecuente: (pedidosTotales + 1) >= 3
+      });
+    }
+
+    async function enviarEmail() {
+      emailjs.init("TU_USER_ID"); // Reemplaza con tu userID de EmailJS
+
+      const templateParams = {
+        nombre: datos.nombre,
+        telefono: datos.telefono,
+        email: datos.email,
+        fechaEvento: datos.fechaEvento,
+        direccion: datos.direccion,
+        personas: datos.personas,
+        carrito: JSON.stringify(datos.carrito, null, 2),
+        extras: JSON.stringify(datos.extras, null, 2),
+        total: datos.total
+      };
+
+      await emailjs.send("TU_SERVICE_ID", "TU_TEMPLATE_ID", templateParams);
+    }
+
+    confirmarBtn.addEventListener("click", async () => {
+      confirmarBtn.disabled = true;
+      confirmarBtn.innerText = "Guardando pedido...";
+
+      await calcularDistancia();
+      renderResumen();
+      await guardarPedido();
+      await enviarEmail();
+
+      alert("Pedido confirmado. ¡Gracias!");
+      window.location.href = "confirmacion.html"; // Página 4
+    });
+
+    // Inicial
+    calcularDistancia();
+    renderResumen();
+
+  </script>
+
+</body>
+</html>

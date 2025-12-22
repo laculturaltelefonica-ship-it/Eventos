@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Selecciona tu menú | Catering Gil y Román</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="selector.css">
+</head>
+
+<body>
+
+  <header class="top">
+    <h1>Selecciona tu menú</h1>
+    <p id="infoCliente"></p>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- CATEGORÍAS -->
+    <section class="grid">
+
+      <div class="card" onclick="addItem('Carnes', 15)">
+        <h3>Carnes</h3>
+        <span>15 € / persona</span>
+      </div>
+
+      <div class="card" onclick="addItem('Ensaladas', 6)">
+        <h3>Ensaladas</h3>
+        <span>6 € / persona</span>
+      </div>
+
+      <div class="card" onclick="addItem('Entrantes', 5)">
+        <h3>Entrantes</h3>
+        <span>5 € / persona</span>
+      </div>
+
+      <div class="card" onclick="addItem('Bebidas', 4)">
+        <h3>Bebidas</h3>
+        <span>4 € / persona</span>
+      </div>
+
+    </section>
+
+    <!-- EXTRAS -->
+    <section class="extras">
+      <h2>Extras</h2>
+
+      <label>
+        <input type="checkbox" onchange="toggleExtra('Vajilla', 2)">
+        Vajilla y cubertería (+2 € / persona)
+      </label>
+
+      <label>
+        <input type="checkbox" onchange="toggleExtra('Camareros', 120)">
+        Camareros (120 € fijo)
+      </label>
+    </section>
+
+    <!-- RESUMEN -->
+    <aside class="resumen">
+      <h2>Resumen</h2>
+      <ul id="lista"></ul>
+      <p id="total">Total: 0 €</p>
+
+      <button onclick="continuar()">Continuar</button>
+    </aside>
+
+  </main>
+
+  <script type="module" src="selector.js"></script>
+</body>
+</html>
