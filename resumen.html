@@ -9,46 +9,50 @@
 
 <body>
 
-  <header class="top">
-    <h1>Resumen del pedido</h1>
-    <p id="infoCliente"></p>
-  </header>
+<header class="top">
+  <h1>Resumen del pedido</h1>
+  <p id="infoCliente"></p>
+</header>
 
-  <main class="contenedor">
+<main class="contenedor">
+  <section class="resumen">
+    <h2>Detalles</h2>
+    <ul id="listaResumen"></ul>
 
-    <section class="resumen">
-      <h2>Detalles</h2>
-      <ul id="listaResumen"></ul>
+    <p id="detalleExtras"></p>
+    <p id="detallePersonas"></p>
+    <p id="detalleDistancia"></p>
+    <p id="totalFinal"></p>
 
-      <p id="detalleExtras"></p>
-      <p id="detallePersonas"></p>
-      <p id="detalleDistancia"></p>
-      <p id="totalFinal"></p>
+    <button id="confirmar">Confirmar pedido</button>
+  </section>
+</main>
 
-      <button id="confirmar">Confirmar pedido</button>
-    </section>
-
-  </main>
+<!-- ✅ EmailJS como script GLOBAL -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script type="module">
 import { db } from "./firebase.js";
-import { collection, addDoc, doc, updateDoc, increment, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-import emailjs from "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
+import {
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
+  increment,
+  serverTimestamp,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-// 🔁 Cargar datos del presupuesto actualizado
-function cargarDatos() {
-  const datos = JSON.parse(localStorage.getItem("presupuesto"));
-  if (!datos) {
-    alert("No hay presupuesto guardado. Redirigiendo...");
-    window.location.href = "index.html";
-    return null;
-  }
-  return datos;
+/* ---------------- DATOS ---------------- */
+
+const datos = JSON.parse(localStorage.getItem("presupuesto"));
+if (!datos) {
+  alert("No hay presupuesto guardado");
+  window.location.href = "index.html";
 }
 
-let datos = cargarDatos();
+/* ---------------- DOM ---------------- */
 
-// Referencias a elementos del DOM
 const infoCliente = document.getElementById("infoCliente");
 const listaResumen = document.getElementById("listaResumen");
 const detalleExtras = document.getElementById("detalleExtras");
@@ -57,92 +61,79 @@ const detalleDistancia = document.getElementById("detalleDistancia");
 const totalFinal = document.getElementById("totalFinal");
 const confirmarBtn = document.getElementById("confirmar");
 
-// Mostrar info inicial
 infoCliente.innerText = `${datos.nombre} · ${datos.personas} personas`;
 
-async function calcularDistancia() {
-  // Ejemplo de distancia fija, puedes integrar Google Maps API
-  const distanciaKm = 10;
-  datos.distanciaKm = distanciaKm;
-  detalleDistancia.innerText = `Distancia aproximada: ${distanciaKm} km`;
-}
+/* ---------------- RESUMEN ---------------- */
 
 function renderResumen() {
-  if (!datos) return;
-
   listaResumen.innerHTML = "";
-  let subtotal = 0;
+  let total = 0;
 
-  // Productos
   (datos.carrito || []).forEach(item => {
     const li = document.createElement("li");
     li.textContent = `${item.nombre} (${item.categoria}) – ${item.precioPersona} € x ${datos.personas}`;
     listaResumen.appendChild(li);
-    subtotal += (item.total || item.precioPersona * datos.personas);
+    total += item.total;
   });
 
-  // Extras
   let extrasTxt = "Extras: ";
   for (let e in datos.extras || {}) {
     extrasTxt += `${e} (${datos.extras[e]} €) `;
-    subtotal += datos.extras[e] * (e === "Vajilla" ? datos.personas : 1);
+    total += datos.extras[e];
   }
-  detalleExtras.innerText = extrasTxt;
-  detallePersonas.innerText = `Número de personas: ${datos.personas}`;
-  datos.total = subtotal;
-  totalFinal.innerText = `Total final: ${subtotal.toFixed(2)} €`;
 
-  // Guardar de nuevo en localStorage
+  detalleExtras.innerText = extrasTxt;
+  detallePersonas.innerText = `Personas: ${datos.personas}`;
+  detalleDistancia.innerText = "Distancia aproximada: 10 km";
+
+  datos.total = total;
+  totalFinal.innerText = `Total final: ${total.toFixed(2)} €`;
+
   localStorage.setItem("presupuesto", JSON.stringify(datos));
 }
 
+/* ---------------- FIREBASE ---------------- */
+
 async function guardarPedido() {
-  const pedidosRef = collection(db, "pedidos");
-  await addDoc(pedidosRef, { ...datos, fechaCreacion: serverTimestamp() });
-
-  const clienteRef = doc(db, "clientes", datos.telefono);
-  const clienteSnap = await getDoc(clienteRef);
-  let pedidosTotales = clienteSnap.exists() ? clienteSnap.data().pedidosTotales : 0;
-
-  await updateDoc(clienteRef, {
-    pedidosTotales: increment(1),
-    totalGastado: increment(datos.total),
-    ultimoPedido: serverTimestamp(),
-    esFrecuente: (pedidosTotales + 1) >= 3
+  await addDoc(collection(db, "pedidos"), {
+    ...datos,
+    fechaCreacion: serverTimestamp()
   });
 }
 
-async function enviarEmail() {
+/* ---------------- EMAIL ---------------- */
+
+function enviarEmail() {
   emailjs.init("XTg7lRhg7RNbEGYMB");
-  const templateParams = {
-    nombre: datos.nombre,
-    telefono: datos.telefono,
-    email: datos.email,
-    fechaEvento: datos.fechaEvento,
-    direccion: datos.direccion,
-    personas: datos.personas,
-    carrito: JSON.stringify(datos.carrito, null, 2),
-    extras: JSON.stringify(datos.extras, null, 2),
-    total: datos.total
-  };
-  await emailjs.send("service_4olj3be", "template_g5jz7ir", templateParams);
+
+  return emailjs.send(
+    "service_4olj3be",
+    "template_g5jz7ir",
+    {
+      nombre: datos.nombre,
+      telefono: datos.telefono,
+      email: datos.email,
+      carrito: datos.carrito.map(p => `${p.nombre} (${p.categoria})`).join(", "),
+      total: datos.total
+    }
+  );
 }
+
+/* ---------------- CONFIRMAR ---------------- */
 
 confirmarBtn.addEventListener("click", async () => {
   confirmarBtn.disabled = true;
-  confirmarBtn.innerText = "Guardando pedido...";
+  confirmarBtn.innerText = "Procesando...";
 
-  await calcularDistancia();
   renderResumen();
   await guardarPedido();
   await enviarEmail();
 
-  alert("Pedido confirmado. ¡Gracias!");
   window.location.href = "confirmacion.html";
 });
 
-// Inicial
-calcularDistancia();
+/* ---------------- INIT ---------------- */
+
 renderResumen();
 </script>
 
