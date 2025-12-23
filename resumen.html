@@ -30,112 +30,121 @@
 
   </main>
 
-  <script type="module">
-    import { db } from "./firebase.js";
-    import { collection, addDoc, doc, updateDoc, increment, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-    import emailjs from "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
+<script type="module">
+import { db } from "./firebase.js";
+import { collection, addDoc, doc, updateDoc, increment, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import emailjs from "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
 
-    let datos = JSON.parse(localStorage.getItem("presupuesto"));
+// 🔁 Cargar datos del presupuesto actualizado
+function cargarDatos() {
+  const datos = JSON.parse(localStorage.getItem("presupuesto"));
+  if (!datos) {
+    alert("No hay presupuesto guardado. Redirigiendo...");
+    window.location.href = "index.html";
+    return null;
+  }
+  return datos;
+}
 
-    const infoCliente = document.getElementById("infoCliente");
-    const listaResumen = document.getElementById("listaResumen");
-    const detalleExtras = document.getElementById("detalleExtras");
-    const detallePersonas = document.getElementById("detallePersonas");
-    const detalleDistancia = document.getElementById("detalleDistancia");
-    const totalFinal = document.getElementById("totalFinal");
-    const confirmarBtn = document.getElementById("confirmar");
+let datos = cargarDatos();
 
-    infoCliente.innerText = `${datos.nombre} · ${datos.personas} personas`;
+// Referencias a elementos del DOM
+const infoCliente = document.getElementById("infoCliente");
+const listaResumen = document.getElementById("listaResumen");
+const detalleExtras = document.getElementById("detalleExtras");
+const detallePersonas = document.getElementById("detallePersonas");
+const detalleDistancia = document.getElementById("detalleDistancia");
+const totalFinal = document.getElementById("totalFinal");
+const confirmarBtn = document.getElementById("confirmar");
 
-    // Función para calcular distancia (aprox, opcional)
-    async function calcularDistancia() {
-      // Ejemplo: distancia base fija 10km (puedes integrar Google Maps API)
-      const distanciaKm = 10;
-      datos.distanciaKm = distanciaKm;
-      detalleDistancia.innerText = `Distancia aproximada: ${distanciaKm} km`;
-    }
+// Mostrar info inicial
+infoCliente.innerText = `${datos.nombre} · ${datos.personas} personas`;
 
-    function renderResumen() {
-      listaResumen.innerHTML = "";
-      let subtotal = 0;
+async function calcularDistancia() {
+  // Ejemplo de distancia fija, puedes integrar Google Maps API
+  const distanciaKm = 10;
+  datos.distanciaKm = distanciaKm;
+  detalleDistancia.innerText = `Distancia aproximada: ${distanciaKm} km`;
+}
 
-      datos.carrito.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.nombre} – ${item.precio} € / persona`;
-        listaResumen.appendChild(li);
-        subtotal += item.precio * datos.personas;
-      });
+function renderResumen() {
+  if (!datos) return;
 
-      // Extras
-      let extrasTxt = "Extras: ";
-      for (let e in datos.extras) {
-        extrasTxt += `${e} (${datos.extras[e]} €) `;
-        subtotal += datos.extras[e] * (e === "Vajilla" ? datos.personas : 1);
-      }
-      detalleExtras.innerText = extrasTxt;
-      detallePersonas.innerText = `Número de personas: ${datos.personas}`;
-      datos.total = subtotal;
-      totalFinal.innerText = `Total final: ${subtotal} €`;
-    }
+  listaResumen.innerHTML = "";
+  let subtotal = 0;
 
-    async function guardarPedido() {
-      // Guardar en Firestore
-      const pedidosRef = collection(db, "pedidos");
-      await addDoc(pedidosRef, {
-        ...datos,
-        fechaCreacion: serverTimestamp()
-      });
+  // Productos
+  (datos.carrito || []).forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.nombre} (${item.categoria}) – ${item.precioPersona} € x ${datos.personas}`;
+    listaResumen.appendChild(li);
+    subtotal += (item.total || item.precioPersona * datos.personas);
+  });
 
-      // Actualizar métricas cliente
-      const clienteRef = doc(db, "clientes", datos.telefono);
-      const clienteSnap = await getDoc(clienteRef);
-      let pedidosTotales = clienteSnap.exists() ? clienteSnap.data().pedidosTotales : 0;
-      let totalGastado = clienteSnap.exists() ? clienteSnap.data().totalGastado : 0;
+  // Extras
+  let extrasTxt = "Extras: ";
+  for (let e in datos.extras || {}) {
+    extrasTxt += `${e} (${datos.extras[e]} €) `;
+    subtotal += datos.extras[e] * (e === "Vajilla" ? datos.personas : 1);
+  }
+  detalleExtras.innerText = extrasTxt;
+  detallePersonas.innerText = `Número de personas: ${datos.personas}`;
+  datos.total = subtotal;
+  totalFinal.innerText = `Total final: ${subtotal.toFixed(2)} €`;
 
-      await updateDoc(clienteRef, {
-        pedidosTotales: increment(1),
-        totalGastado: increment(datos.total),
-        ultimoPedido: serverTimestamp(),
-        esFrecuente: (pedidosTotales + 1) >= 3
-      });
-    }
+  // Guardar de nuevo en localStorage
+  localStorage.setItem("presupuesto", JSON.stringify(datos));
+}
 
-    async function enviarEmail() {
-      emailjs.init("TU_USER_ID"); // Reemplaza con tu userID de EmailJS
+async function guardarPedido() {
+  const pedidosRef = collection(db, "pedidos");
+  await addDoc(pedidosRef, { ...datos, fechaCreacion: serverTimestamp() });
 
-      const templateParams = {
-        nombre: datos.nombre,
-        telefono: datos.telefono,
-        email: datos.email,
-        fechaEvento: datos.fechaEvento,
-        direccion: datos.direccion,
-        personas: datos.personas,
-        carrito: JSON.stringify(datos.carrito, null, 2),
-        extras: JSON.stringify(datos.extras, null, 2),
-        total: datos.total
-      };
+  const clienteRef = doc(db, "clientes", datos.telefono);
+  const clienteSnap = await getDoc(clienteRef);
+  let pedidosTotales = clienteSnap.exists() ? clienteSnap.data().pedidosTotales : 0;
 
-      await emailjs.send("TU_SERVICE_ID", "TU_TEMPLATE_ID", templateParams);
-    }
+  await updateDoc(clienteRef, {
+    pedidosTotales: increment(1),
+    totalGastado: increment(datos.total),
+    ultimoPedido: serverTimestamp(),
+    esFrecuente: (pedidosTotales + 1) >= 3
+  });
+}
 
-    confirmarBtn.addEventListener("click", async () => {
-      confirmarBtn.disabled = true;
-      confirmarBtn.innerText = "Guardando pedido...";
+async function enviarEmail() {
+  emailjs.init("TU_USER_ID");
+  const templateParams = {
+    nombre: datos.nombre,
+    telefono: datos.telefono,
+    email: datos.email,
+    fechaEvento: datos.fechaEvento,
+    direccion: datos.direccion,
+    personas: datos.personas,
+    carrito: JSON.stringify(datos.carrito, null, 2),
+    extras: JSON.stringify(datos.extras, null, 2),
+    total: datos.total
+  };
+  await emailjs.send("TU_SERVICE_ID", "TU_TEMPLATE_ID", templateParams);
+}
 
-      await calcularDistancia();
-      renderResumen();
-      await guardarPedido();
-      await enviarEmail();
+confirmarBtn.addEventListener("click", async () => {
+  confirmarBtn.disabled = true;
+  confirmarBtn.innerText = "Guardando pedido...";
 
-      alert("Pedido confirmado. ¡Gracias!");
-      window.location.href = "confirmacion.html"; // Página 4
-    });
+  await calcularDistancia();
+  renderResumen();
+  await guardarPedido();
+  await enviarEmail();
 
-    // Inicial
-    calcularDistancia();
-    renderResumen();
+  alert("Pedido confirmado. ¡Gracias!");
+  window.location.href = "confirmacion.html";
+});
 
-  </script>
+// Inicial
+calcularDistancia();
+renderResumen();
+</script>
 
 </body>
 </html>
