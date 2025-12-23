@@ -2,68 +2,102 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Carnes | Catering Gil y Román</title>
+  <title>Ensaladas | Catering Gil y Román</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS COMÚN PARA COMIDAS -->
   <link rel="stylesheet" href="comidas.css">
+  <link rel="stylesheet" href="comidas-contador.css">
 </head>
-
 <body>
 
   <div class="container">
 
     <header class="header">
-      <a href="../carta.html" class="volver">← Volver</a>
+      <a href="../selector.html" class="volver">← Volver</a>
       <h1>Ensaladas</h1>
+      <p class="info" id="infoPersonas"></p>
     </header>
 
     <section class="lista">
 
-      <article class="item">
-        <h3>Ensalada Clásica</h3>
-        <p>
-          Ensalada de lechuga con tomate, cebolla, zanahoria, remolacha y atún
-          aliñada con aceite, vinagre y sal
-        </p>
-        <span class="precio">1,50 € / persona</span>
+      <article class="item" data-nombre="Ensalada Clásica" data-precio="1.5">
+        <div>
+          <h3>Ensalada Clásica</h3>
+          <p>Ensalada de lechuga con tomate, cebolla, zanahoria, remolacha y atún aliñada con aceite, vinagre y sal.</p>
+          <span class="precio">1,50 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Ensalada Cesar</h3>
-        <p>
-          
-        </p>
-        <span class="precio">1,90 € / persona</span>
+      <article class="item" data-nombre="Ensalada Cesar" data-precio="1.9">
+        <div>
+          <h3>Ensalada Cesar</h3>
+          <p>Lechuga, pollo a la plancha, picatostes, queso parmesano y salsa Cesar.</p>
+          <span class="precio">1,90 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Ensalada 3</h3>
-        <p>
-          
-        </p>
-        <span class="precio">1,50 € / persona</span>
+      <article class="item" data-nombre="Ensalada Mediterránea" data-precio="1.5">
+        <div>
+          <h3>Ensalada Mediterránea</h3>
+          <p>Tomate, pepino, pimiento, cebolla roja, aceitunas y queso feta con aliño de aceite de oliva.</p>
+          <span class="precio">1,50 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Ensalada 4</h3>
-        <p>
-          
-        </p>
-        <span class="precio">1,90 € / persona</span>
+      <article class="item" data-nombre="Ensalada de Quinoa" data-precio="1.9">
+        <div>
+          <h3>Ensalada de Quinoa</h3>
+          <p>Quinoa, espinaca, aguacate, tomate cherry y semillas con vinagreta cítrica.</p>
+          <span class="precio">1,90 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Ensalada 5</h3>
-        <p>
-          
-        </p>
-        <span class="precio">1,50 € / persona</span>
+      <article class="item" data-nombre="Ensalada Tropical" data-precio="1.5">
+        <div>
+          <h3>Ensalada Tropical</h3>
+          <p>Lechuga, mango, piña, aguacate, nueces y aliño de miel y limón.</p>
+          <span class="precio">1,50 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
     </section>
 
   </div>
 
+  <script src="comidas.js"></script>
 </body>
 </html>

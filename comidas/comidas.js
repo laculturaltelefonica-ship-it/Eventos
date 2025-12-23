@@ -26,7 +26,7 @@ document.querySelectorAll(".item").forEach(item => {
     if (cantidad === 0) {
       if (index > -1) presupuesto.carrito.splice(index, 1);
     } else {
-      const total = precioPersona * personas * cantidad;
+      const total = precioPersona * cantidad;
       if (index > -1) {
         presupuesto.carrito[index].cantidad = cantidad;
         presupuesto.carrito[index].total = total;

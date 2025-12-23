@@ -2,71 +2,102 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Carnes | Catering Gil y Román</title>
+  <title>Entrantes | Catering Gil y Román</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS COMÚN PARA COMIDAS -->
   <link rel="stylesheet" href="comidas.css">
+  <link rel="stylesheet" href="comidas-contador.css">
 </head>
-
 <body>
 
   <div class="container">
 
     <header class="header">
-      <a href="../carta.html" class="volver">← Volver</a>
+      <a href="../selector.html" class="volver">← Volver</a>
       <h1>Entrantes</h1>
+      <p class="info" id="infoPersonas"></p>
     </header>
 
     <section class="lista">
 
-      <article class="item">
-        <h3>Croquetas</h3>
-        <p>
-          Croquetas de Pollo
-          Croquetas de Jamón
-        </p>
-        <span class="precio">10,00 € / 12 unidades</span>
+      <article class="item" data-nombre="Croquetas" data-precio="10">
+        <div>
+          <h3>Croquetas</h3>
+          <p>Croquetas de Pollo / Croquetas de Jamón</p>
+          <span class="precio">10,00 € / 12 unidades</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Croquetas Premium</h3>
-        <p>
-          Croquetas de Rabo de Toro
-          Croquetas de Merluza y Gambas al Pil-Pil
-        </p>
-        <span class="precio">15,00 € / 12 unidades</span>
+      <article class="item" data-nombre="Croquetas Premium" data-precio="15">
+        <div>
+          <h3>Croquetas Premium</h3>
+          <p>Croquetas de Rabo de Toro / Croquetas de Merluza y Gambas al Pil-Pil</p>
+          <span class="precio">15,00 € / 12 unidades</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Ensaladilla Rusa</h3>
-        <p>
-          Ensaladilla con patata, mayonesa, atún, huevo cocido,
-          bocas de mar, aceitunas, zanahoria.
-        </p>
-        <span class="precio">2,00 € / 12 vasos</span>
+      <article class="item" data-nombre="Ensaladilla Rusa" data-precio="2">
+        <div>
+          <h3>Ensaladilla Rusa</h3>
+          <p>Ensaladilla con patata, mayonesa, atún, huevo cocido, bocas de mar, aceitunas, zanahoria.</p>
+          <span class="precio">2,00 € / 12 vasos</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Tortilla de Patatas</h3>
-        <p>
-          Tortilla de patatas Con o sin cebolla
-        </p>
-        <span class="precio">15,00 € / unidad</span>
+      <article class="item" data-nombre="Tortilla de Patatas" data-precio="15">
+        <div>
+          <h3>Tortilla de Patatas</h3>
+          <p>Tortilla de patatas con o sin cebolla.</p>
+          <span class="precio">15,00 € / unidad</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Huevo Relleno</h3>
-        <p>
-          Huevo cocido relleno con una mezcla de yema, atún y tomate frito 
-          tapado con una capa de mayonesa y pimiento morrón.
-        </p>
-        <span class="precio">14,50 € / 12 huevos</span>
+      <article class="item" data-nombre="Huevo Relleno" data-precio="14.5">
+        <div>
+          <h3>Huevo Relleno</h3>
+          <p>Huevo cocido relleno con yema, atún y tomate frito, tapado con mayonesa y pimiento morrón.</p>
+          <span class="precio">14,50 € / 12 huevos</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
     </section>
 
   </div>
 
+  <script src="comidas.js"></script>
 </body>
 </html>

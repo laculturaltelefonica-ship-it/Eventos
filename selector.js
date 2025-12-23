@@ -46,11 +46,11 @@ function renderResumen() {
 
   // Productos seleccionados
   (datos.carrito || []).forEach(item => {
+    const subtotal = item.precioPersona * item.cantidad; // 🔹 subtotal correcto
     const li = document.createElement("li");
-    li.textContent =
-      `${item.nombre} (${item.categoria}) – ${item.precioPersona} € x ${item.personas}`;
+    li.textContent = `${item.nombre} (${item.categoria}) – ${item.precioPersona} € x ${item.cantidad} unidades = ${subtotal.toFixed(2)} €`;
     lista.appendChild(li);
-    total += item.total;
+    total += subtotal;
   });
 
   // Extras (si ya los tienes)
@@ -66,6 +66,7 @@ function renderResumen() {
 
   localStorage.setItem("presupuesto", JSON.stringify(datos));
 }
+
 
 // ➡️ Continuar
 window.continuar = function () {

@@ -4,70 +4,100 @@
   <meta charset="UTF-8">
   <title>Carnes | Catering Gil y Román</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS COMÚN PARA COMIDAS -->
   <link rel="stylesheet" href="comidas.css">
+  <link rel="stylesheet" href="comidas-contador.css">
 </head>
-
 <body>
 
   <div class="container">
 
     <header class="header">
-      <a href="../carta.html" class="volver">← Volver</a>
+      <a href="../selector.html" class="volver">← Volver</a>
       <h1>Carnes</h1>
+      <p class="info" id="infoPersonas"></p>
     </header>
 
     <section class="lista">
 
-      <article class="item">
-        <h3>Solomillo de ternera</h3>
-        <p>
-          Tierna pieza de ternera preparada a la plancha, acompañada de salsa
-          de champiñones o reducción de vino tinto.
-        </p>
-        <span class="precio">18,50 € / persona</span>
+      <article class="item" data-nombre="Solomillo de ternera" data-precio="18.5">
+        <div>
+          <h3>Solomillo de ternera</h3>
+          <p>Tierna pieza de ternera preparada a la plancha, acompañada de salsa de champiñones o reducción de vino tinto.</p>
+          <span class="precio">18,50 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Entrecot a la brasa</h3>
-        <p>
-          Entrecot de vacuno cocinado a la brasa, con sal en escamas y guarnición
-          de patatas asadas.
-        </p>
-        <span class="precio">16,90 € / persona</span>
+      <article class="item" data-nombre="Entrecot a la brasa" data-precio="16.9">
+        <div>
+          <h3>Entrecot a la brasa</h3>
+          <p>Entrecot de vacuno cocinado a la brasa, con sal en escamas y guarnición de patatas asadas.</p>
+          <span class="precio">16,90 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Pollo al horno especiado</h3>
-        <p>
-          Pollo asado lentamente con hierbas aromáticas y especias, jugoso y
-          lleno de sabor.
-        </p>
-        <span class="precio">12,50 € / persona</span>
+      <article class="item" data-nombre="Pollo al horno especiado" data-precio="12.5">
+        <div>
+          <h3>Pollo al horno especiado</h3>
+          <p>Pollo asado lentamente con hierbas aromáticas y especias, jugoso y lleno de sabor.</p>
+          <span class="precio">12,50 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Carrillada ibérica</h3>
-        <p>
-          Carrilladas de cerdo ibérico guisadas a fuego lento en su propia salsa,
-          extremadamente melosas.
-        </p>
-        <span class="precio">15,90 € / persona</span>
+      <article class="item" data-nombre="Carrillada ibérica" data-precio="15.9">
+        <div>
+          <h3>Carrillada ibérica</h3>
+          <p>Carrilladas de cerdo ibérico guisadas a fuego lento en su propia salsa, extremadamente melosas.</p>
+          <span class="precio">15,90 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
-      <article class="item">
-        <h3>Costillas BBQ</h3>
-        <p>
-          Costillas de cerdo marinadas y horneadas, terminadas con salsa barbacoa
-          casera.
-        </p>
-        <span class="precio">14,50 € / persona</span>
+      <article class="item" data-nombre="Costillas BBQ" data-precio="14.5">
+        <div>
+          <h3>Costillas BBQ</h3>
+          <p>Costillas de cerdo marinadas y horneadas, terminadas con salsa barbacoa casera.</p>
+          <span class="precio">14,50 € / persona</span>
+        </div>
+        <div class="acciones">
+          <button class="reset">x</button>
+          <button class="menos"><</button>
+          <span class="cantidad">0</span>
+          <button class="mas">></button>
+          <button class="multiplicar">+n</button>
+        </div>
       </article>
 
     </section>
 
   </div>
 
+  <script src="comidas.js"></script>
 </body>
 </html>
