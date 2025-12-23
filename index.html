@@ -65,9 +65,11 @@
       text-align: center;
       margin-bottom: 15px;
       font-weight: bold;
-      color: #0a7;
       display: none;
     }
+
+    .ok { color: #0a7; }
+    .error { color: #c00; }
   </style>
 </head>
 
@@ -85,7 +87,7 @@
       <input type="tel" id="telefono" placeholder="Teléfono" required />
       <input type="email" id="email" placeholder="Email" required />
       <input type="date" id="fechaEvento" required />
-      <input type="text" id="direccion" placeholder="Dirección del evento" required />
+      <input type="text" id="direccion" placeholder="Dirección exacta del evento" required />
       <input type="number" id="personas" placeholder="Número de personas" required min="1" />
 
       <button type="submit">Continuar</button>
@@ -93,51 +95,120 @@
     </form>
   </div>
 
-  <!-- FIREBASE + LÓGICA -->
+  <!-- LÓGICA -->
   <script type="module">
     import { db } from "./firebase.js";
     import {
       doc,
       getDoc,
       setDoc,
-      updateDoc,
       serverTimestamp
     } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
     const form = document.getElementById("formPresupuesto");
     const mensaje = document.getElementById("mensaje");
 
+    // 📍 Coordenadas FIJAS de tu local (AJUSTA si hace falta)
+    const MI_LOCAL = {
+      lat: 36.72016,
+      lon: -4.42034 // Málaga centro (ejemplo)
+    };
+
+    async function validarDireccion(direccion) {
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}&limit=2&countrycodes=es`;
+
+      const res = await fetch(url, {
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      const data = await res.json();
+
+      if (data.length === 0) return null;
+      if (data.length > 1) return "AMBIGUA";
+
+      return {
+        direccionNormalizada: data[0].display_name,
+        lat: parseFloat(data[0].lat),
+        lon: parseFloat(data[0].lon)
+      };
+    }
+
+    function calcularDistancia(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+
+      const a =
+        Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) ** 2;
+
+      return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+    }
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      mensaje.style.display = "none";
 
       const nombre = document.getElementById("nombre").value.trim();
       const telefono = document.getElementById("telefono").value.trim();
       const email = document.getElementById("email").value.trim();
       const fechaEvento = document.getElementById("fechaEvento").value;
-      const direccion = document.getElementById("direccion").value.trim();
+      const direccionTexto = document.getElementById("direccion").value.trim();
       const personas = Number(document.getElementById("personas").value);
 
-      const clienteRef = doc(db, "clientes", telefono);
-      const clienteSnap = await getDoc(clienteRef);
+      mensaje.textContent = "Validando dirección…";
+      mensaje.className = "mensaje";
+      mensaje.style.display = "block";
 
-      // 📦 Datos base del presupuesto (sesión actual)
+      const direccionValida = await validarDireccion(direccionTexto);
+
+      if (!direccionValida) {
+        mensaje.textContent = "❌ La dirección no existe. Revísala.";
+        mensaje.classList.add("error");
+        return;
+      }
+
+      if (direccionValida === "AMBIGUA") {
+        mensaje.textContent = "❌ Dirección poco concreta. Añade calle y número.";
+        mensaje.classList.add("error");
+        return;
+      }
+
+      const distanciaKm = calcularDistancia(
+        MI_LOCAL.lat,
+        MI_LOCAL.lon,
+        direccionValida.lat,
+        direccionValida.lon
+      ).toFixed(2);
+
       const presupuestoActual = {
         nombre,
         telefono,
         email,
         fechaEvento,
-        direccion,
         personas,
+        direccion: {
+          textoUsuario: direccionTexto,
+          normalizada: direccionValida.direccionNormalizada,
+          lat: direccionValida.lat,
+          lon: direccionValida.lon,
+          distanciaKm: Number(distanciaKm)
+        },
         carrito: [],
         extras: {},
         creadoEn: Date.now()
       };
 
-      // 💾 Guardamos sesión local
       localStorage.setItem("presupuesto", JSON.stringify(presupuestoActual));
 
+      const clienteRef = doc(db, "clientes", telefono);
+      const clienteSnap = await getDoc(clienteRef);
+
       if (!clienteSnap.exists()) {
-        // 🆕 Cliente nuevo
         await setDoc(clienteRef, {
           nombre,
           email,
@@ -147,23 +218,9 @@
           esFrecuente: false,
           fechaPrimerPedido: serverTimestamp()
         });
-      } else {
-        // 🔁 Cliente recurrente
-        mensaje.innerText = "¡Bienvenido de nuevo 👋!";
-        mensaje.style.display = "block";
-
-        // Pre-cargar datos si hiciera falta en el futuro
-        const data = clienteSnap.data();
-        presupuestoActual.nombre = data.nombre;
-        presupuestoActual.email = data.email;
-
-        localStorage.setItem("presupuesto", JSON.stringify(presupuestoActual));
       }
 
-      // 👉 Siguiente paso
-      setTimeout(() => {
-        window.location.href = "selector.html";
-      }, 500);
+      window.location.href = "selector.html";
     });
   </script>
 

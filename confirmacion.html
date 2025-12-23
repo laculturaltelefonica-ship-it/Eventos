@@ -91,8 +91,12 @@
       html += `<strong>Personas:</strong> ${datos.personas} <br>`;
       html += `<strong>Platos seleccionados:</strong><ul>`;
       datos.carrito.forEach(item => {
-        html += `<li>${item.nombre} – ${item.precio} € / persona</li>`;
+      html += `<li>
+          ${item.nombre} – ${item.precioPersona} € / persona 
+          (${item.total} € total)
+      </li>`;
       });
+
       html += `</ul>`;
 
       if (datos.extras && Object.keys(datos.extras).length > 0) {

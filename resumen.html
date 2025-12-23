@@ -28,7 +28,7 @@
   </section>
 </main>
 
-<!-- ✅ EmailJS como script GLOBAL -->
+<!-- ✅ EmailJS global -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script type="module">
@@ -36,16 +36,13 @@ import { db } from "./firebase.js";
 import {
   collection,
   addDoc,
-  doc,
-  updateDoc,
-  increment,
-  serverTimestamp,
-  getDoc
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
 /* ---------------- DATOS ---------------- */
 
 const datos = JSON.parse(localStorage.getItem("presupuesto"));
+
 if (!datos) {
   alert("No hay presupuesto guardado");
   window.location.href = "index.html";
@@ -63,12 +60,20 @@ const confirmarBtn = document.getElementById("confirmar");
 
 infoCliente.innerText = `${datos.nombre} · ${datos.personas} personas`;
 
+/* ---------------- CÁLCULO DISTANCIA ---------------- */
+
+function calcularCosteDistancia(distanciaKm) {
+  if (!distanciaKm || distanciaKm <= 0) return 0;
+  return Math.ceil(distanciaKm / 100) * 40;
+}
+
 /* ---------------- RESUMEN ---------------- */
 
 function renderResumen() {
   listaResumen.innerHTML = "";
   let total = 0;
 
+  // 🍽️ Platos
   (datos.carrito || []).forEach(item => {
     const li = document.createElement("li");
     li.textContent = `${item.nombre} (${item.categoria}) – ${item.precioPersona} € x ${datos.personas}`;
@@ -76,17 +81,32 @@ function renderResumen() {
     total += item.total;
   });
 
+  // ➕ Extras
   let extrasTxt = "Extras: ";
+  let hayExtras = false;
+
   for (let e in datos.extras || {}) {
     extrasTxt += `${e} (${datos.extras[e]} €) `;
     total += datos.extras[e];
+    hayExtras = true;
   }
 
-  detalleExtras.innerText = extrasTxt;
+  detalleExtras.innerText = hayExtras ? extrasTxt : "Extras: Ninguno";
   detallePersonas.innerText = `Personas: ${datos.personas}`;
-  detalleDistancia.innerText = "Distancia aproximada: 10 km";
 
+  // 🚚 Distancia
+  const distanciaKm = datos.direccion?.distanciaKm || 0;
+  const costeDistancia = calcularCosteDistancia(distanciaKm);
+
+  detalleDistancia.innerText =
+    `Distancia: ${distanciaKm.toFixed(2)} km · Desplazamiento: ${costeDistancia} €`;
+
+  total += costeDistancia;
+
+  // 💰 Total final
   datos.total = total;
+  datos.costeDistancia = costeDistancia;
+
   totalFinal.innerText = `Total final: ${total.toFixed(2)} €`;
 
   localStorage.setItem("presupuesto", JSON.stringify(datos));
@@ -113,8 +133,9 @@ function enviarEmail() {
       nombre: datos.nombre,
       telefono: datos.telefono,
       email: datos.email,
-      carrito: datos.carrito.map(p => `${p.nombre} (${p.categoria})`).join(", "),
-      total: datos.total
+      distancia: `${datos.direccion.distanciaKm.toFixed(2)} km`,
+      desplazamiento: `${datos.costeDistancia} €`,
+      total: `${datos.total.toFixed(2)} €`
     }
   );
 }
