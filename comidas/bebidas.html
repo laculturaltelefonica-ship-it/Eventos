@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Postres | Catering Gil y Román</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS COMÚN -->
+  <link rel="stylesheet" href="comidas.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header class="header">
+      <a href="../selector.html" class="volver">← Volver</a>
+      <h1>Postres</h1>
+      <p class="info" id="infoPersonas"></p>
+    </header>
+
+    <section class="lista">
+
+      <article class="item" onclick="addProducto('Flan', 1.5)">
+        <h3>Flan</h3>
+        <span class="precio">1,50 € / persona</span>
+      </article>
+
+      <article class="item" onclick="addProducto('Natillas', 1.9)">
+        <h3>Natillas</h3>
+        <span class="precio">1,90 € / persona</span>
+      </article>
+
+      <article class="item" onclick="addProducto('Fruta', 2.5)">
+        <h3>Fruta</h3>
+        <span class="precio">2,50 € / persona</span>
+      </article>
+
+      <article class="item" onclick="addProducto('Bizcocho con helado', 2.9)">
+        <h3>Bizcocho con helado</h3>
+        <span class="precio">2,90 € / persona</span>
+      </article>
+
+      <article class="item" onclick="addProducto('Tarta de queso', 3.5)">
+        <h3>Tarta de queso</h3>
+        <span class="precio">3,50 € / persona</span>
+      </article>
+
+      <article class="item" onclick="addProducto('Tarta de la abuela', 3.5)">
+        <h3>Tarta de la abuela</h3>
+        <span class="precio">3,50 € / persona</span>
+      </article>
+
+      <article class="item" onclick="addProducto('Tarta 3 chocolates', 3.5)">
+        <h3>Tarta de 3 chocolates</h3>
+        <span class="precio">3,50 € / persona</span>
+      </article>
+
+    </section>
+
+  </div>
+
+  <script>
+    const presupuesto = JSON.parse(localStorage.getItem("presupuesto"));
+
+    // Seguridad: si no hay sesión activa
+    if (!presupuesto) {
+      window.location.href = "../index.html";
+    }
+
+    const personas = presupuesto.personas || 1;
+    document.getElementById("infoPersonas").innerText =
+      `Seleccionando para ${personas} personas`;
+
+    // Añadir producto al carrito
+    function addProducto(nombre, precioPersona) {
+      if (!presupuesto.carrito) {
+        presupuesto.carrito = [];
+      }
+
+      // Evitar duplicados
+      const existe = presupuesto.carrito.find(
+        item => item.nombre === nombre
+      );
+
+      if (existe) {
+        alert("Este producto ya está añadido al presupuesto");
+        return;
+      }
+
+      presupuesto.carrito.push({
+        categoria: "Postres",
+        nombre,
+        precioPersona,
+        personas,
+        total: precioPersona * personas
+      });
+
+      localStorage.setItem("presupuesto", JSON.stringify(presupuesto));
+
+      alert(`✔ ${nombre} añadido al presupuesto`);
+    }
+  </script>
+
+</body>
+</html>
