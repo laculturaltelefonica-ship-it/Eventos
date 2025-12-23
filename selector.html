@@ -13,11 +13,13 @@
 
   <section class="carta-container">
 
+    <!-- HEADER -->
     <header class="carta-header">
       <h1>Selecciona tu menú</h1>
       <p id="infoCliente"></p>
     </header>
 
+    <!-- GRID CATEGORÍAS -->
     <div class="grid-categorias">
 
       <button class="categoria" onclick="irCategoria('carnes')">
@@ -51,6 +53,15 @@
       </button>
 
     </div>
+
+    <!-- ✅ RESUMEN PRESUPUESTO -->
+    <aside class="resumen">
+      <h2>Tu presupuesto</h2>
+      <ul id="lista"></ul>
+      <p id="total">Total: 0 €</p>
+
+      <button onclick="continuar()">Continuar</button>
+    </aside>
 
   </section>
 

@@ -89,6 +89,44 @@ body {
   z-index: 2;
 }
 
+/* RESUMEN PRESUPUESTO */
+.resumen {
+  margin-top: 40px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.resumen h2 {
+  margin-bottom: 10px;
+}
+
+.resumen ul {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+.resumen li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.resumen button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.resumen button:hover {
+  background: #333;
+}
+
 /* MÓVIL */
 @media (max-width: 480px) {
   .categoria {
