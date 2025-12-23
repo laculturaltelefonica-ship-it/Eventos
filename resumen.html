@@ -113,7 +113,7 @@ async function guardarPedido() {
 }
 
 async function enviarEmail() {
-  emailjs.init("TU_USER_ID");
+  emailjs.init("XTg7lRhg7RNbEGYMB");
   const templateParams = {
     nombre: datos.nombre,
     telefono: datos.telefono,
@@ -125,7 +125,7 @@ async function enviarEmail() {
     extras: JSON.stringify(datos.extras, null, 2),
     total: datos.total
   };
-  await emailjs.send("TU_SERVICE_ID", "TU_TEMPLATE_ID", templateParams);
+  await emailjs.send("service_4olj3be", "template_g5jz7ir", templateParams);
 }
 
 confirmarBtn.addEventListener("click", async () => {
