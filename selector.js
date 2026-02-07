@@ -18,12 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Inicializar productos por categoría
-  initProductos("carnes");
-  initProductos("ensaladas");
-  initProductos("platos-calientes");
-  initProductos("entrantes");
-  initProductos("postres");
-  initProductos("bebidas");
+  ["carnes","ensaladas","platos-calientes","entrantes","postres","bebidas"]
+    .forEach(categoria => initProductos(categoria));
 
   // Render inicial del resumen
   renderResumen();
@@ -64,7 +60,7 @@ function initProductos(categoria) {
 
       let cantidad = 0;
 
-      // 🔄 Si ya existe en carrito, restaurar cantidad
+      // 🔄 Restaurar cantidad si ya estaba en carrito
       const existente = (datos.carrito || []).find(p => p.nombre === nombre);
       if (existente) {
         cantidad = existente.cantidad;
@@ -103,21 +99,12 @@ function initProductos(categoria) {
         renderResumen();
       }
 
-      // 🎛️ Eventos
+      // 🎛️ Eventos de los botones
       resetBtn.onclick = () => actualizarCarrito(0);
-
-      menosBtn.onclick = () => {
-        if (cantidad > 0) actualizarCarrito(cantidad - 1);
-      };
-
-      masBtn.onclick = () => {
-        actualizarCarrito(cantidad + 1);
-      };
-
-      multiplicarBtn.onclick = () => {
-        actualizarCarrito(cantidad + personas);
-      };
-    });
+      menosBtn.onclick = () => { if(cantidad>0) actualizarCarrito(cantidad - 1); };
+      masBtn.onclick = () => actualizarCarrito(cantidad + 1);
+      multiplicarBtn.onclick = () => actualizarCarrito(cantidad + personas);
+  });
 }
 
 /* =========================

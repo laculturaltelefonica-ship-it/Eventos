@@ -1,7 +1,5 @@
 /* selector.css */
 
-/* selector.css */
-
 /* =========================
    RESET
 ========================= */
@@ -105,13 +103,82 @@ body {
   padding: 25px;
   border-radius: 14px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
+/* TÍTULO DE SECCIÓN */
 .seccion h2 {
   font-size: 26px;
   margin-bottom: 20px;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
+}
+
+/* =========================
+   ITEM DE PRODUCTO (CONTADOR)
+========================= */
+.item {
+  background-color: #fff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.item h3 {
+  font-size: 20px;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.item p {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #555;
+}
+
+.precio {
+  margin-top: 8px;
+  font-weight: bold;
+  color: #111;
+  font-size: 15px;
+}
+
+/* CONTADOR Y BOTONES */
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.acciones button {
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #f9f9f9;
+  transition: background 0.2s ease;
+}
+
+.acciones button:hover {
+  background: #e2e2e2;
+}
+
+.cantidad {
+  width: 2rem;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
 }
 
 /* =========================
@@ -123,7 +190,7 @@ body {
   background: #fff;
   padding: 20px;
   border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .resumen h2 {

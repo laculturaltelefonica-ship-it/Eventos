@@ -1,6 +1,3 @@
-<!-- selector.html -->
-
-<!-- selector.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,6 +26,7 @@
       <aside class="sidebar">
         <h3>Categorías</h3>
 
+        <button onclick="irSeccion('carnes')">🥩 Carnes</button>
         <button onclick="irSeccion('ensaladas')">🥗 Ensaladas</button>
         <button onclick="irSeccion('platos-calientes')">🍲 Platos calientes</button>
         <button onclick="irSeccion('entrantes')">🍽 Entrantes</button>
@@ -38,6 +36,87 @@
 
       <!-- 📜 CONTENIDO CON SCROLL -->
       <main class="contenido">
+
+        <!-- CARNES -->
+        <section id="carnes" class="seccion">
+          <h2>Carnes</h2>
+
+          <article class="item" data-nombre="Solomillo de ternera" data-precio="18.5">
+            <div>
+              <h3>Solomillo de ternera</h3>
+              <p>Tierna pieza de ternera preparada a la plancha, acompañada de salsa de champiñones o reducción de vino tinto.</p>
+              <span class="precio">18,50 € / persona</span>
+            </div>
+            <div class="acciones">
+              <button class="reset">x</button>
+              <button class="menos"><</button>
+              <span class="cantidad">0</span>
+              <button class="mas">></button>
+              <button class="multiplicar">+n</button>
+            </div>
+          </article>
+
+          <article class="item" data-nombre="Entrecot a la brasa" data-precio="16.9">
+            <div>
+              <h3>Entrecot a la brasa</h3>
+              <p>Entrecot de vacuno cocinado a la brasa, con sal en escamas y guarnición de patatas asadas.</p>
+              <span class="precio">16,90 € / persona</span>
+            </div>
+            <div class="acciones">
+              <button class="reset">x</button>
+              <button class="menos"><</button>
+              <span class="cantidad">0</span>
+              <button class="mas">></button>
+              <button class="multiplicar">+n</button>
+            </div>
+          </article>
+
+          <article class="item" data-nombre="Pollo al horno especiado" data-precio="12.5">
+            <div>
+              <h3>Pollo al horno especiado</h3>
+              <p>Pollo asado lentamente con hierbas aromáticas y especias, jugoso y lleno de sabor.</p>
+              <span class="precio">12,50 € / persona</span>
+            </div>
+            <div class="acciones">
+              <button class="reset">x</button>
+              <button class="menos"><</button>
+              <span class="cantidad">0</span>
+              <button class="mas">></button>
+              <button class="multiplicar">+n</button>
+            </div>
+          </article>
+
+          <article class="item" data-nombre="Carrillada ibérica" data-precio="15.9">
+            <div>
+              <h3>Carrillada ibérica</h3>
+              <p>Carrilladas de cerdo ibérico guisadas a fuego lento en su propia salsa, extremadamente melosas.</p>
+              <span class="precio">15,90 € / persona</span>
+            </div>
+            <div class="acciones">
+              <button class="reset">x</button>
+              <button class="menos"><</button>
+              <span class="cantidad">0</span>
+              <button class="mas">></button>
+              <button class="multiplicar">+n</button>
+            </div>
+          </article>
+
+          <article class="item" data-nombre="Costillas BBQ" data-precio="14.5">
+            <div>
+              <h3>Costillas BBQ</h3>
+              <p>Costillas de cerdo marinadas y horneadas, terminadas con salsa barbacoa casera.</p>
+              <span class="precio">14,50 € / persona</span>
+            </div>
+            <div class="acciones">
+              <button class="reset">x</button>
+              <button class="menos"><</button>
+              <span class="cantidad">0</span>
+              <button class="mas">></button>
+              <button class="multiplicar">+n</button>
+            </div>
+          </article>
+
+        </section>
 
         <!-- ENSALADAS -->
         <section id="ensaladas" class="seccion">
