@@ -1,3 +1,6 @@
+<!-- selector.html -->
+
+<!-- selector.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,49 +22,64 @@
       <p id="infoCliente"></p>
     </header>
 
-    <!-- GRID CATEGORÍAS -->
-    <div class="grid-categorias">
+    <!-- 🔷 LAYOUT PRINCIPAL -->
+    <section class="layout">
 
-      <button class="categoria" onclick="irCategoria('carnes')">
-        <img src="images/carnes.jpeg" alt="Carnes">
-        <span>Carnes</span>
-      </button>
+      <!-- 🧭 LATERAL FIJO CATEGORÍAS -->
+      <aside class="sidebar">
+        <h3>Categorías</h3>
 
-      <button class="categoria" onclick="irCategoria('ensaladas')">
-        <img src="images/ensaladatempladaC.jpeg" alt="Ensaladas">
-        <span>Ensaladas</span>
-      </button>
+        <button onclick="irSeccion('ensaladas')">🥗 Ensaladas</button>
+        <button onclick="irSeccion('platos-calientes')">🍲 Platos calientes</button>
+        <button onclick="irSeccion('entrantes')">🍽 Entrantes</button>
+        <button onclick="irSeccion('postres')">🍰 Postres</button>
+        <button onclick="irSeccion('bebidas')">🥤 Bebidas</button>
+      </aside>
 
-      <button class="categoria" onclick="irCategoria('platos-calientes')">
-        <img src="images/paella.jpeg" alt="Platos Calientes">
-        <span>Platos Calientes</span>
-      </button>
+      <!-- 📜 CONTENIDO CON SCROLL -->
+      <main class="contenido">
 
-      <button class="categoria" onclick="irCategoria('entrantes')">
-        <img src="images/huevorelleno.jpeg" alt="Entrantes">
-        <span>Entrantes</span>
-      </button>
+        <!-- ENSALADAS -->
+        <section id="ensaladas" class="seccion">
+          <h2>Ensaladas</h2>
+          <!-- productos de ensaladas -->
+        </section>
 
-      <button class="categoria" onclick="irCategoria('postres')">
-        <img src="images/postres.jpeg" alt="Postres">
-        <span>Postres</span>
-      </button>
+        <!-- PLATOS CALIENTES -->
+        <section id="platos-calientes" class="seccion">
+          <h2>Platos calientes</h2>
+          <!-- productos de platos calientes -->
+        </section>
 
-      <button class="categoria" onclick="irCategoria('bebidas')">
-        <img src="images/bebidas.jpeg" alt="Bebidas">
-        <span>Bebidas</span>
-      </button>
+        <!-- ENTRANTES -->
+        <section id="entrantes" class="seccion">
+          <h2>Entrantes</h2>
+          <!-- productos de entrantes -->
+        </section>
 
-    </div>
+        <!-- POSTRES -->
+        <section id="postres" class="seccion">
+          <h2>Postres</h2>
+          <!-- productos de postres -->
+        </section>
 
-    <!-- ✅ RESUMEN PRESUPUESTO -->
-    <aside class="resumen">
-      <h2>Tu presupuesto</h2>
-      <ul id="lista"></ul>
-      <p id="total">Total: 0 €</p>
+        <!-- BEBIDAS -->
+        <section id="bebidas" class="seccion">
+          <h2>Bebidas</h2>
+          <!-- productos de bebidas -->
+        </section>
 
-      <button onclick="continuar()">Continuar</button>
-    </aside>
+      </main>
+
+      <!-- ✅ RESUMEN PRESUPUESTO -->
+      <aside class="resumen">
+        <h2>Tu presupuesto</h2>
+        <ul id="lista"></ul>
+        <p id="total">Total: 0 €</p>
+        <button onclick="continuar()">Continuar</button>
+      </aside>
+
+    </section>
 
   </section>
 
