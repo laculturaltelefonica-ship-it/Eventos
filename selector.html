@@ -32,6 +32,7 @@
         <button onclick="irSeccion('ensaladas')">🥗 Ensaladas</button>
         <button onclick="irSeccion('platos-calientes')">🍲 Platos calientes</button>
         <button onclick="irSeccion('bebidas')">🥤 Bebidas</button>
+        <button onclick="irSeccion('shushis')">🍣 Sushis</button>
       </aside>
 
       <!-- 📜 CONTENIDO CON SCROLL -->
@@ -43,7 +44,7 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
 <section id="entrantes" class="seccion">
   <h2>Entrantes</h2>
 
-  <article class="item" data-nombre="Canapé Tosta" data-precio="10">
+  <article class="item" data-nombre="Canapé Tosta" data-precio="8.50">
     <div class="info-producto">
       <img src="images/Canape_tosta.jpeg" alt="Tosta" class="img-producto">
       <div class="texto">
@@ -61,7 +62,7 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Canapé Volavanes" data-precio="10">
+  <article class="item" data-nombre="Canapé Volavanes" data-precio="15">
     <div class="info-producto">
       <img src="images/Canape_volavanes.jpeg" alt="Volavanes" class="img-producto">
       <div class="texto">
@@ -79,13 +80,49 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Canapé Tartaleta" data-precio="10">
+  <article class="item" data-nombre="Canapé Tartaleta" data-precio="30">
     <div class="info-producto">
       <img src="images/Canape_tartaleta.jpeg" alt="Tartaleta" class="img-producto">
       <div class="texto">
-        <h3>Canapé Tosta</h3>
+        <h3>Canapé Tartaleta</h3>
         <p>Canapé de Salmon/ Anchoa/ Pollo</p>
         <span class="precio">30,00 € / Plato de 12 unidades</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Jamón iberico" data-precio="10">
+    <div class="info-producto">
+      <img src="images/jamon.jpeg" alt="Jamon" class="img-producto">
+      <div class="texto">
+        <h3>Jamón Iberico</h3>
+        <p>Plato 100 gr</p>
+        <span class="precio">10,00 € / Plato 100 gr</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Hojaldre Dog" data-precio="30">
+    <div class="info-producto">
+      <img src="images/perritos.jpeg" alt="Hojaldre Dog" class="img-producto">
+      <div class="texto">
+        <h3>Hojaldre Dog</h3>
+        <p>Perrito Caliente en masa de Hojaldre 15 cm</p>
+        <span class="precio">30,00 € / Plato de 15 unidades</span>
       </div>
     </div>
     <div class="acciones">
@@ -784,6 +821,26 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
 
 </section>
 
+<section id="sushis" class="seccion">
+  <h2>Sushis</h2>
+
+  <article class="item" data-nombre="Maki" data-precio="10">
+    <div class="info-producto">
+      <img src="images/maki.jpeg" alt="Maki" class="img-producto">
+      <div class="texto">
+        <h3>Maki</h3>
+        <span class="precio">10€ / 8 piezas</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+</section>
 
 
       </main>
