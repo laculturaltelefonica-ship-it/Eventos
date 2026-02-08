@@ -255,3 +255,27 @@ body {
     position: relative;
   }
 }
+
+.info-producto {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.img-producto {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.texto h3 {
+  margin: 0;
+}
+
+.texto p {
+  margin: 4px 0;
+  font-size: 0.9em;
+  color: #555;
+}

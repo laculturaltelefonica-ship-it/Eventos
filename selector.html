@@ -26,16 +26,178 @@
       <aside class="sidebar">
         <h3>Categorías</h3>
 
+        <button onclick="irSeccion('entrantes')">🍽 Entrantes</button>
+        <button onclick="irSeccion('postres')">🍰 Postres</button>
         <button onclick="irSeccion('carnes')">🥩 Carnes</button>
         <button onclick="irSeccion('ensaladas')">🥗 Ensaladas</button>
         <button onclick="irSeccion('platos-calientes')">🍲 Platos calientes</button>
-        <button onclick="irSeccion('entrantes')">🍽 Entrantes</button>
-        <button onclick="irSeccion('postres')">🍰 Postres</button>
         <button onclick="irSeccion('bebidas')">🥤 Bebidas</button>
       </aside>
 
       <!-- 📜 CONTENIDO CON SCROLL -->
       <main class="contenido">
+
+
+        <!-- ENTRANTES -->
+<!-- ENTRANTES -->
+<section id="entrantes" class="seccion">
+  <h2>Entrantes</h2>
+
+  <article class="item" data-nombre="Croquetas" data-precio="10">
+    <div>
+      <h3>Croquetas</h3>
+      <p>Croquetas de Pollo / Croquetas de Jamón</p>
+      <span class="precio">10,00 € / 12 unidades</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Croquetas Premium" data-precio="15">
+    <div>
+      <h3>Croquetas Premium</h3>
+      <p>Croquetas de Rabo de Toro / Croquetas de Merluza y Gambas al Pil-Pil</p>
+      <span class="precio">15,00 € / 12 unidades</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Ensaladilla Rusa" data-precio="2">
+    <div>
+      <h3>Ensaladilla Rusa</h3>
+      <p>Ensaladilla con patata, mayonesa, atún, huevo cocido, bocas de mar, aceitunas, zanahoria.</p>
+      <span class="precio">2,00 € / 12 vasos</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Tortilla de Patatas" data-precio="15">
+    <div>
+      <h3>Tortilla de Patatas</h3>
+      <p>Tortilla de patatas con o sin cebolla.</p>
+      <span class="precio">15,00 € / unidad</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Huevo Relleno" data-precio="14.5">
+    <div>
+      <h3>Huevo Relleno</h3>
+      <p>Huevo cocido relleno con yema, atún y tomate frito, tapado con mayonesa y pimiento morrón.</p>
+      <span class="precio">14,50 € / 12 huevos</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+</section>
+
+
+        <!-- POSTRES -->
+<!-- POSTRES -->
+<section id="postres" class="seccion">
+  <h2>Postres</h2>
+
+  <article class="item" data-nombre="Flan" data-precio="1.5">
+    <div>
+      <h3>Flan</h3>
+      <span class="precio">1,50 € / persona</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Natillas" data-precio="1.9">
+    <div>
+      <h3>Natillas</h3>
+      <span class="precio">1,90 € / persona</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Fruta" data-precio="2.5">
+    <div>
+      <h3>Fruta</h3>
+      <span class="precio">2,50 € / persona</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Tarta de Chocolate" data-precio="3">
+    <div>
+      <h3>Tarta de Chocolate</h3>
+      <span class="precio">3,00 € / persona</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Cheesecake" data-precio="3.5">
+    <div>
+      <h3>Cheesecake</h3>
+      <span class="precio">3,50 € / persona</span>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+</section>
+
 
         <!-- CARNES -->
         <section id="carnes" class="seccion">
@@ -207,11 +369,15 @@
   <h2>Platos calientes</h2>
 
   <article class="item" data-nombre="Paella de carne" data-precio="8.5">
-    <div>
+  <div class="info-producto">
+    <img src="img/paella.jpeg" alt="Paella de carne" class="img-producto">
+
+    <div class="texto">
       <h3>Paella de carne</h3>
       <p>Paella con pollo y magro.</p>
       <span class="precio">8,50 € / persona</span>
     </div>
+  </div>
     <div class="acciones">
       <button class="reset">x</button>
       <button class="menos"><</button>
@@ -329,165 +495,6 @@
 </section>
 
 
-        <!-- ENTRANTES -->
-<!-- ENTRANTES -->
-<section id="entrantes" class="seccion">
-  <h2>Entrantes</h2>
-
-  <article class="item" data-nombre="Croquetas" data-precio="10">
-    <div>
-      <h3>Croquetas</h3>
-      <p>Croquetas de Pollo / Croquetas de Jamón</p>
-      <span class="precio">10,00 € / 12 unidades</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Croquetas Premium" data-precio="15">
-    <div>
-      <h3>Croquetas Premium</h3>
-      <p>Croquetas de Rabo de Toro / Croquetas de Merluza y Gambas al Pil-Pil</p>
-      <span class="precio">15,00 € / 12 unidades</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Ensaladilla Rusa" data-precio="2">
-    <div>
-      <h3>Ensaladilla Rusa</h3>
-      <p>Ensaladilla con patata, mayonesa, atún, huevo cocido, bocas de mar, aceitunas, zanahoria.</p>
-      <span class="precio">2,00 € / 12 vasos</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Tortilla de Patatas" data-precio="15">
-    <div>
-      <h3>Tortilla de Patatas</h3>
-      <p>Tortilla de patatas con o sin cebolla.</p>
-      <span class="precio">15,00 € / unidad</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Huevo Relleno" data-precio="14.5">
-    <div>
-      <h3>Huevo Relleno</h3>
-      <p>Huevo cocido relleno con yema, atún y tomate frito, tapado con mayonesa y pimiento morrón.</p>
-      <span class="precio">14,50 € / 12 huevos</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-</section>
-
-
-        <!-- POSTRES -->
-<!-- POSTRES -->
-<section id="postres" class="seccion">
-  <h2>Postres</h2>
-
-  <article class="item" data-nombre="Flan" data-precio="1.5">
-    <div>
-      <h3>Flan</h3>
-      <span class="precio">1,50 € / persona</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Natillas" data-precio="1.9">
-    <div>
-      <h3>Natillas</h3>
-      <span class="precio">1,90 € / persona</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Fruta" data-precio="2.5">
-    <div>
-      <h3>Fruta</h3>
-      <span class="precio">2,50 € / persona</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Tarta de Chocolate" data-precio="3">
-    <div>
-      <h3>Tarta de Chocolate</h3>
-      <span class="precio">3,00 € / persona</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Cheesecake" data-precio="3.5">
-    <div>
-      <h3>Cheesecake</h3>
-      <span class="precio">3,50 € / persona</span>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-
-</section>
 
 
         <!-- BEBIDAS -->
