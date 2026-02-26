@@ -1,5 +1,7 @@
 /* selector.css */
 
+/* selector.css */
+
 /* =========================
    RESET
 ========================= */
@@ -117,7 +119,7 @@ body {
 }
 
 /* =========================
-   ITEM DE PRODUCTO (CONTADOR)
+   ITEM DE PRODUCTO
 ========================= */
 .item {
   background-color: #fff;
@@ -256,18 +258,55 @@ body {
   }
 }
 
+/* =========================
+   INFO PRODUCTO
+========================= */
 .info-producto {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
+/* IMAGEN PRODUCTO (TAMAÑO + ZOOM) */
 .img-producto {
   width: 70px;
   height: 70px;
   object-fit: cover;
   border-radius: 8px;
   flex-shrink: 0;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.img-producto:hover {
+  transform: scale(1.05);
+}
+
+/* VISOR IMAGEN GRANDE */
+.visor-imagen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.visor-imagen img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  animation: zoom 0.2s ease;
+}
+
+@keyframes zoom {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 .texto h3 {

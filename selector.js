@@ -17,9 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
       `Presupuesto para ${datos.nombre} · ${datos.personas} personas`;
   }
 
+  // 🧱 Generar productos automáticamente desde la base de datos
+  generarProductos();
+
   // Inicializar productos por categoría
   ["carnes","ensaladas","platos-calientes","entrantes","postres","bebidas"]
     .forEach(categoria => initProductos(categoria));
+
+  // Activar visor de imágenes
+  initVisorImagen();
 
   // Render inicial del resumen
   renderResumen();
@@ -37,6 +43,71 @@ window.irSeccion = function (id) {
     block: "start"
   });
 };
+
+/* =========================
+   🧱 GENERAR PRODUCTOS (BD)
+========================= */
+function generarProductos() {
+
+  if (typeof PRODUCTOS === "undefined") return;
+
+  PRODUCTOS.forEach(p => {
+
+    const seccion = document.querySelector(`#${p.categoria} .productos`);
+    if (!seccion) return;
+
+    const article = document.createElement("article");
+    article.className = "item";
+    article.dataset.nombre = p.nombre;
+    article.dataset.precio = p.precio;
+
+    article.innerHTML = `
+      <div class="info-producto">
+
+        <img src="${p.imagen}" alt="${p.nombre}" class="img-producto">
+
+        <div class="texto">
+          <h3>${p.nombre}</h3>
+          ${p.descripcion ? `<p>${p.descripcion}</p>` : ""}
+          <span class="precio">${p.precioTexto}</span>
+        </div>
+
+      </div>
+
+      <div class="acciones">
+        <button class="reset">x</button>
+        <button class="menos"><</button>
+        <span class="cantidad">0</span>
+        <button class="mas">></button>
+        <button class="multiplicar">+n</button>
+      </div>
+    `;
+
+    seccion.appendChild(article);
+  });
+}
+
+/* =========================
+   🖼️ VISOR DE IMÁGENES
+========================= */
+function initVisorImagen() {
+  const imagenes = document.querySelectorAll(".img-producto");
+  const visor = document.getElementById("visorImagen");
+  const imagenGrande = document.getElementById("imagenGrande");
+
+  if (!visor || !imagenGrande) return;
+
+  imagenes.forEach(img => {
+    img.addEventListener("click", () => {
+      imagenGrande.src = img.src;
+      visor.style.display = "flex";
+    });
+  });
+
+  visor.addEventListener("click", () => {
+    visor.style.display = "none";
+  });
+}
 
 /* =========================
    🍽️ INIT PRODUCTOS
@@ -101,7 +172,7 @@ function initProductos(categoria) {
 
       // 🎛️ Eventos de los botones
       resetBtn.onclick = () => actualizarCarrito(0);
-      menosBtn.onclick = () => { if(cantidad>0) actualizarCarrito(cantidad - 1); };
+      menosBtn.onclick = () => { if (cantidad > 0) actualizarCarrito(cantidad - 1); };
       masBtn.onclick = () => actualizarCarrito(cantidad + 1);
       multiplicarBtn.onclick = () => actualizarCarrito(cantidad + personas);
   });
