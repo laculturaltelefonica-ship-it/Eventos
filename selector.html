@@ -1,90 +1,915 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Selector de menú | Catering</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Selecciona tu menú | Catering Gil y Román</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="comidas.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="selector.css">
 </head>
 
 <body>
 
-<div class="container">
+  <section class="carta-container">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
+    <!-- HEADER -->
+    <header class="carta-header">
+      <h1>Selecciona tu menú</h1>
+      <p id="infoCliente"></p>
+    </header>
 
-    <h2>Menú</h2>
+    <!-- 🔷 LAYOUT PRINCIPAL -->
+    <section class="layout">
 
-    <button onclick="irSeccion('entrantes')">Entrantes</button>
-    <button onclick="irSeccion('ensaladas')">Ensaladas</button>
-    <button onclick="irSeccion('carnes')">Carnes</button>
-    <button onclick="irSeccion('platos-calientes')">Platos calientes</button>
-    <button onclick="irSeccion('postres')">Postres</button>
-    <button onclick="irSeccion('bebidas')">Bebidas</button>
+      <!-- 🧭 LATERAL FIJO CATEGORÍAS -->
+      <aside class="sidebar">
+        <h3>Categorías</h3>
 
-    <hr>
+        <button onclick="irSeccion('entrantes')">🍽 Entrantes</button>
+        <button onclick="irSeccion('postres')">🍰 Postres</button>
+        <button onclick="irSeccion('carnes')">🥩 Carnes</button>
+        <button onclick="irSeccion('ensaladas')">🥗 Ensaladas</button>
+        <button onclick="irSeccion('platos-calientes')">🍲 Platos calientes</button>
+        <button onclick="irSeccion('bebidas')">🥤 Bebidas</button>
+        <button onclick="irSeccion('shushis')">🍣 Sushis</button>
+      </aside>
 
-    <div id="infoCliente"></div>
+      <!-- 📜 CONTENIDO CON SCROLL -->
+      <main class="contenido">
 
-    <h3>Resumen</h3>
-    <ul id="lista"></ul>
+enviamelo completo todos con imagenes que estan en images tal como en paella.jpeg: 
 
-    <p id="total"></p>
+<!-- ENTRANTES -->
+<section id="entrantes" class="seccion">
+  <h2>Entrantes</h2>
 
-    <button onclick="continuar()" class="continuar">
-      Continuar
-    </button>
+  <article class="item" data-nombre="Canapé Tosta" data-precio="8.50">
+    <div class="info-producto">
+      <img src="images/Canape_tosta.jpeg" alt="Tosta" class="img-producto">
+      <div class="texto">
+        <h3>Canapé Tosta</h3>
+        <p>Canapé de Salmon/ Anchoa/ Pollo</p>
+        <span class="precio">8,50 € / Plato de 12 unidades</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
 
-  </aside>
+  <article class="item" data-nombre="Canapé Volavanes" data-precio="15">
+    <div class="info-producto">
+      <img src="images/Canape_volavanes.jpeg" alt="Volavanes" class="img-producto">
+      <div class="texto">
+        <h3>Canapé Volavanes</h3>
+        <p>Canapé de Salmon/ Anchoa/ Pollo</p>
+        <span class="precio">15,00 € / Plato de 12 unidades</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Canapé Tartaleta" data-precio="30">
+    <div class="info-producto">
+      <img src="images/Canape_tartaleta.jpeg" alt="Tartaleta" class="img-producto">
+      <div class="texto">
+        <h3>Canapé Tartaleta</h3>
+        <p>Canapé de Salmon/ Anchoa/ Pollo</p>
+        <span class="precio">30,00 € / Plato de 12 unidades</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Jamón iberico" data-precio="10">
+    <div class="info-producto">
+      <img src="images/jamon.jpeg" alt="Jamon" class="img-producto">
+      <div class="texto">
+        <h3>Jamón Iberico</h3>
+        <p>Plato 100 gr</p>
+        <span class="precio">10,00 € / Plato 100 gr</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Hojaldre Dog" data-precio="30">
+    <div class="info-producto">
+      <img src="images/perritos.jpeg" alt="Hojaldre Dog" class="img-producto">
+      <div class="texto">
+        <h3>Hojaldre Dog</h3>
+        <p>Perrito Caliente en masa de Hojaldre 15 cm</p>
+        <span class="precio">30,00 € / Plato de 15 unidades</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Croquetas" data-precio="10">
+    <div class="info-producto">
+      <img src="images/croqueta.jpeg" alt="Croquetas" class="img-producto">
+      <div class="texto">
+        <h3>Croquetas</h3>
+        <p>Croquetas de Pollo / Croquetas de Jamón</p>
+        <span class="precio">10,00 € / 12 unidades</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Croquetas Premium" data-precio="15">
+    <div class="info-producto">
+      <img src="images/croqueta.jpeg" alt="Croquetas Premium" class="img-producto">
+      <div class="texto">
+        <h3>Croquetas Premium</h3>
+        <p>Croquetas de Rabo de Toro / Croquetas de Merluza y Gambas al Pil-Pil</p>
+        <span class="precio">15,00 € / 12 unidades</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Ensaladilla Rusa" data-precio="2">
+    <div class="info-producto">
+      <img src="images/ensaladilla.jpeg" alt="Ensaladilla Rusa" class="img-producto">
+      <div class="texto">
+        <h3>Ensaladilla Rusa</h3>
+        <p>Ensaladilla con patata, mayonesa, atún, huevo cocido, bocas de mar, aceitunas, zanahoria.</p>
+        <span class="precio">2,00 € / 12 vasos</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Tortilla de Patatas" data-precio="15">
+    <div class="info-producto">
+      <img src="images/tortilla_patata.jpeg" alt="Tortilla de Patatas" class="img-producto">
+      <div class="texto">
+        <h3>Tortilla de Patatas</h3>
+        <p>Tortilla de patatas con o sin cebolla.</p>
+        <span class="precio">15,00 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Huevo Relleno" data-precio="14.5">
+    <div class="info-producto">
+      <img src="images/huevorelleno.jpeg" alt="Huevo Relleno" class="img-producto">
+      <div class="texto">
+        <h3>Huevo Relleno</h3>
+        <p>Huevo cocido relleno con yema, atún y tomate frito, tapado con mayonesa y pimiento morrón.</p>
+        <span class="precio">14,50 € / 12 huevos</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+</section>
 
 
-  <!-- CONTENIDO -->
-  <main class="contenido">
+<!-- POSTRES -->
+<section id="postres" class="seccion">
+  <h2>Postres</h2>
 
-    <section id="entrantes" class="seccion">
-      <h2>Entrantes</h2>
-      <div class="productos"></div>
+  <article class="item" data-nombre="Flan" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/flan.jpeg" alt="Flan" class="img-producto">
+      <div class="texto">
+        <h3>Flan</h3>
+        <span class="precio">1,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Natillas" data-precio="1.9">
+    <div class="info-producto">
+      <img src="images/natillas.jpeg" alt="Natillas" class="img-producto">
+      <div class="texto">
+        <h3>Natillas</h3>
+        <span class="precio">1,90 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Fruta" data-precio="2.5">
+    <div class="info-producto">
+      <img src="images/fruta.jpeg" alt="Fruta" class="img-producto">
+      <div class="texto">
+        <h3>Fruta</h3>
+        <span class="precio">2,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Tarta de Chocolate" data-precio="3">
+    <div class="info-producto">
+      <img src="images/tarta-chocolate.jpeg" alt="Tarta de Chocolate" class="img-producto">
+      <div class="texto">
+        <h3>Tarta de Chocolate</h3>
+        <span class="precio">3,00 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Cheesecake" data-precio="3.5">
+    <div class="info-producto">
+      <img src="images/cheesecake.jpeg" alt="Cheesecake" class="img-producto">
+      <div class="texto">
+        <h3>Cheesecake</h3>
+        <span class="precio">3,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+</section>
+
+<!-- CARNES -->
+<section id="carnes" class="seccion">
+  <h2>Carnes</h2>
+
+  <article class="item" data-nombre="Solomillo de ternera" data-precio="18.5">
+    <div class="info-producto">
+      <img src="images/solomillo-ternera.jpeg" alt="Solomillo de ternera" class="img-producto">
+      <div class="texto">
+        <h3>Solomillo de ternera</h3>
+        <p>Tierna pieza de ternera preparada a la plancha, acompañada de salsa de champiñones o reducción de vino tinto.</p>
+        <span class="precio">18,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Entrecot a la brasa" data-precio="16.9">
+    <div class="info-producto">
+      <img src="images/entrecot-brasa.jpeg" alt="Entrecot a la brasa" class="img-producto">
+      <div class="texto">
+        <h3>Entrecot a la brasa</h3>
+        <p>Entrecot de vacuno cocinado a la brasa, con sal en escamas y guarnición de patatas asadas.</p>
+        <span class="precio">16,90 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Pollo al horno especiado" data-precio="12.5">
+    <div class="info-producto">
+      <img src="images/pollo-horno.jpeg" alt="Pollo al horno especiado" class="img-producto">
+      <div class="texto">
+        <h3>Pollo al horno especiado</h3>
+        <p>Pollo asado lentamente con hierbas aromáticas y especias, jugoso y lleno de sabor.</p>
+        <span class="precio">12,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Carrillada ibérica" data-precio="15.9">
+    <div class="info-producto">
+      <img src="images/carrillada-iberica.jpeg" alt="Carrillada ibérica" class="img-producto">
+      <div class="texto">
+        <h3>Carrillada ibérica</h3>
+        <p>Carrilladas de cerdo ibérico guisadas a fuego lento en su propia salsa, extremadamente melosas.</p>
+        <span class="precio">15,90 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Costillas BBQ" data-precio="14.5">
+    <div class="info-producto">
+      <img src="images/costillas-bbq.jpeg" alt="Costillas BBQ" class="img-producto">
+      <div class="texto">
+        <h3>Costillas BBQ</h3>
+        <p>Costillas de cerdo marinadas y horneadas, terminadas con salsa barbacoa casera.</p>
+        <span class="precio">14,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+</section>
+
+ 
+<!-- ENSALADAS -->
+<section id="ensaladas" class="seccion">
+  <h2>Ensaladas</h2>
+
+  <article class="item" data-nombre="Ensalada Clásica" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/ensalada-clasica.jpeg" alt="Ensalada Clásica" class="img-producto">
+      <div class="texto">
+        <h3>Ensalada Clásica</h3>
+        <p>Ensalada de lechuga con tomate, cebolla, zanahoria, remolacha y atún aliñada con aceite, vinagre y sal.</p>
+        <span class="precio">1,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Ensalada Cesar" data-precio="1.9">
+    <div class="info-producto">
+      <img src="images/ensalada-cesar.jpeg" alt="Ensalada Cesar" class="img-producto">
+      <div class="texto">
+        <h3>Ensalada Cesar</h3>
+        <p>Lechuga, pollo a la plancha, picatostes, queso parmesano y salsa Cesar.</p>
+        <span class="precio">1,90 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Ensalada Mediterránea" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/ensalada-mediterranea.jpeg" alt="Ensalada Mediterránea" class="img-producto">
+      <div class="texto">
+        <h3>Ensalada Mediterránea</h3>
+        <p>Tomate, pepino, pimiento, cebolla roja, aceitunas y queso feta con aliño de aceite de oliva.</p>
+        <span class="precio">1,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Ensalada de Quinoa" data-precio="1.9">
+    <div class="info-producto">
+      <img src="images/ensalada-quinoa.jpeg" alt="Ensalada de Quinoa" class="img-producto">
+      <div class="texto">
+        <h3>Ensalada de Quinoa</h3>
+        <p>Quinoa, espinaca, aguacate, tomate cherry y semillas con vinagreta cítrica.</p>
+        <span class="precio">1,90 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Ensalada Tropical" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/ensalada-tropical.jpeg" alt="Ensalada Tropical" class="img-producto">
+      <div class="texto">
+        <h3>Ensalada Tropical</h3>
+        <p>Lechuga, mango, piña, aguacate, nueces y aliño de miel y limón.</p>
+        <span class="precio">1,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+</section>
+
+
+<!-- PLATOS CALIENTES -->
+<section id="platos-calientes" class="seccion">
+  <h2>Platos calientes</h2>
+
+  <article class="item" data-nombre="Paella de carne" data-precio="8.5">
+    <div class="info-producto">
+      <img src="images/paella.jpeg" alt="Paella de carne" class="img-producto">
+      <div class="texto">
+        <h3>Paella de carne</h3>
+        <p>Paella con pollo y magro.</p>
+        <span class="precio">8,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Paella de marisco" data-precio="10.9">
+    <div class="info-producto">
+      <img src="images/paella.jpeg" alt="Paella de marisco" class="img-producto">
+      <div class="texto">
+        <h3>Paella de marisco</h3>
+        <p>Gambas, mejillones, calamares y almejas.</p>
+        <span class="precio">10,90 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Paella mixta" data-precio="12.5">
+    <div class="info-producto">
+      <img src="images/paella.jpeg" alt="Paella mixta" class="img-producto">
+      <div class="texto">
+        <h3>Paella mixta</h3>
+        <p>Pollo, gambas, mejillones, calamares y almejas.</p>
+        <span class="precio">12,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Arroz amarillo con carne y setas" data-precio="9.9">
+    <div class="info-producto">
+      <img src="images/paella.jpeg" alt="Arroz amarillo con carne y setas" class="img-producto">
+      <div class="texto">
+        <h3>Arroz amarillo con carne y setas</h3>
+        <p>Pollo, magro y revuelto de setas.</p>
+        <span class="precio">9,90 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Sopa Castellana" data-precio="7.5">
+    <div class="info-producto">
+      <img src="images/sopa-castellana.jpeg" alt="Sopa Castellana" class="img-producto">
+      <div class="texto">
+        <h3>Sopa Castellana</h3>
+        <span class="precio">7,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Puchero" data-precio="7.5">
+    <div class="info-producto">
+      <img src="images/puchero.jpeg" alt="Puchero" class="img-producto">
+      <div class="texto">
+        <h3>Puchero</h3>
+        <p>Caldo malagueño con garbanzos, pollo, ternera y cerdo.</p>
+        <span class="precio">7,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Cazuela de fideos" data-precio="7.5">
+    <div class="info-producto">
+      <img src="images/cazuela-fideos.jpeg" alt="Cazuela de fideos" class="img-producto">
+      <div class="texto">
+        <h3>Cazuela de fideos</h3>
+        <p>Fideos, gambas y almejas.</p>
+        <span class="precio">7,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Cazuela de patatas" data-precio="7.5">
+    <div class="info-producto">
+      <img src="images/cazuela-patatas.jpeg" alt="Cazuela de patatas" class="img-producto">
+      <div class="texto">
+        <h3>Cazuela de patatas</h3>
+        <p>Patatas, gambas y almejas.</p>
+        <span class="precio">7,50 € / persona</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+</section>
+
+
+<!-- BEBIDAS -->
+<section id="bebidas" class="seccion">
+  <h2>Bebidas</h2>
+
+  <article class="item" data-nombre="Cocacola 330ml" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/Coca-cola.jpeg" alt="Cocacola 330ml" class="img-producto">
+      <div class="texto">
+        <h3>Cocacola 330ml</h3>
+        <span class="precio">1,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Fanta 330ml" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/fanta.jpeg" alt="Fanta 330ml" class="img-producto">
+      <div class="texto">
+        <h3>Fanta 330ml</h3>
+        <span class="precio">1,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Tónica 330ml" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/tonica.jpeg" alt="Tónica 330ml" class="img-producto">
+      <div class="texto">
+        <h3>Tónica 330ml</h3>
+        <span class="precio">1,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Cerveza Cruzcampo 330ml" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/Cruzcampo.jpeg" alt="Cerveza Cruzcampo 330ml" class="img-producto">
+      <div class="texto">
+        <h3>Cerveza Cruzcampo 330ml</h3>
+        <span class="precio">1,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Cerveza Estrella Galicia 330ml" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/estrella_galicia.jpeg" alt="Cerveza Estrella Galicia 330ml" class="img-producto">
+      <div class="texto">
+        <h3>Cerveza Estrella Galicia 330ml</h3>
+        <span class="precio">1,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Cerveza San Miguel 330ml" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/san_miguel.jpeg" alt="Cerveza San Miguel 330ml" class="img-producto">
+      <div class="texto">
+        <h3>Cerveza San Miguel 330ml</h3>
+        <span class="precio">1,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="FuzeTea" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/fuzetea.jpeg" alt="FuzeTea" class="img-producto">
+      <div class="texto">
+        <h3>FuzeTea 330ml</h3>
+        <span class="precio">1,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+ 
+  <article class="item" data-nombre="Acuarius" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/acuarius.jpeg" alt="Acuarius" class="img-producto">
+      <div class="texto">
+        <h3>Acuarius 330ml</h3>
+        <span class="precio">1,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+ 
+  <article class="item" data-nombre="Acuarius" data-precio="1.5">
+    <div class="info-producto">
+      <img src="images/acuarius_naranja.jpeg" alt="Acuarius" class="img-producto">
+      <div class="texto">
+        <h3>Acuarius 330ml</h3>
+        <span class="precio">1,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Monster 500ml" data-precio="2.0">
+    <div class="info-producto">
+      <img src="images/monster.jpeg" alt="Monster 500ml" class="img-producto">
+      <div class="texto">
+        <h3>Monster 500ml</h3>
+        <span class="precio">2,00 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Red Bull" data-precio="2.5">
+    <div class="info-producto">
+      <img src="images/redbull.jpeg" alt="Red Bull" class="img-producto">
+      <div class="texto">
+        <h3>Red Bull</h3>
+        <span class="precio">2,50 € / unidad</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Vino Protos" data-precio="17.5">
+    <div class="info-producto">
+      <img src="images/protos.jpeg" alt="Vino Protos" class="img-producto">
+      <div class="texto">
+        <h3>Vino Protos</h3>
+        <span class="precio">17,50 € / botella</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+</section>
+
+<section id="sushis" class="seccion">
+  <h2>Sushis</h2>
+
+  <article class="item" data-nombre="Maki" data-precio="10">
+    <div class="info-producto">
+      <img src="images/maki.jpeg" alt="Maki" class="img-producto">
+      <div class="texto">
+        <h3>Maki</h3>
+        <span class="precio">10€ / 8 piezas</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+</section>
+
+
+      </main>
+
+      <!-- ✅ RESUMEN PRESUPUESTO -->
+      <aside class="resumen">
+        <h2>Tu presupuesto</h2>
+        <ul id="lista"></ul>
+        <p id="total">Total: 0 €</p>
+        <button onclick="continuar()">Continuar</button>
+      </aside>
+
     </section>
 
-    <section id="ensaladas" class="seccion">
-      <h2>Ensaladas</h2>
-      <div class="productos"></div>
-    </section>
+  </section>
 
-    <section id="carnes" class="seccion">
-      <h2>Carnes</h2>
-      <div class="productos"></div>
-    </section>
-
-    <section id="platos-calientes" class="seccion">
-      <h2>Platos calientes</h2>
-      <div class="productos"></div>
-    </section>
-
-    <section id="postres" class="seccion">
-      <h2>Postres</h2>
-      <div class="productos"></div>
-    </section>
-
-    <section id="bebidas" class="seccion">
-      <h2>Bebidas</h2>
-      <div class="productos"></div>
-    </section>
-
-  </main>
-
-</div>
-
-
-<!-- VISOR DE IMAGEN -->
-<div id="visorImagen" class="visor-imagen">
-  <img id="imagenGrande">
-</div>
-
-<script src="productos.js"></script>
-<script src="selector.js"></script>
-
+  <!-- JS -->
+  <script type="module" src="selector.js"></script>
 </body>
 </html>
