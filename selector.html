@@ -31,8 +31,8 @@
         <button onclick="irSeccion('carnes')">🥩 Carnes</button>
         <button onclick="irSeccion('ensaladas')">🥗 Ensaladas</button>
         <button onclick="irSeccion('platos-calientes')">🍲 Platos calientes</button>
-        <button onclick="irSeccion('bebidas')">🥤 Bebidas</button>
         <button onclick="irSeccion('shushis')">🍣 Sushis</button>
+        <button onclick="irSeccion('bebidas')">🥤 Bebidas</button>
       </aside>
 
       <!-- 📜 CONTENIDO CON SCROLL -->
@@ -98,6 +98,24 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
+  <article class="item" data-nombre="Aguacate Malagueño" data-precio="25">
+    <div class="info-producto">
+      <img src="images/aguacate.jpeg" alt="Aguacate" class="img-producto">
+      <div class="texto">
+        <h3>Aguacate Malagueño</h3>
+        <p>Aguacate relleno de marisco </p>
+        <span class="precio">25,00 € / Plato de 10 unidades (mitades)</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
   <article class="item" data-nombre="Jamón iberico" data-precio="10">
     <div class="info-producto">
       <img src="images/jamon.jpeg" alt="Jamon" class="img-producto">
@@ -105,6 +123,24 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
         <h3>Jamón Iberico</h3>
         <p>Plato 100 gr</p>
         <span class="precio">10,00 € / Plato 100 gr</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Queso semicurado" data-precio="5">
+    <div class="info-producto">
+      <img src="images/queso.jpeg" alt="Queso" class="img-producto">
+      <div class="texto">
+        <h3>Queso Semicurado</h3>
+        <p>Plato 100-150 gr</p>
+        <span class="precio">5,00 € / Plato 100-150 gr</span>
       </div>
     </div>
     <div class="acciones">
@@ -170,13 +206,13 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Ensaladilla Rusa" data-precio="2">
+  <article class="item" data-nombre="Ensaladilla Rusa" data-precio="15">
     <div class="info-producto">
       <img src="images/ensaladilla.jpeg" alt="Ensaladilla Rusa" class="img-producto">
       <div class="texto">
         <h3>Ensaladilla Rusa</h3>
         <p>Ensaladilla con patata, mayonesa, atún, huevo cocido, bocas de mar, aceitunas, zanahoria.</p>
-        <span class="precio">2,00 € / 12 vasos</span>
+        <span class="precio">15,00 € / 10 vasos</span>
       </div>
     </div>
     <div class="acciones">
@@ -206,13 +242,13 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Huevo Relleno" data-precio="14.5">
+  <article class="item" data-nombre="Huevo Relleno" data-precio="15">
     <div class="info-producto">
       <img src="images/huevorelleno.jpeg" alt="Huevo Relleno" class="img-producto">
       <div class="texto">
         <h3>Huevo Relleno</h3>
         <p>Huevo cocido relleno con yema, atún y tomate frito, tapado con mayonesa y pimiento morrón.</p>
-        <span class="precio">14,50 € / 12 huevos</span>
+        <span class="precio">15,00 € / 12 unidades (medio huevo)</span>
       </div>
     </div>
     <div class="acciones">
@@ -516,13 +552,13 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
 <section id="platos-calientes" class="seccion">
   <h2>Platos calientes</h2>
 
-  <article class="item" data-nombre="Paella de carne" data-precio="8.5">
+  <article class="item" data-nombre="Paella de carne" data-precio="150">
     <div class="info-producto">
       <img src="images/paella.jpeg" alt="Paella de carne" class="img-producto">
       <div class="texto">
-        <h3>Paella de carne</h3>
+        <h3>Paella de carne para 20-200</h3>
         <p>Paella con pollo y magro.</p>
-        <span class="precio">8,50 € / persona</span>
+        <span class="precio">150 € / 20 personas</span>
       </div>
     </div>
     <div class="acciones">
@@ -534,13 +570,13 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Paella de marisco" data-precio="10.9">
+  <article class="item" data-nombre="Paella de marisco" data-precio="200">
     <div class="info-producto">
       <img src="images/paella.jpeg" alt="Paella de marisco" class="img-producto">
       <div class="texto">
-        <h3>Paella de marisco</h3>
+        <h3>Paella de marisco para 20-200</h3>
         <p>Gambas, mejillones, calamares y almejas.</p>
-        <span class="precio">10,90 € / persona</span>
+        <span class="precio">200 € / 20 personas</span>
       </div>
     </div>
     <div class="acciones">
@@ -552,13 +588,13 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Paella mixta" data-precio="12.5">
+  <article class="item" data-nombre="Paella mixta" data-precio="250">
     <div class="info-producto">
       <img src="images/paella.jpeg" alt="Paella mixta" class="img-producto">
       <div class="texto">
         <h3>Paella mixta</h3>
         <p>Pollo, gambas, mejillones, calamares y almejas.</p>
-        <span class="precio">12,50 € / persona</span>
+        <span class="precio">250 € / 20 personas</span>
       </div>
     </div>
     <div class="acciones">
@@ -570,13 +606,13 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Arroz amarillo con carne y setas" data-precio="9.9">
+  <article class="item" data-nombre="Arroz amarillo con carne y setas" data-precio="180">
     <div class="info-producto">
       <img src="images/paella.jpeg" alt="Arroz amarillo con carne y setas" class="img-producto">
       <div class="texto">
-        <h3>Arroz amarillo con carne y setas</h3>
+        <h3>Arroz amarillo con carne y setas para 20-200</h3>
         <p>Pollo, magro y revuelto de setas.</p>
-        <span class="precio">9,90 € / persona</span>
+        <span class="precio">180 € / 20 personas</span>
       </div>
     </div>
     <div class="acciones">
@@ -588,12 +624,12 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Sopa Castellana" data-precio="7.5">
+  <article class="item" data-nombre="Sopa Castellana" data-precio="100">
     <div class="info-producto">
       <img src="images/sopa-castellana.jpeg" alt="Sopa Castellana" class="img-producto">
       <div class="texto">
-        <h3>Sopa Castellana</h3>
-        <span class="precio">7,50 € / persona</span>
+        <h3>Sopa Castellana para 20-200</h3>
+        <span class="precio">100 € / 20 personas</span>
       </div>
     </div>
     <div class="acciones">
@@ -605,13 +641,30 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Puchero" data-precio="7.5">
+  <article class="item" data-nombre="Crema de Calabaza" data-precio="100">
+    <div class="info-producto">
+      <img src="images/sopa-castellana.jpeg" alt="Sopa Castellana" class="img-producto">
+      <div class="texto">
+        <h3>Sopa Castellana para 20-200</h3>
+        <span class="precio">100 € / 20 personas</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+
+  <article class="item" data-nombre="Puchero" data-precio="100">
     <div class="info-producto">
       <img src="images/puchero.jpeg" alt="Puchero" class="img-producto">
       <div class="texto">
-        <h3>Puchero</h3>
+        <h3>Puchero para 20-200</h3>
         <p>Caldo malagueño con garbanzos, pollo, ternera y cerdo.</p>
-        <span class="precio">7,50 € / persona</span>
+        <span class="precio">100 € / 20 personas</span>
       </div>
     </div>
     <div class="acciones">
@@ -623,13 +676,13 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Cazuela de fideos" data-precio="7.5">
+  <article class="item" data-nombre="Cazuela de fideos" data-precio="200">
     <div class="info-producto">
       <img src="images/cazuela-fideos.jpeg" alt="Cazuela de fideos" class="img-producto">
       <div class="texto">
         <h3>Cazuela de fideos</h3>
         <p>Fideos, gambas y almejas.</p>
-        <span class="precio">7,50 € / persona</span>
+        <span class="precio">200 € / 20 personas</span>
       </div>
     </div>
     <div class="acciones">
@@ -641,13 +694,13 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
     </div>
   </article>
 
-  <article class="item" data-nombre="Cazuela de patatas" data-precio="7.5">
+  <article class="item" data-nombre="Cazuela de patatas" data-precio="180">
     <div class="info-producto">
       <img src="images/cazuela-patatas.jpeg" alt="Cazuela de patatas" class="img-producto">
       <div class="texto">
         <h3>Cazuela de patatas</h3>
-        <p>Patatas, gambas y almejas.</p>
-        <span class="precio">7,50 € / persona</span>
+        <p>Patatas y carne de cerdo.</p>
+        <span class="precio">180 € / 20 personas</span>
       </div>
     </div>
     <div class="acciones">
@@ -661,6 +714,26 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
 
 </section>
 
+<section id="sushis" class="seccion">
+  <h2>Sushis</h2>
+
+  <article class="item" data-nombre="Maki" data-precio="10">
+    <div class="info-producto">
+      <img src="images/maki.jpeg" alt="Maki" class="img-producto">
+      <div class="texto">
+        <h3>Maki</h3>
+        <span class="precio">10€ / 8 piezas</span>
+      </div>
+    </div>
+    <div class="acciones">
+      <button class="reset">x</button>
+      <button class="menos"><</button>
+      <span class="cantidad">0</span>
+      <button class="mas">></button>
+      <button class="multiplicar">+n</button>
+    </div>
+  </article>
+</section>
 
 <!-- BEBIDAS -->
 <section id="bebidas" class="seccion">
@@ -873,26 +946,7 @@ enviamelo completo todos con imagenes que estan en images tal como en paella.jpe
 
 </section>
 
-<section id="sushis" class="seccion">
-  <h2>Sushis</h2>
 
-  <article class="item" data-nombre="Maki" data-precio="10">
-    <div class="info-producto">
-      <img src="images/maki.jpeg" alt="Maki" class="img-producto">
-      <div class="texto">
-        <h3>Maki</h3>
-        <span class="precio">10€ / 8 piezas</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+n</button>
-    </div>
-  </article>
-</section>
 
 
       </main>
