@@ -1,4 +1,3 @@
-//selector.js
 // selector.js
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   generarProductos();
 
   // Inicializar productos por categoría
-  ["carnes","ensaladas","platos-calientes","entrantes","postres","bebidas"]
+  ["carnes","ensaladas","platos-calientes","entrantes","postres","bebidas","sushis"]
     .forEach(categoria => initProductos(categoria));
 
   // Activar visor de imágenes
