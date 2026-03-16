@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
   generarProductos();
 
   // Inicializar productos por categoría
-  ["carnes","ensaladas","platos-calientes","entrantes","postres","bebidas","sushis"]
-    .forEach(categoria => initProductos(categoria));
-
+document.querySelectorAll(".seccion").forEach(seccion=>{
+  initProductos(seccion.id);
+});
   // Activar visor de imágenes
   initVisorImagen();
 
