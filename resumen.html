@@ -1,3 +1,5 @@
+<!-- resumen.html -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,16 +22,11 @@
     <ul id="listaResumen"></ul>
 
     <p id="detalleExtras"></p>
-    <p id="detallePersonas"></p>
-    <p id="detalleDistancia"></p>
     <p id="totalFinal"></p>
 
     <button id="confirmar">Confirmar pedido</button>
   </section>
 </main>
-
-<!-- ✅ EmailJS global -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script type="module">
 import { db } from "./firebase.js";
@@ -53,59 +50,47 @@ if (!datos) {
 const infoCliente = document.getElementById("infoCliente");
 const listaResumen = document.getElementById("listaResumen");
 const detalleExtras = document.getElementById("detalleExtras");
-const detallePersonas = document.getElementById("detallePersonas");
-const detalleDistancia = document.getElementById("detalleDistancia");
 const totalFinal = document.getElementById("totalFinal");
 const confirmarBtn = document.getElementById("confirmar");
 
-infoCliente.innerText = `${datos.nombre} · ${datos.personas} personas`;
-
-/* ---------------- CÁLCULO DISTANCIA ---------------- */
-
-function calcularCosteDistancia(distanciaKm) {
-  if (!distanciaKm || distanciaKm <= 0) return 0;
-  return Math.ceil(distanciaKm / 100) * 40;
-}
+infoCliente.innerText = `${datos.nombre}`;
 
 /* ---------------- RESUMEN ---------------- */
 
 function renderResumen() {
+
   listaResumen.innerHTML = "";
   let total = 0;
 
-  // 🍽️ Platos
   (datos.carrito || []).forEach(item => {
+
+    const subtotal = item.precioPersona * item.cantidad;
+
     const li = document.createElement("li");
-    li.textContent = `${item.nombre} (${item.categoria}) – ${item.precioPersona} € x ${datos.personas}`;
+    li.textContent =
+      `${item.nombre} (${item.categoria}) – ${item.precioPersona} € x ${item.cantidad} = ${subtotal.toFixed(2)} €`;
+
     listaResumen.appendChild(li);
-    total += item.total;
+
+    total += subtotal;
+
   });
 
-  // ➕ Extras
+  // Extras
   let extrasTxt = "Extras: ";
   let hayExtras = false;
 
   for (let e in datos.extras || {}) {
+
     extrasTxt += `${e} (${datos.extras[e]} €) `;
     total += datos.extras[e];
     hayExtras = true;
+
   }
 
   detalleExtras.innerText = hayExtras ? extrasTxt : "Extras: Ninguno";
-  detallePersonas.innerText = `Personas: ${datos.personas}`;
 
-  // 🚚 Distancia
-  const distanciaKm = datos.direccion?.distanciaKm || 0;
-  const costeDistancia = calcularCosteDistancia(distanciaKm);
-
-  detalleDistancia.innerText =
-    `Distancia: ${distanciaKm.toFixed(2)} km · Desplazamiento: ${costeDistancia} €`;
-
-  total += costeDistancia;
-
-  // 💰 Total final
   datos.total = total;
-  datos.costeDistancia = costeDistancia;
 
   totalFinal.innerText = `Total final: ${total.toFixed(2)} €`;
 
@@ -115,47 +100,79 @@ function renderResumen() {
 /* ---------------- FIREBASE ---------------- */
 
 async function guardarPedido() {
+
   await addDoc(collection(db, "pedidos"), {
     ...datos,
     fechaCreacion: serverTimestamp()
   });
+
 }
 
-/* ---------------- EMAIL ---------------- */
+/* ---------------- MENSAJE WHATSAPP ---------------- */
 
-function enviarEmail() {
-  emailjs.init("XTg7lRhg7RNbEGYMB");
+function generarMensajeWhatsApp() {
 
-  return emailjs.send(
-    "service_4olj3be",
-    "template_g5jz7ir",
-    {
-      nombre: datos.nombre,
-      telefono: datos.telefono,
-      email: datos.email,
-      distancia: `${datos.direccion.distanciaKm.toFixed(2)} km`,
-      desplazamiento: `${datos.costeDistancia} €`,
-      total: `${datos.total.toFixed(2)} €`
+  let mensaje =
+`Hola, soy ${datos.nombre}.
+Quiero solicitar este presupuesto:
+
+`;
+
+  (datos.carrito || []).forEach(item => {
+
+    const subtotal = item.precioPersona * item.cantidad;
+
+    mensaje +=
+`• ${item.nombre} (${item.categoria})
+  ${item.precioPersona}€ x ${item.cantidad} = ${subtotal.toFixed(2)}€
+
+`;
+
+  });
+
+  if (datos.extras) {
+
+    for (let e in datos.extras) {
+
+      mensaje += `• Extra: ${e} (${datos.extras[e]} €)\n`;
+
     }
-  );
+
+  }
+
+  mensaje += `
+TOTAL BASE SUGERIDO: ${datos.total.toFixed(2)} €
+
+Teléfono: ${datos.telefono}
+Email: ${datos.email}
+`;
+
+  return encodeURIComponent(mensaje);
 }
 
 /* ---------------- CONFIRMAR ---------------- */
 
 confirmarBtn.addEventListener("click", async () => {
+
   confirmarBtn.disabled = true;
-  confirmarBtn.innerText = "Procesando...";
+  confirmarBtn.innerText = "Abriendo WhatsApp...";
 
   renderResumen();
-  await guardarPedido();
-  await enviarEmail();
 
-  window.location.href = "confirmacion.html";
+  await guardarPedido();
+
+  const mensaje = generarMensajeWhatsApp();
+
+  const url = `https://wa.me/34643213578?text=${mensaje}`;
+
+  window.location.href = url;
+
 });
 
 /* ---------------- INIT ---------------- */
 
 renderResumen();
+
 </script>
 
 </body>
