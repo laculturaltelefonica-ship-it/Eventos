@@ -1,0 +1,179 @@
+<!-- resumen.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Resumen del pedido | Catering Gil y Román</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="selector.css">
+</head>
+
+<body>
+
+<header class="top">
+  <h1>Resumen del pedido</h1>
+  <p id="infoCliente"></p>
+</header>
+
+<main class="contenedor">
+  <section class="resumen">
+    <h2>Detalles</h2>
+    <ul id="listaResumen"></ul>
+
+    <p id="detalleExtras"></p>
+    <p id="totalFinal"></p>
+
+    <button id="confirmar">Confirmar pedido</button>
+  </section>
+</main>
+
+<script type="module">
+import { db } from "./firebase.js";
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+/* ---------------- DATOS ---------------- */
+
+const datos = JSON.parse(localStorage.getItem("presupuesto"));
+
+if (!datos) {
+  alert("No hay presupuesto guardado");
+  window.location.href = "index.html";
+}
+
+/* ---------------- DOM ---------------- */
+
+const infoCliente = document.getElementById("infoCliente");
+const listaResumen = document.getElementById("listaResumen");
+const detalleExtras = document.getElementById("detalleExtras");
+const totalFinal = document.getElementById("totalFinal");
+const confirmarBtn = document.getElementById("confirmar");
+
+infoCliente.innerText = `${datos.nombre}`;
+
+/* ---------------- RESUMEN ---------------- */
+
+function renderResumen() {
+
+  listaResumen.innerHTML = "";
+  let total = 0;
+
+  (datos.carrito || []).forEach(item => {
+
+    const subtotal = item.precioPersona * item.cantidad;
+
+    const li = document.createElement("li");
+    li.textContent =
+      `${item.nombre} (${item.categoria}) – ${item.precioPersona} € x ${item.cantidad} = ${subtotal.toFixed(2)} €`;
+
+    listaResumen.appendChild(li);
+
+    total += subtotal;
+
+  });
+
+  // Extras
+  let extrasTxt = "Extras: ";
+  let hayExtras = false;
+
+  for (let e in datos.extras || {}) {
+
+    extrasTxt += `${e} (${datos.extras[e]} €) `;
+    total += datos.extras[e];
+    hayExtras = true;
+
+  }
+
+  detalleExtras.innerText = hayExtras ? extrasTxt : "Extras: Ninguno";
+
+  datos.total = total;
+
+  totalFinal.innerText = `Total final: ${total.toFixed(2)} €`;
+
+  localStorage.setItem("presupuesto", JSON.stringify(datos));
+}
+
+/* ---------------- FIREBASE ---------------- */
+
+async function guardarPedido() {
+
+  await addDoc(collection(db, "pedidos"), {
+    ...datos,
+    fechaCreacion: serverTimestamp()
+  });
+
+}
+
+/* ---------------- MENSAJE WHATSAPP ---------------- */
+
+function generarMensajeWhatsApp() {
+
+  let mensaje =
+`Hola, soy ${datos.nombre}.
+Quiero solicitar este presupuesto:
+
+`;
+
+  (datos.carrito || []).forEach(item => {
+
+    const subtotal = item.precioPersona * item.cantidad;
+
+    mensaje +=
+`• ${item.nombre} (${item.categoria})
+  ${item.precioPersona}€ x ${item.cantidad} = ${subtotal.toFixed(2)}€
+
+`;
+
+  });
+
+  if (datos.extras) {
+
+    for (let e in datos.extras) {
+
+      mensaje += `• Extra: ${e} (${datos.extras[e]} €)\n`;
+
+    }
+
+  }
+
+  mensaje += `
+TOTAL BASE SUGERIDO: ${datos.total.toFixed(2)} €
+
+Teléfono: ${datos.telefono}
+Email: ${datos.email}
+`;
+
+  return encodeURIComponent(mensaje);
+}
+
+/* ---------------- CONFIRMAR ---------------- */
+
+confirmarBtn.addEventListener("click", async () => {
+
+  confirmarBtn.disabled = true;
+  confirmarBtn.innerText = "Abriendo WhatsApp...";
+
+  renderResumen();
+
+  await guardarPedido();
+
+  const mensaje = generarMensajeWhatsApp();
+
+  const url = `https://wa.me/34643213578?text=${mensaje}`;
+
+  window.location.href = url;
+
+});
+
+/* ---------------- INIT ---------------- */
+
+renderResumen();
+
+</script>
+
+</body>
+</html>
