@@ -1,152 +1,27 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Pedir presupuesto | Catering Gil y Román</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Presupuesto | Catering Gil y Román</title> <style> * { box-sizing: border-box; } body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: linear-gradient(135deg, #f7f4ef, #eee9e1); min-height: 100vh; display: flex; align-items: center; justify-content: center; color: #222; } .container { width: 100%; max-width: 520px; padding: 25px; } .card { background: #fff; border-radius: 24px; padding: 40px 28px; text-align: center; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10); } .logo { font-size: 18px; font-weight: bold; letter-spacing: 1px; margin-bottom: 35px; } h1 { font-size: 32px; line-height: 1.15; margin: 0 0 15px; } .descripcion { color: #666; font-size: 17px; line-height: 1.5; margin: 0 auto 30px; max-width: 400px; } .boton { display: block; width: 100%; padding: 17px 20px; background: #111; color: #fff; text-decoration: none; border-radius: 12px; font-size: 17px; font-weight: bold; transition: all 0.2s ease; } .boton:hover { background: #333; transform: translateY(-1px); } .info { margin-top: 22px; font-size: 14px; color: #888; } @media (max-width: 480px) { .card { padding: 35px 22px; } h1 { font-size: 28px; } } </style> </head> <body> <div class="container">
+<div class="card">
 
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f6f8;
-      margin: 0;
-    }
-
-    .container {
-      max-width: 500px;
-      margin: auto;
-      padding: 30px 20px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    p {
-      text-align: center;
-      color: #555;
-      margin-bottom: 25px;
-    }
-
-    form {
-      background: #fff;
-      padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    input {
-      padding: 12px;
-      font-size: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 14px;
-      background: #111;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #333;
-    }
-
-    .mensaje {
-      text-align: center;
-      margin-bottom: 15px;
-      font-weight: bold;
-      display: none;
-    }
-
-    .ok { color: #0a7; }
-    .error { color: #c00; }
-  </style>
-</head>
-
-<body>
-
-  <div class="container">
-    <h1>Pedir presupuesto</h1>
-    <p>Cuéntanos los datos básicos de tu evento</p>
-
-    <div id="mensaje" class="mensaje"></div>
-
-    <form id="formPresupuesto">
-
-      <input type="text" id="nombre" placeholder="Nombre completo" required />
-      <input type="tel" id="telefono" placeholder="Teléfono" required />
-      <input type="email" id="email" placeholder="Email" required />
-      
-      <label for="fechaEvento">Fecha de celebración del evento</label>
-      <input type="date" id="fechaEvento" required />
-
-      <button type="submit">Continuar</button>
-
-    </form>
+  <div class="logo">
+    CATERING GIL Y ROMÁN
   </div>
 
-  <!-- LÓGICA -->
-  <script type="module">
-    import { db } from "./firebase.js";
-    import {
-      doc,
-      getDoc,
-      setDoc,
-      serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+  <h1>
+    Prepara tu presupuesto
+  </h1>
 
-    const form = document.getElementById("formPresupuesto");
-    const mensaje = document.getElementById("mensaje");
+  <p class="descripcion">
+    Elige tus productos y servicios para tu evento.
+    Podrás ver tu presupuesto mientras lo preparas.
+  </p>
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      mensaje.style.display = "none";
+  <a href="selector.html" class="boton">
+    Empezar presupuesto
+  </a>
 
-      const nombre = document.getElementById("nombre").value.trim();
-      const telefono = document.getElementById("telefono").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const fechaEvento = document.getElementById("fechaEvento").value;
+  <div class="info">
+    Sin registro · Fácil y rápido
+  </div>
 
-      const presupuestoActual = {
-        nombre,
-        telefono,
-        email,
-        fechaEvento,
-        carrito: [],
-        extras: {},
-        creadoEn: Date.now()
-      };
+</div>
 
-      localStorage.setItem("presupuesto", JSON.stringify(presupuestoActual));
-
-      const clienteRef = doc(db, "clientes", telefono);
-      const clienteSnap = await getDoc(clienteRef);
-
-      if (!clienteSnap.exists()) {
-        await setDoc(clienteRef, {
-          nombre,
-          email,
-          telefono,
-          pedidosTotales: 0,
-          totalGastado: 0,
-          esFrecuente: false,
-          fechaPrimerPedido: serverTimestamp()
-        });
-      }
-
-      window.location.href = "selector.html";
-    });
-  </script>
-
-</body>
-</html>
+</div> </body> </html>
