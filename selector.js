@@ -82,6 +82,7 @@ function generarProductos() {
         <span class="cantidad">0</span>
         <button class="mas">></button>
         <button class="multiplicar">+n</button>
+        <button class="multiplicar">+10</button>
       </div>
     `;
 
@@ -123,7 +124,6 @@ function initVisorImagen() {
 ========================= */
 function initProductos(categoria) {
 
-  const personas = datos.personas ?? 1;
 
   document
     .querySelectorAll(`#${categoria} .item`)
@@ -203,7 +203,7 @@ function initProductos(categoria) {
 
       masBtn.onclick = () => actualizarCarrito(cantidad + 1);
 
-      multiplicarBtn.onclick = () => actualizarCarrito(cantidad + personas);
+      multiplicarBtn.onclick = () => actualizarCarrito(cantidad + 10);
 
     });
 
