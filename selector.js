@@ -4,32 +4,31 @@ let datos = null;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 📦 Cargar presupuesto
+  // 📦 Cargar presupuesto de localStorage
   datos = JSON.parse(localStorage.getItem("presupuesto"));
   if (!datos) {
     window.location.href = "index.html";
     return;
   }
 
-  // 🧾 Info cliente
+  // 🧾 Mostrar info cliente
   const infoCliente = document.getElementById("infoCliente");
   if (infoCliente) {
-    infoCliente.innerText =
-      `Presupuesto para ${datos.nombre}`;
+    infoCliente.innerText = `Presupuesto para ${datos.nombre || "Cliente"}`;
   }
 
-  // 🧱 Generar productos automáticamente desde la base de datos
+  // 🧱 Generar productos dinámicos si existe la BD (en caso de usar render por JS)
   generarProductos();
 
-  // Inicializar productos por categoría
-  document.querySelectorAll(".seccion").forEach(seccion=>{
+  // Inicializar listeners en los ítems existentes en la página
+  document.querySelectorAll(".seccion").forEach(seccion => {
     initProductos(seccion.id);
   });
 
-  // Activar visor de imágenes
+  // Activar visor modal de imágenes grandes
   initVisorImagen();
 
-  // Render inicial del resumen
+  // Render inicial del resumen de pedido
   renderResumen();
 });
 
@@ -55,8 +54,12 @@ function generarProductos() {
 
   PRODUCTOS.forEach(p => {
 
-    const seccion = document.querySelector(`#${p.categoria} .productos`);
+    const seccion = document.getElementById(p.categoria);
     if (!seccion) return;
+
+    // Verificar si el producto ya existe estáticamente para evitar duplicados
+    const yaExiste = seccion.querySelector(`[data-nombre="${p.nombre}"]`);
+    if (yaExiste) return;
 
     const article = document.createElement("article");
     article.className = "item";
@@ -65,23 +68,19 @@ function generarProductos() {
 
     article.innerHTML = `
       <div class="info-producto">
-
         <img src="${p.imagen}" alt="${p.nombre}" class="img-producto">
-
         <div class="texto">
           <h3>${p.nombre}</h3>
           ${p.descripcion ? `<p>${p.descripcion}</p>` : ""}
           <span class="precio">${p.precioTexto}</span>
         </div>
-
       </div>
 
       <div class="acciones">
         <button class="reset">x</button>
-        <button class="menos"><</button>
+        <button class="menos">&lt;</button>
         <span class="cantidad">0</span>
-        <button class="mas">></button>
-        <button class="multiplicar">+n</button>
+        <button class="mas">&gt;</button>
         <button class="multiplicar">+10</button>
       </div>
     `;
@@ -102,28 +101,21 @@ function initVisorImagen() {
   if (!visor || !imagenGrande) return;
 
   imagenes.forEach(img => {
-
     img.addEventListener("click", () => {
-
       imagenGrande.src = img.src;
       visor.style.display = "flex";
-
     });
-
   });
 
   visor.addEventListener("click", () => {
-
     visor.style.display = "none";
-
   });
 }
 
 /* =========================
-   🍽️ INIT PRODUCTOS
+   🍽️ INIT PRODUCTOS (BOTONES Y LÓGICA)
 ========================= */
 function initProductos(categoria) {
-
 
   document
     .querySelectorAll(`#${categoria} .item`)
@@ -140,14 +132,12 @@ function initProductos(categoria) {
 
       let cantidad = 0;
 
-      // 🔄 Restaurar cantidad si ya estaba en carrito
+      // 🔄 Restaurar cantidad si el ítem ya estaba guardado en el carrito
       const existente = (datos.carrito || []).find(p => p.nombre === nombre);
 
       if (existente) {
-
         cantidad = existente.cantidad;
-        cantidadSpan.innerText = cantidad;
-
+        if (cantidadSpan) cantidadSpan.innerText = cantidad;
       }
 
       function actualizarCarrito(nuevaCantidad) {
@@ -157,20 +147,15 @@ function initProductos(categoria) {
         const index = datos.carrito.findIndex(p => p.nombre === nombre);
 
         if (nuevaCantidad === 0) {
-
           if (index > -1) datos.carrito.splice(index, 1);
-
         } else {
-
           const total = precioPersona * nuevaCantidad;
+          const personas = datos.personas || 1; // Corrección para evitar ReferenceError
 
           if (index > -1) {
-
             datos.carrito[index].cantidad = nuevaCantidad;
             datos.carrito[index].total = total;
-
           } else {
-
             datos.carrito.push({
               categoria,
               nombre,
@@ -179,34 +164,31 @@ function initProductos(categoria) {
               cantidad: nuevaCantidad,
               total
             });
-
           }
-
         }
 
         cantidad = nuevaCantidad;
-        cantidadSpan.innerText = cantidad;
+        if (cantidadSpan) cantidadSpan.innerText = cantidad;
 
         localStorage.setItem("presupuesto", JSON.stringify(datos));
 
         renderResumen();
       }
 
-      // 🎛️ Eventos botones
-      resetBtn.onclick = () => actualizarCarrito(0);
+      // 🎛️ Eventos de botones de selección
+      if (resetBtn) resetBtn.onclick = () => actualizarCarrito(0);
 
-      menosBtn.onclick = () => {
+      if (menosBtn) {
+        menosBtn.onclick = () => {
+          if (cantidad > 0) actualizarCarrito(cantidad - 1);
+        };
+      }
 
-        if (cantidad > 0) actualizarCarrito(cantidad - 1);
+      if (masBtn) masBtn.onclick = () => actualizarCarrito(cantidad + 1);
 
-      };
-
-      masBtn.onclick = () => actualizarCarrito(cantidad + 1);
-
-      multiplicarBtn.onclick = () => actualizarCarrito(cantidad + 10);
+      if (multiplicarBtn) multiplicarBtn.onclick = () => actualizarCarrito(cantidad + 10);
 
     });
-
 }
 
 /* =========================
@@ -223,13 +205,12 @@ function renderResumen() {
 
   let total = 0;
 
-  // 🛒 Productos
+  // 🛒 Productos seleccionados
   (datos.carrito || []).forEach(item => {
 
     const subtotal = item.precioPersona * item.cantidad;
 
     const li = document.createElement("li");
-
     li.textContent =
       `${item.nombre} (${item.categoria}) – ` +
       `${item.precioPersona} € x ${item.cantidad} = ` +
@@ -241,13 +222,11 @@ function renderResumen() {
 
   });
 
-  // ➕ Extras
+  // ➕ Extras agregados
   for (let extra in datos.extras || {}) {
 
     const precio = datos.extras[extra];
-
     const li = document.createElement("li");
-
     li.textContent = `${extra} – ${precio.toFixed(2)} €`;
 
     lista.appendChild(li);
@@ -256,20 +235,17 @@ function renderResumen() {
 
   }
 
-  // 💰 Total
+  // 💰 Total recalculado
   datos.total = total;
 
   totalTxt.innerText = `Total: ${total.toFixed(2)} €`;
 
   localStorage.setItem("presupuesto", JSON.stringify(datos));
-
 }
 
 /* =========================
-   ➡️ CONTINUAR
+   ➡️ CONTINUAR AL RESUMEN
 ========================= */
 window.continuar = function () {
-
   window.location.href = "resumen.html";
-
 };
