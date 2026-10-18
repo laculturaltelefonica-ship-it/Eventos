@@ -1,227 +1,707 @@
-// selector.js
 
-let datos = null;
+/* =========================================================
+   CATERING GIL & ROMÁN — selector.js
+   Compatible con selector.html y resumen.html
+   - No genera productos: están definidos en selector.html.
+   - Guarda la selección en localStorage bajo "presupuesto".
+   - Los servicios con precio a consultar no se suman al total.
+   ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
+  "use strict";
 
-  // 📦 Cargar presupuesto guardado
-  datos = JSON.parse(localStorage.getItem("presupuesto")) || {};
-  if (!datos || !datos.nombre) {
-    // Si no hay datos básicos de cliente, se asigna una estructura por defecto
-    if (!datos) datos = {};
+  const STORAGE_KEY = "presupuesto";
+  const PRODUCT_SELECTOR = ".item[data-nombre][data-precio]";
+
+  const euros = new Intl.NumberFormat("es-ES", {
+    style: "currency",
+    currency: "EUR"
+  });
+
+  const normalizar = (texto) =>
+    String(texto ?? "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const numero = (valor, defecto = 0) => {
+    const resultado = Number(valor);
+    return Number.isFinite(resultado) ? resultado : defecto;
+  };
+
+  function leerPresupuesto() {
+    try {
+      const guardado = localStorage.getItem(STORAGE_KEY);
+
+      if (!guardado) return {};
+
+      const dato = JSON.parse(guardado);
+
+      return dato && typeof dato === "object" && !Array.isArray(dato)
+        ? dato
+        : {};
+    } catch (error) {
+      console.warn("No se pudo leer el presupuesto guardado.", error);
+      return {};
+    }
   }
 
-  // 🧾 Info cliente
-  const infoCliente = document.getElementById("infoCliente");
-  if (infoCliente && datos.nombre) {
-    infoCliente.innerText = `Presupuesto para ${datos.nombre}`;
+  let presupuesto = leerPresupuesto();
+
+  if (!Array.isArray(presupuesto.carrito)) {
+    presupuesto.carrito = [];
   }
 
-  // 🧱 Generar productos automáticamente si existe el array PRODUCTOS (de productos.js)
-  if (typeof PRODUCTOS !== "undefined" && Array.isArray(PRODUCTOS)) {
-    generarProductos();
+  if (!presupuesto.extras || typeof presupuesto.extras !== "object") {
+    presupuesto.extras = {};
   }
 
-  // Inicializar eventos de productos por cada categoría existente
-  document.querySelectorAll(".seccion").forEach(seccion => {
-    initProductos(seccion.id);
-  });
+  const productos = Array.from(
+    document.querySelectorAll(PRODUCT_SELECTOR)
+  );
 
-  // Activar visor modal de imágenes ampliadas
-  initVisorImagen();
+  const elementos = {
+    infoCliente: document.getElementById("infoCliente"),
+    contador: document.getElementById("contadorCarrito"),
+    totalBarra: document.getElementById("totalBarra"),
+    total: document.getElementById("total"),
+    textoResumen: document.getElementById("textoResumen"),
+    lista: document.getElementById("lista"),
+    mensajeVacio: document.getElementById("mensajeCarritoVacio"),
+    detalles: document.getElementById("detallesPresupuesto"),
+    presupuesto: document.getElementById("presupuesto"),
+    visor: document.getElementById("visorImagen"),
+    imagenGrande: document.getElementById("imagenGrande"),
+    cerrarVisor: document.getElementById("cerrarVisor")
+  };
 
-  // Render inicial del presupuesto en la barra lateral
-  renderResumen();
-});
+  /* =========================================================
+     GUARDAR DATOS
+     ========================================================= */
 
-/* =========================
-   🧭 SCROLL A SECCIÓN
-========================= */
-window.irSeccion = function (id) {
-  const seccion = document.getElementById(id);
-  if (!seccion) return;
+  function guardarPresupuesto() {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(presupuesto)
+      );
+    } catch (error) {
+      console.error("No se pudo guardar el presupuesto.", error);
 
-  seccion.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-};
+      alert(
+        "No se ha podido guardar la selección en este navegador. " +
+        "Comprueba que el almacenamiento esté permitido."
+      );
+    }
+  }
 
-/* =========================
-   🧱 GENERAR PRODUCTOS (DESDE PRODUCTOS.JS)
-========================= */
-function generarProductos() {
-  if (typeof PRODUCTOS === "undefined") return;
+  /* =========================================================
+     INFORMACIÓN DE LOS PRODUCTOS
+     ========================================================= */
 
-  PRODUCTOS.forEach(p => {
-    const seccionPadre = document.getElementById(p.categoria);
-    if (!seccionPadre) return;
+  function datosProducto(elemento) {
+    const cantidadElemento = elemento.querySelector(".cantidad");
 
-    // Buscar si existe un contenedor .productos o insertar directamente en la sección
-    let contenedor = seccionPadre.querySelector(".productos") || seccionPadre;
+    const cantidad = Math.max(
+      0,
+      Math.floor(numero(cantidadElemento?.textContent))
+    );
 
-    // Evitar duplicar el producto si ya existe en el HTML
-    const existente = contenedor.querySelector(`[data-nombre="${p.nombre}"]`);
-    if (existente) return;
+    const precio = Math.max(
+      0,
+      numero(elemento.dataset.precio)
+    );
 
-    const article = document.createElement("article");
-    article.className = "item";
-    article.dataset.nombre = p.nombre;
-    article.dataset.precio = p.precio;
+    const consulta = elemento.dataset.consulta === "true";
 
-    // Se utiliza p.imagen para que cargue la ruta correcta de la foto
-    article.innerHTML = `
-      <div class="info-producto">
-        <img src="${p.imagen}" alt="${p.nombre}" class="img-producto">
-        <div class="texto">
-          <h3>${p.nombre}</h3>
-          ${p.descripcion ? `<p>${p.descripcion}</p>` : ""}
-          <span class="precio">${p.precioTexto || p.precio + " €"}</span>
-        </div>
-      </div>
+    const nombre =
+      elemento.dataset.nombre ||
+      elemento.querySelector("h3")?.textContent.trim() ||
+      "Producto";
 
-      <div class="acciones">
-        <button class="reset">x</button>
-        <button class="menos">&lt;</button>
-        <span class="cantidad">0</span>
-        <button class="mas">&gt;</button>
-        <button class="multiplicar">+10</button>
-      </div>
-    `;
+    const categoria =
+      elemento.dataset.categoria ||
+      elemento.closest(".seccion")?.id ||
+      "";
 
-    contenedor.appendChild(article);
-  });
-}
+    return {
+      elemento,
+      nombre,
+      categoria,
+      precioPersona: precio,
+      cantidad,
+      total: consulta ? 0 : precio * cantidad,
+      consulta
+    };
+  }
 
-/* =========================
-   🖼️ VISOR DE IMÁGENES (AGRANDAR AL PULSAR)
-========================= */
-function initVisorImagen() {
-  const imagenes = document.querySelectorAll(".img-producto");
-  const visor = document.getElementById("visorImagen");
-  const imagenGrande = document.getElementById("imagenGrande");
+  function leerCantidad(elemento) {
+    return Math.max(
+      0,
+      Math.floor(
+        numero(elemento.querySelector(".cantidad")?.textContent)
+      )
+    );
+  }
 
-  if (!visor || !imagenGrande) return;
+  function escribirCantidad(elemento, cantidad) {
+    const segura = Math.max(
+      0,
+      Math.floor(numero(cantidad))
+    );
 
-  imagenes.forEach(img => {
-    // Clonar evento para evitar duplicidad si el DOM cambia
-    img.addEventListener("click", () => {
-      imagenGrande.src = img.src;
-      visor.style.display = "flex";
-    });
-  });
+    const visorCantidad = elemento.querySelector(".cantidad");
 
-  visor.addEventListener("click", () => {
-    visor.style.display = "none";
-  });
-}
-
-/* =========================
-   🍽️ LÓGICA Y BOTONES DE PRODUCTOS
-========================= */
-function initProductos(categoria) {
-  document.querySelectorAll(`#${categoria} .item`).forEach(item => {
-    const nombre = item.dataset.nombre;
-    const precioPersona = parseFloat(item.dataset.precio);
-
-    const cantidadSpan = item.querySelector(".cantidad");
-    const resetBtn = item.querySelector(".reset");
-    const menosBtn = item.querySelector(".menos");
-    const masBtn = item.querySelector(".mas");
-    const multiplicarBtn = item.querySelector(".multiplicar");
-
-    let cantidad = 0;
-
-    // Restaurar cantidad actual si ya estaba guardada en el carrito
-    const existente = (datos.carrito || []).find(p => p.nombre === nombre);
-    if (existente) {
-      cantidad = existente.cantidad;
-      if (cantidadSpan) cantidadSpan.innerText = cantidad;
+    if (visorCantidad) {
+      visorCantidad.textContent = String(segura);
     }
 
-    function actualizarCarrito(nuevaCantidad) {
-      if (!datos.carrito) datos.carrito = [];
+    const botonMenos = elemento.querySelector(".menos");
+    const botonReset = elemento.querySelector(".reset");
 
-      const index = datos.carrito.findIndex(p => p.nombre === nombre);
+    if (botonMenos) {
+      botonMenos.disabled = segura === 0;
+    }
 
-      if (nuevaCantidad <= 0) {
-        if (index > -1) datos.carrito.splice(index, 1);
-        nuevaCantidad = 0;
-      } else {
-        const total = precioPersona * nuevaCantidad;
-        // Solucionado error de referencia: datos.personas o valor por defecto
-        const numPersonas = datos.personas || 1;
+    if (botonReset) {
+      botonReset.disabled = segura === 0;
+    }
 
-        if (index > -1) {
-          datos.carrito[index].cantidad = nuevaCantidad;
-          datos.carrito[index].total = total;
-        } else {
-          datos.carrito.push({
-            categoria,
-            nombre,
-            precioPersona,
-            personas: numPersonas,
-            cantidad: nuevaCantidad,
-            total
-          });
-        }
+    elemento.setAttribute("data-cantidad", String(segura));
+
+    actualizarPresupuesto();
+  }
+
+  /* =========================================================
+     RECUPERAR LA SELECCIÓN GUARDADA
+     ========================================================= */
+
+  function cantidadesGuardadas() {
+    const mapa = new Map();
+
+    presupuesto.carrito.forEach((producto) => {
+      if (!producto || !producto.nombre) return;
+
+      const nombre = normalizar(producto.nombre);
+
+      const cantidad = Math.max(
+        0,
+        Math.floor(numero(producto.cantidad))
+      );
+
+      if (cantidad > 0) {
+        mapa.set(
+          nombre,
+          (mapa.get(nombre) || 0) + cantidad
+        );
+      }
+    });
+
+    return mapa;
+  }
+
+  function escribirCantidadSinActualizar(elemento, cantidad) {
+    const segura = Math.max(
+      0,
+      Math.floor(numero(cantidad))
+    );
+
+    const visorCantidad = elemento.querySelector(".cantidad");
+
+    if (visorCantidad) {
+      visorCantidad.textContent = String(segura);
+    }
+
+    const botonMenos = elemento.querySelector(".menos");
+    const botonReset = elemento.querySelector(".reset");
+
+    if (botonMenos) {
+      botonMenos.disabled = segura === 0;
+    }
+
+    if (botonReset) {
+      botonReset.disabled = segura === 0;
+    }
+
+    elemento.setAttribute("data-cantidad", String(segura));
+  }
+
+  function restaurarCantidades() {
+    const guardadas = cantidadesGuardadas();
+
+    productos.forEach((elemento) => {
+      const nombre = normalizar(elemento.dataset.nombre);
+
+      escribirCantidadSinActualizar(
+        elemento,
+        guardadas.get(nombre) || 0
+      );
+    });
+
+    actualizarPresupuesto();
+  }
+
+  /* =========================================================
+     CONSTRUIR EL CARRITO
+     ========================================================= */
+
+  function construirCarrito() {
+    return productos
+      .map((elemento) => datosProducto(elemento))
+      .filter((producto) => producto.cantidad > 0)
+      .map(({ elemento, ...producto }) => ({
+        categoria: producto.categoria,
+        nombre: producto.nombre,
+        precioPersona: producto.precioPersona,
+        cantidad: producto.cantidad,
+        total: producto.total,
+        ...(producto.consulta ? { consulta: true } : {})
+      }));
+  }
+
+  function totalCalculado(carrito = construirCarrito()) {
+    return carrito.reduce((suma, producto) => {
+      if (
+        producto.consulta ||
+        numero(producto.precioPersona) === 0
+      ) {
+        return suma;
       }
 
-      cantidad = nuevaCantidad;
-      if (cantidadSpan) cantidadSpan.innerText = cantidad;
+      const importe = numero(
+        producto.total,
+        numero(producto.precioPersona) *
+        numero(producto.cantidad)
+      );
 
-      localStorage.setItem("presupuesto", JSON.stringify(datos));
-      renderResumen();
-    }
-
-    // Eventos de los botones (+, -, x, +10)
-    if (resetBtn) resetBtn.onclick = () => actualizarCarrito(0);
-    if (menosBtn) menosBtn.onclick = () => { if (cantidad > 0) actualizarCarrito(cantidad - 1); };
-    if (masBtn) masBtn.onclick = () => actualizarCarrito(cantidad + 1);
-    if (multiplicarBtn) multiplicarBtn.onclick = () => actualizarCarrito(cantidad + 10);
-  });
-}
-
-/* =========================
-   🧾 RENDERIZAR RESUMEN LATERAL
-========================= */
-function renderResumen() {
-  const lista = document.getElementById("lista");
-  const totalTxt = document.getElementById("total");
-
-  if (!datos || !lista || !totalTxt) return;
-
-  lista.innerHTML = "";
-  let total = 0;
-
-  // 🛒 Productos seleccionados
-  (datos.carrito || []).forEach(item => {
-    const subtotal = item.precioPersona * item.cantidad;
-    const li = document.createElement("li");
-    li.textContent = `${item.nombre} – ${item.precioPersona} € x ${item.cantidad} = ${subtotal.toFixed(2)} €`;
-    lista.appendChild(li);
-    total += subtotal;
-  });
-
-  // ➕ Extras acumulados
-  for (let extra in datos.extras || {}) {
-    const precio = datos.extras[extra];
-    const li = document.createElement("li");
-    li.textContent = `${extra} – ${precio.toFixed(2)} €`;
-    lista.appendChild(li);
-    total += precio;
+      return suma + importe;
+    }, 0);
   }
 
-  // 💰 Total
-  datos.total = total;
-  totalTxt.innerText = `Total: ${total.toFixed(2)} €`;
+  function cantidadLineas(carrito = construirCarrito()) {
+    return carrito.reduce(
+      (suma, producto) => suma + numero(producto.cantidad),
+      0
+    );
+  }
 
-  localStorage.setItem("presupuesto", JSON.stringify(datos));
-}
+  function guardarYActualizar(carrito) {
+    presupuesto.carrito = carrito;
+    presupuesto.total = totalCalculado(carrito);
+    presupuesto.totalEstimado = presupuesto.total;
+    presupuesto.ultimaActualizacion = new Date().toISOString();
 
-/* =========================
-   ➡️ CONTINUAR AL RESUMEN
-========================= */
-window.continuar = function () {
-  window.location.href = "resumen.html";
-};
+    guardarPresupuesto();
+  }
+
+  /* =========================================================
+     ACTUALIZAR EL PRESUPUESTO
+     ========================================================= */
+
+  function actualizarPresupuesto() {
+    const carrito = construirCarrito();
+
+    const total = totalCalculado(carrito);
+    const unidades = cantidadLineas(carrito);
+
+    const serviciosConsulta = carrito.filter(
+      (producto) =>
+        producto.consulta ||
+        numero(producto.precioPersona) === 0
+    ).length;
+
+    presupuesto.carrito = carrito;
+    presupuesto.total = total;
+    presupuesto.totalEstimado = total;
+
+    guardarPresupuesto();
+
+    if (elementos.total) {
+      elementos.total.textContent =
+        `Total: ${euros.format(total)}`;
+    }
+
+    if (elementos.totalBarra) {
+      elementos.totalBarra.textContent =
+        euros.format(total);
+    }
+
+    if (elementos.contador) {
+      elementos.contador.textContent = String(unidades);
+
+      elementos.contador.setAttribute(
+        "aria-label",
+        `${unidades} unidades seleccionadas`
+      );
+    }
+
+    if (elementos.textoResumen) {
+      if (!carrito.length) {
+        elementos.textoResumen.textContent =
+          "Todavía no has añadido productos";
+      } else {
+        const textoServicios = serviciosConsulta
+          ? ` · ${serviciosConsulta} ${
+              serviciosConsulta === 1
+                ? "servicio"
+                : "servicios"
+            } a consultar`
+          : "";
+
+        elementos.textoResumen.textContent =
+          `${carrito.length} ${
+            carrito.length === 1
+              ? "tipo seleccionado"
+              : "tipos seleccionados"
+          }${textoServicios}`;
+      }
+    }
+
+    if (elementos.lista) {
+      renderizarLista(carrito);
+    }
+
+    if (elementos.mensajeVacio) {
+      elementos.mensajeVacio.hidden = carrito.length > 0;
+
+      elementos.mensajeVacio.textContent = carrito.length
+        ? ""
+        : "Tu selección aparecerá aquí.";
+    }
+  }
+
+  /* =========================================================
+     MOSTRAR PRODUCTOS SELECCIONADOS
+     ========================================================= */
+
+  function renderizarLista(carrito) {
+    elementos.lista.replaceChildren();
+
+    carrito.forEach((producto) => {
+      const li = document.createElement("li");
+
+      if (
+        producto.consulta ||
+        numero(producto.precioPersona) === 0
+      ) {
+        li.classList.add("linea-consulta");
+      }
+
+      const columnaNombre = document.createElement("div");
+      columnaNombre.className = "nombre-linea";
+
+      const enlaceProducto = document.createElement("button");
+
+      enlaceProducto.type = "button";
+      enlaceProducto.textContent = producto.nombre;
+
+      enlaceProducto.setAttribute(
+        "aria-label",
+        `Volver a ${producto.nombre} para cambiar la cantidad`
+      );
+
+      enlaceProducto.addEventListener("click", () => {
+        irAProducto(producto.nombre);
+      });
+
+      columnaNombre.appendChild(enlaceProducto);
+
+      const detalle = document.createElement("span");
+
+      detalle.className = "detalle-cantidad";
+      detalle.textContent =
+        `${producto.cantidad} ${
+          producto.cantidad === 1 ? "unidad" : "unidades"
+        }`;
+
+      columnaNombre.appendChild(detalle);
+
+      const importe = document.createElement("span");
+      importe.className = "importe-linea";
+
+      if (
+        producto.consulta ||
+        numero(producto.precioPersona) === 0
+      ) {
+        importe.textContent = "Precio a consultar";
+      } else {
+        importe.textContent = euros.format(
+          numero(
+            producto.total,
+            numero(producto.precioPersona) *
+            numero(producto.cantidad)
+          )
+        );
+      }
+
+      li.append(columnaNombre, importe);
+      elementos.lista.appendChild(li);
+    });
+  }
+
+  /* =========================================================
+     VOLVER A LA FICHA DE UN PRODUCTO
+     ========================================================= */
+
+  function irAProducto(nombre) {
+    const objetivo = productos.find((elemento) =>
+      normalizar(elemento.dataset.nombre) === normalizar(nombre)
+    );
+
+    if (!objetivo) {
+      alert(
+        `No se ha encontrado la ficha de «${nombre}». ` +
+        "Prueba a buscarlo en la carta."
+      );
+
+      return;
+    }
+
+    if (
+      elementos.detalles &&
+      window.matchMedia("(max-width: 760px)").matches
+    ) {
+      elementos.detalles.open = false;
+    }
+
+    objetivo.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+    objetivo.classList.add("producto-enfocado");
+
+    window.setTimeout(() => {
+      objetivo.classList.remove("producto-enfocado");
+    }, 1800);
+  }
+
+  /* =========================================================
+     INFORMACIÓN DEL CLIENTE
+     ========================================================= */
+
+  function actualizarInfoCliente() {
+    if (!elementos.infoCliente) return;
+
+    const nombre =
+      presupuesto.nombre ||
+      presupuesto.cliente?.nombre ||
+      presupuesto.datosCliente?.nombre ||
+      "";
+
+    if (nombre) {
+      elementos.infoCliente.textContent =
+        `Presupuesto para ${nombre}. ` +
+        "Añade o modifica los productos y servicios que necesites. " +
+        "Tu selección se guarda automáticamente.";
+    }
+  }
+
+  /* =========================================================
+     VISOR DE IMÁGENES
+     ========================================================= */
+
+  function abrirVisor(imagen) {
+    if (
+      !elementos.visor ||
+      !elementos.imagenGrande ||
+      !imagen?.src
+    ) {
+      return;
+    }
+
+    elementos.imagenGrande.src =
+      imagen.currentSrc || imagen.src;
+
+    elementos.imagenGrande.alt =
+      imagen.alt || "Imagen ampliada del producto";
+
+    elementos.visor.hidden = false;
+
+    elementos.visor.setAttribute("aria-hidden", "false");
+
+    document.body.style.overflow = "hidden";
+
+    elementos.cerrarVisor?.focus();
+  }
+
+  function cerrarVisor() {
+    if (!elementos.visor) return;
+
+    elementos.visor.hidden = true;
+
+    elementos.visor.setAttribute("aria-hidden", "true");
+
+    if (elementos.imagenGrande) {
+      elementos.imagenGrande.removeAttribute("src");
+    }
+
+    document.body.style.overflow = "";
+  }
+
+  /* =========================================================
+     BOTONES DE CADA PRODUCTO
+     ========================================================= */
+
+  function conectarProductos() {
+    productos.forEach((elemento) => {
+      const botonMas = elemento.querySelector(".mas");
+      const botonMenos = elemento.querySelector(".menos");
+      const botonReset = elemento.querySelector(".reset");
+      const botonMultiplicar =
+        elemento.querySelector(".multiplicar");
+
+      const imagen = elemento.querySelector(".img-producto");
+
+      botonMas?.addEventListener("click", () => {
+        escribirCantidad(
+          elemento,
+          leerCantidad(elemento) + 1
+        );
+      });
+
+      botonMenos?.addEventListener("click", () => {
+        escribirCantidad(
+          elemento,
+          leerCantidad(elemento) - 1
+        );
+      });
+
+      botonReset?.addEventListener("click", () => {
+        escribirCantidad(elemento, 0);
+      });
+
+      // +10 suma diez unidades a la cantidad existente.
+      botonMultiplicar?.addEventListener("click", () => {
+        escribirCantidad(
+          elemento,
+          leerCantidad(elemento) + 10
+        );
+      });
+
+      if (imagen) {
+        imagen.tabIndex = 0;
+
+        imagen.setAttribute("role", "button");
+
+        imagen.setAttribute(
+          "aria-label",
+          `Ampliar imagen de ${elemento.dataset.nombre}`
+        );
+
+        imagen.addEventListener("click", () => {
+          abrirVisor(imagen);
+        });
+
+        imagen.addEventListener("keydown", (evento) => {
+          if (
+            evento.key === "Enter" ||
+            evento.key === " "
+          ) {
+            evento.preventDefault();
+            abrirVisor(imagen);
+          }
+        });
+      }
+    });
+  }
+
+  /* =========================================================
+     NAVEGACIÓN Y CIERRE DEL VISOR
+     ========================================================= */
+
+  function conectarNavegacion() {
+    document
+      .querySelectorAll('a[href="#presupuesto"]')
+      .forEach((enlace) => {
+        enlace.addEventListener("click", () => {
+          if (elementos.detalles) {
+            elementos.detalles.open = true;
+          }
+        });
+      });
+
+    document
+      .querySelectorAll(
+        'a[href="#catalogo"], a.seguir-eligiendo'
+      )
+      .forEach((enlace) => {
+        enlace.addEventListener("click", () => {
+          if (
+            elementos.detalles &&
+            window.matchMedia("(max-width: 760px)").matches
+          ) {
+            elementos.detalles.open = false;
+          }
+        });
+      });
+
+    if (elementos.cerrarVisor) {
+      elementos.cerrarVisor.addEventListener(
+        "click",
+        cerrarVisor
+      );
+    }
+
+    if (elementos.visor) {
+      elementos.visor.addEventListener("click", (evento) => {
+        if (evento.target === elementos.visor) {
+          cerrarVisor();
+        }
+      });
+    }
+
+    document.addEventListener("keydown", (evento) => {
+      if (
+        evento.key === "Escape" &&
+        elementos.visor &&
+        !elementos.visor.hidden
+      ) {
+        cerrarVisor();
+      }
+    });
+
+    // En ordenador, el presupuesto aparece desplegado.
+    if (
+      elementos.detalles &&
+      window.matchMedia("(min-width: 761px)").matches
+    ) {
+      elementos.detalles.open = true;
+    }
+  }
+
+  /* =========================================================
+     CONTINUAR AL RESUMEN
+     ========================================================= */
+
+  window.continuar = function continuar() {
+    const carrito = construirCarrito();
+
+    if (!carrito.length) {
+      alert(
+        "Todavía no has seleccionado ningún producto o servicio. " +
+        "Añade al menos uno antes de continuar."
+      );
+
+      return;
+    }
+
+    guardarYActualizar(carrito);
+
+    // Conserva los datos existentes dentro de "presupuesto".
+    // resumen.html debe leer la selección desde localStorage.
+    window.location.href = "resumen.html";
+  };
+
+  /* =========================================================
+     INICIAR LA PÁGINA
+     ========================================================= */
+
+  conectarProductos();
+  conectarNavegacion();
+  restaurarCantidades();
+  actualizarInfoCliente();
+
+})();

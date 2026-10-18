@@ -1,1236 +1,1204 @@
-<!-- selector.html -->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Selecciona tu menú | Catering Gil y Román</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#073b4c">
+  <meta name="description" content="Personaliza tu presupuesto de catering en Málaga: mesa dulce, mesa salada, platos calientes y servicios para tu evento con Catering Gil & Román.">
+  <title>Personaliza tu menú | Catering Gil &amp; Román</title>
   <link rel="stylesheet" href="selector.css">
 </head>
-
 <body>
+  <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
 
-  <section class="carta-container">
+  <!-- Barra fija: accesos rápidos a las cuatro categorías y al presupuesto -->
+  <header class="barra-superior" id="inicio">
+    <a class="marca" href="#inicio" aria-label="Catering Gil y Román, inicio">Gil <span>&amp;</span> Román</a>
+    <nav class="navegacion-categorias" aria-label="Categorías del menú">
+      <a href="#mesa-dulce">Mesa dulce</a>
+      <a href="#mesa-salada">Mesa salada</a>
+      <a href="#platos-calientes">Platos calientes</a>
+      <a href="#otros-servicios">Otros servicios</a>
+    </nav>
+    <a class="acceso-presupuesto" href="#presupuesto" aria-label="Ir a tu presupuesto">
+      <span aria-hidden="true">🛒</span>
+      <span class="texto-presupuesto">Presupuesto</span>
+      <span id="contadorCarrito" class="contador-carrito" aria-live="polite">0</span>
+      <strong id="totalBarra">0,00 €</strong>
+    </a>
+  </header>
 
-    <!-- HEADER -->
+  <div class="carta-container">
     <header class="carta-header">
-      <h1>Selecciona tu menú</h1>
-      <p id="infoCliente"></p>
+      <p class="etiqueta-superior">CATERING GIL &amp; ROMÁN · MÁLAGA</p>
+      <h1>Personaliza tu menú</h1>
+      <p id="infoCliente">Añade los productos y servicios que necesites para tu evento. Tu selección se guardará automáticamente.</p>
     </header>
 
-    <!-- 🔷 LAYOUT PRINCIPAL -->
-    <section class="layout">
-
-      <!-- 🧭 LATERAL FIJO CATEGORÍAS -->
-      <aside class="sidebar">
-        <h3>Categorías</h3>
-
-        <button onclick="irSeccion('entrantes')">🍽 Entrantes</button>
-        <button onclick="irSeccion('postres')">🍰 Postres</button>
-        <button onclick="irSeccion('carnes')">🥩 Carnes</button>
-        <button onclick="irSeccion('ensaladas')">🥗 Ensaladas</button>
-        <button onclick="irSeccion('platos-calientes')">🍲 Platos calientes</button>
-        <button onclick="irSeccion('venezolano')">🫓 Venezolano</button>
-        <button onclick="irSeccion('asiatico')">🍣 Asiático</button>
-        <button onclick="irSeccion('bebidas')">🥤 Bebidas</button>
+    <div class="layout">
+      <!-- Navegación secundaria; en móvil puede convertirse en accesos desplazables -->
+      <aside class="sidebar" aria-label="Acceso rápido a categorías">
+        <h2>Explora la carta</h2>
+        <a href="#mesa-dulce">🍰 Mesa dulce <span>Postres y tartas</span></a>
+        <a href="#mesa-salada">🥗 Mesa salada <span>Entrantes, ensaladas y más</span></a>
+        <a href="#platos-calientes">🍲 Platos calientes <span>Arroces, carnes y guisos</span></a>
+        <a href="#otros-servicios">✨ Otros servicios <span>Personal para el evento y alquileres</span></a>
+        <p class="ayuda-categorias">Puedes modificar las cantidades en cualquier momento desde cada producto o desde tu presupuesto.</p>
       </aside>
 
-      <!-- 📜 CONTENIDO CON SCROLL -->
-      <main class="contenido">
-
-        
-<!-- ENTRANTES -->
-<section id="entrantes" class="seccion">
-  <h2>Entrantes</h2>
-
-  <article class="item" data-nombre="Canapé Tosta" data-precio="1">
-    <div class="info-producto">
-      <img src="images/Canape_tosta.jpeg" alt="Tosta" class="img-producto">
-      <div class="texto">
-        <h3>Canapé Tosta</h3>
-        <p>Canapé de Salmon/ Anchoa/ Pollo</p>
-        <span class="precio">1€ </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Canapé Volavanes" data-precio="1.25">
-    <div class="info-producto">
-      <img src="images/Canape_volavanes.jpeg" alt="Volavanes" class="img-producto">
-      <div class="texto">
-        <h3>Canapé Volavanes</h3>
-        <p>Canapé de Salmon/ Anchoa/ Pollo</p>
-        <span class="precio">1,25 € </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Canapé Tartaleta" data-precio="2.5">
-    <div class="info-producto">
-      <img src="images/Canape_tartaleta.jpeg" alt="Tartaleta" class="img-producto">
-      <div class="texto">
-        <h3>Canapé Tartaleta</h3>
-        <p>Canapé de Salmon/ Anchoa/ Pollo</p>
-        <span class="precio">2,50 € </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Canapé Quiché" data-precio="2.5">
-    <div class="info-producto">
-      <img src="images/canape_quiche.jpeg" alt="Quiché" class="img-producto">
-      <div class="texto">
-        <h3>Canapé Quiché</h3>
-        <p>Canapé de Salmon/ Anchoa/ Pollo</p>
-        <span class="precio">2,50 € </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Aguacate Malagueño" data-precio="2.5">
-    <div class="info-producto">
-      <img src="images/aguacate.jpeg" alt="Aguacate" class="img-producto">
-      <div class="texto">
-        <h3>Aguacate Malagueño</h3>
-        <p>Medio aguacate relleno de marisco </p>
-        <span class="precio">2,50 € /  (mitad)</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Jamón iberico" data-precio="10">
-    <div class="info-producto">
-      <img src="images/jamon.jpeg" alt="Jamon" class="img-producto">
-      <div class="texto">
-        <h3>Jamón Iberico</h3>
-        <p>Plato 100 gr</p>
-        <span class="precio">10,00 € / Plato 100 gr</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Lomo iberico" data-precio="4">
-    <div class="info-producto">
-      <img src="images/lomo.jpeg" alt="Lomo" class="img-producto">
-      <div class="texto">
-        <h3>Lomo Iberico</h3>
-        <p>Plato 100 gr</p>
-        <span class="precio">4,00 € / Plato 100 gr</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Chorizo iberico" data-precio="4">
-    <div class="info-producto">
-      <img src="images/lomo.jpeg" alt="Lomo" class="img-producto">
-      <div class="texto">
-        <h3>Chorizo Iberico</h3>
-        <p>Plato 100 gr</p>
-        <span class="precio">4,00 € / Plato 100 gr</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Queso semicurado" data-precio="5">
-    <div class="info-producto">
-      <img src="images/queso.jpeg" alt="Queso" class="img-producto">
-      <div class="texto">
-        <h3>Queso Semicurado</h3>
-        <p>Plato 100-150 gr</p>
-        <span class="precio">5,00 € / Plato de 100-150 gr</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Hojaldre Dog" data-precio="2">
-    <div class="info-producto">
-      <img src="images/perritos.jpeg" alt="Hojaldre Dog" class="img-producto">
-      <div class="texto">
-        <h3>Hojaldre Dog</h3>
-        <p>Perrito Caliente en masa de Hojaldre 15 cm</p>
-        <span class="precio">2,00 € </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Mini Wraps de Salmon" data-precio="2">
-    <div class="info-producto">
-      <img src="images/wraps.jpeg" alt="Mini Wraps" class="img-producto">
-      <div class="texto">
-        <h3>Mini Wraps Salmon</h3>
-        <p>Mini totrita rellena de Salmon y crema</p>
-        <span class="precio">2,00 € </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Saladitos" data-precio="1">
-    <div class="info-producto">
-      <img src="images/saladitos.jpeg" alt="Saladitos" class="img-producto">
-      <div class="texto">
-        <h3>Saladitos</h3>
-        <p>Bocaditos salados de hojaldre relleno</p>
-        <span class="precio">1,00 € </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Empanadillas" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/empanadillas.jpeg" alt="Empanadillas" class="img-producto">
-      <div class="texto">
-        <h3>Empanadillas</h3>
-        <p>Empanadilla tradicional de atún y tomate</p>
-        <span class="precio">1,50 € </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Croquetas" data-precio="1">
-    <div class="info-producto">
-      <img src="images/croqueta.jpeg" alt="Croquetas" class="img-producto">
-      <div class="texto">
-        <h3>Croquetas</h3>
-        <p>Croquetas de Pollo / Croquetas de Jamón</p>
-        <span class="precio">1,00 € </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Croquetas Premium" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/croqueta.jpeg" alt="Croquetas Premium" class="img-producto">
-      <div class="texto">
-        <h3>Croquetas Premium</h3>
-        <p>Croquetas de Rabo de Toro / Croquetas de Merluza y Gambas al Pil-Pil</p>
-        <span class="precio">1,50 €</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Miniburguer" data-precio="2">
-    <div class="info-producto">
-      <img src="images/miniburguer.jpeg" alt="Miniburguer" class="img-producto">
-      <div class="texto">
-        <h3>Miniburguer</h3>
-        <p>Mini Hamburguesas con bacon y queso</p>
-        <span class="precio">2,00 €</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Minibrioches" data-precio="2">
-    <div class="info-producto">
-      <img src="images/minibrioches.jpeg" alt="Minibrioches" class="img-producto">
-      <div class="texto">
-        <h3>Minibrioches</h3>
-        <p>Pan brioche relleno de queso crema / Salmon / Aguacate</p>
-        <span class="precio">2,00 € </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Pinchitos" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/pinchitos.jpeg" alt="Pinchitos" class="img-producto">
-      <div class="texto">
-        <h3>Pinchitos</h3>
-        <p>Pinchitos de Pollo o Cerdo</p>
-        <span class="precio">1,50 €</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Ensaladilla Rusa" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/ensaladilla.jpeg" alt="Ensaladilla Rusa" class="img-producto">
-      <div class="texto">
-        <h3>Ensaladilla Rusa</h3>
-        <p>Ensaladilla con patata, mayonesa, atún, huevo cocido, bocas de mar, aceitunas, zanahoria.</p>
-        <span class="precio">1,50 € / vaso</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Tortilla de Patatas" data-precio="15">
-    <div class="info-producto">
-      <img src="images/tortilla_patata.jpeg" alt="Tortilla de Patatas" class="img-producto">
-      <div class="texto">
-        <h3>Tortilla de Patatas</h3>
-        <p>Tortilla de patatas con o sin cebolla.</p>
-        <span class="precio">15,00 €</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Huevo Relleno" data-precio="2.5">
-    <div class="info-producto">
-      <img src="images/huevorelleno.jpeg" alt="Huevo Relleno" class="img-producto">
-      <div class="texto">
-        <h3>Huevo Relleno</h3>
-        <p>Medio huevo cocido relleno con yema, atún y tomate frito, tapado con mayonesa y pimiento morrón.</p>
-        <span class="precio">2,50 € (2 mitades)</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-</section>
-
-
-
-<!-- ENSALADAS -->
-<section id="ensaladas" class="seccion">
-  <h2>Ensaladas</h2>
-
-  <article class="item" data-nombre="Ensalada Clásica" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/ensalada_clasica.jpeg" alt="Ensalada Clásica" class="img-producto">
-      <div class="texto">
-        <h3>Ensalada Clásica</h3>
-        <p>Ensalada de lechuga con tomate, cebolla, zanahoria, remolacha y atún aliñada con aceite, vinagre y sal.</p>
-        <span class="precio">1,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Ensalada Cesar" data-precio="1.9">
-    <div class="info-producto">
-      <img src="images/ensalada_cesar.jpeg" alt="Ensalada Cesar" class="img-producto">
-      <div class="texto">
-        <h3>Ensalada Cesar</h3>
-        <p>Lechuga, pollo a la plancha, picatostes, queso parmesano y salsa Cesar.</p>
-        <span class="precio">1,90 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Ensalada de Aguacate" data-precio="1.9">
-    <div class="info-producto">
-      <img src="images/ensalada_aguacate.jpeg" alt="Ensalada de Aguacate" class="img-producto">
-      <div class="texto">
-        <h3>Ensalada de Aguacate</h3>
-        <p>Aguacate con tomate aliñada</p>
-        <span class="precio">1,90 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Ensalada Mediterránea" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/ensalada-mediterranea.jpeg" alt="Ensalada Mediterránea" class="img-producto">
-      <div class="texto">
-        <h3>Ensalada Mediterránea</h3>
-        <p>Tomate, pepino, pimiento, cebolla roja, aceitunas y queso feta con aliño de aceite de oliva.</p>
-        <span class="precio">1,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Ensalada de Quinoa" data-precio="1.9">
-    <div class="info-producto">
-      <img src="images/ensalada-quinoa.jpeg" alt="Ensalada de Quinoa" class="img-producto">
-      <div class="texto">
-        <h3>Ensalada de Quinoa</h3>
-        <p>Quinoa, espinaca, aguacate, tomate cherry y semillas con vinagreta cítrica.</p>
-        <span class="precio">1,90 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Ensalada Tropical" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/ensalada-tropical.jpeg" alt="Ensalada Tropical" class="img-producto">
-      <div class="texto">
-        <h3>Ensalada Tropical</h3>
-        <p>Lechuga, mango, piña, aguacate, nueces y aliño de miel y limón.</p>
-        <span class="precio">1,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-</section>
-
-
-<!-- PLATOS CALIENTES -->
-<section id="platos-calientes" class="seccion">
-  <h2>Platos calientes</h2>
-
-  <article class="item" data-nombre="Paella de carne" data-precio="12.5">
-    <div class="info-producto">
-      <img src="images/paella.jpeg" alt="Paella de carne" class="img-producto">
-      <div class="texto">
-        <h3>Paella de carne para 20-200</h3>
-        <p>Paella con pollo y magro.</p>
-        <span class="precio">12,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Paella de marisco" data-precio="15">
-    <div class="info-producto">
-      <img src="images/Paella_marisco.jpeg" alt="Paella de marisco" class="img-producto">
-      <div class="texto">
-        <h3>Paella de marisco para 20-200</h3>
-        <p>Gambas, mejillones, calamares y almejas.</p>
-        <span class="precio">15 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Paella mixta" data-precio="17.5">
-    <div class="info-producto">
-      <img src="images/Paella_marisco.jpeg" alt="Paella mixta" class="img-producto">
-      <div class="texto">
-        <h3>Paella mixta</h3>
-        <p>Pollo, gambas, mejillones, calamares y almejas.</p>
-        <span class="precio">17,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Arroz amarillo con carne y setas" data-precio="14">
-    <div class="info-producto">
-      <img src="images/paella.jpeg" alt="Arroz amarillo con carne y setas" class="img-producto">
-      <div class="texto">
-        <h3>Arroz amarillo con carne y setas para 20-200</h3>
-        <p>Pollo, magro y revuelto de setas.</p>
-        <span class="precio">14 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Migas" data-precio="17.5">
-    <div class="info-producto">
-      <img src="images/migas.jpeg" alt="Migas" class="img-producto">
-      <div class="texto">
-        <h3>Migass para 20-200</h3>
-        <p>Migas con carne, pimiento y huevo.</p>
-        <span class="precio">17,5 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Sopa Castellana" data-precio="10">
-    <div class="info-producto">
-      <img src="images/sopa-castellana.jpeg" alt="Sopa Castellana" class="img-producto">
-      <div class="texto">
-        <h3>Sopa Castellana para 20-200</h3>
-        <span class="precio">10 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Crema de Calabaza" data-precio="10">
-    <div class="info-producto">
-      <img src="images/crema_calabaza.jpeg" alt="Crema Calabaza" class="img-producto">
-      <div class="texto">
-        <h3>Crema Calabaza para 20-200</h3>
-        <p>Con picatostes , leche de coco y coco rayado.</p>
-
-        <span class="precio">10 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Puchero" data-precio="10">
-    <div class="info-producto">
-      <img src="images/puchero.jpeg" alt="Puchero" class="img-producto">
-      <div class="texto">
-        <h3>Puchero para 20-200</h3>
-        <p>Caldo malagueño con garbanzos, pollo, ternera y cerdo.</p>
-        <span class="precio">10 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Cazuela de fideos" data-precio="15">
-    <div class="info-producto">
-      <img src="images/cazuela-fideos.jpeg" alt="Cazuela de fideos" class="img-producto">
-      <div class="texto">
-        <h3>Cazuela de fideos</h3>
-        <p>Fideos, gambas y almejas.</p>
-        <span class="precio">15 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Cazuela de patatas" data-precio="14">
-    <div class="info-producto">
-      <img src="images/cazuela-patatas.jpeg" alt="Cazuela de patatas" class="img-producto">
-      <div class="texto">
-        <h3>Cazuela de patatas</h3>
-        <p>Patatas y carne de cerdo.</p>
-        <span class="precio">14 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-</section>
-
-<section id="venezolano" class="seccion">
-  <h2>Venezolano</h2>
-  <!-- El contenedor donde JavaScript insertará los artículos automáticamente -->
-  <div class="productos"></div>
-</section>
-
-<section id="asiatico" class="seccion">
-  <h2>Asiático</h2>
-
-  <article class="item" data-nombre="Maki" data-precio="1.25">
-    <div class="info-producto">
-      <img src="images/maki.jpeg" alt="Maki" class="img-producto">
-      <div class="texto">
-        <h3>Maki</h3>
-        <span class="precio">1,25€ </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Uramaki" data-precio="1.25">
-    <div class="info-producto">
-      <img src="images/maki.jpeg" alt="Uramaki" class="img-producto">
-      <div class="texto">
-        <h3>Uramaki</h3>
-        <span class="precio">1,25€ </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Niguiri" data-precio="2">
-    <div class="info-producto">
-      <img src="images/maki.jpeg" alt="Niguiri" class="img-producto">
-      <div class="texto">
-        <h3>Niguri</h3>
-        <span class="precio">2€ </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Gyoza" data-precio="2">
-    <div class="info-producto">
-      <img src="images/maki.jpeg" alt="Gyoza" class="img-producto">
-      <div class="texto">
-        <h3>Gyoza</h3>
-        <span class="precio">2€ </span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-</section>
-
-
-<!-- POSTRES -->
-<section id="postres" class="seccion">
-  <h2>Postres</h2>
-
-  <article class="item" data-nombre="Flan" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/flan.jpeg" alt="Flan" class="img-producto">
-      <div class="texto">
-        <h3>Flan</h3>
-        <span class="precio">1,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Natillas" data-precio="1.9">
-    <div class="info-producto">
-      <img src="images/natillas.jpeg" alt="Natillas" class="img-producto">
-      <div class="texto">
-        <h3>Natillas</h3>
-        <span class="precio">1,90 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Fruta" data-precio="2.5">
-    <div class="info-producto">
-      <img src="images/fruta.jpeg" alt="Fruta" class="img-producto">
-      <div class="texto">
-        <h3>Fruta</h3>
-        <span class="precio">2,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Tarta de Chocolate" data-precio="3">
-    <div class="info-producto">
-      <img src="images/tarta-chocolate.jpeg" alt="Tarta de Chocolate" class="img-producto">
-      <div class="texto">
-        <h3>Tarta de Chocolate</h3>
-        <span class="precio">3,00 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Cheesecake" data-precio="3.5">
-    <div class="info-producto">
-      <img src="images/cheesecake.jpeg" alt="Cheesecake" class="img-producto">
-      <div class="texto">
-        <h3>Cheesecake</h3>
-        <span class="precio">3,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-</section>
-
-<!-- CARNES -->
-<section id="carnes" class="seccion">
-  <h2>Carnes</h2>
-
-  <article class="item" data-nombre="Solomillo de ternera" data-precio="18.5">
-    <div class="info-producto">
-      <img src="images/solomillo-ternera.jpeg" alt="Solomillo de ternera" class="img-producto">
-      <div class="texto">
-        <h3>Solomillo de ternera</h3>
-        <p>Tierna pieza de ternera preparada a la plancha, acompañada de salsa de champiñones o reducción de vino tinto.</p>
-        <span class="precio">18,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Entrecot a la brasa" data-precio="16.9">
-    <div class="info-producto">
-      <img src="images/entrecot-brasa.jpeg" alt="Entrecot a la brasa" class="img-producto">
-      <div class="texto">
-        <h3>Entrecot a la brasa</h3>
-        <p>Entrecot de vacuno cocinado a la brasa, con sal en escamas y guarnición de patatas asadas.</p>
-        <span class="precio">16,90 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Pollo al horno especiado" data-precio="12.5">
-    <div class="info-producto">
-      <img src="images/pollo-horno.jpeg" alt="Pollo al horno especiado" class="img-producto">
-      <div class="texto">
-        <h3>Pollo al horno especiado</h3>
-        <p>Pollo asado lentamente con hierbas aromáticas y especias, jugoso y lleno de sabor.</p>
-        <span class="precio">12,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Carrillada ibérica" data-precio="15.9">
-    <div class="info-producto">
-      <img src="images/carrillada-iberica.jpeg" alt="Carrillada ibérica" class="img-producto">
-      <div class="texto">
-        <h3>Carrillada ibérica</h3>
-        <p>Carrilladas de cerdo ibérico guisadas a fuego lento en su propia salsa, extremadamente melosas.</p>
-        <span class="precio">15,90 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Costillas BBQ" data-precio="14.5">
-    <div class="info-producto">
-      <img src="images/costillas-bbq.jpeg" alt="Costillas BBQ" class="img-producto">
-      <div class="texto">
-        <h3>Costillas BBQ</h3>
-        <p>Costillas de cerdo marinadas y horneadas, terminadas con salsa barbacoa casera.</p>
-        <span class="precio">14,50 € / persona</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-</section>
-
- 
-<!-- BEBIDAS -->
-<section id="bebidas" class="seccion">
-  <h2>Bebidas</h2>
-
-  <article class="item" data-nombre="Cocacola 330ml" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/Coca-cola.jpeg" alt="Cocacola 330ml" class="img-producto">
-      <div class="texto">
-        <h3>Cocacola 330ml</h3>
-        <span class="precio">1,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Fanta 330ml" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/fanta.jpeg" alt="Fanta 330ml" class="img-producto">
-      <div class="texto">
-        <h3>Fanta 330ml</h3>
-        <span class="precio">1,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Tónica 330ml" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/tonica.jpeg" alt="Tónica 330ml" class="img-producto">
-      <div class="texto">
-        <h3>Tónica 330ml</h3>
-        <span class="precio">1,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Cerveza Cruzcampo 330ml" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/Cruzcampo.jpeg" alt="Cerveza Cruzcampo 330ml" class="img-producto">
-      <div class="texto">
-        <h3>Cerveza Cruzcampo 330ml</h3>
-        <span class="precio">1,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Cerveza Estrella Galicia 330ml" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/estrella_galicia.jpeg" alt="Cerveza Estrella Galicia 330ml" class="img-producto">
-      <div class="texto">
-        <h3>Cerveza Estrella Galicia 330ml</h3>
-        <span class="precio">1,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Cerveza San Miguel 330ml" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/san_miguel.jpeg" alt="Cerveza San Miguel 330ml" class="img-producto">
-      <div class="texto">
-        <h3>Cerveza San Miguel 330ml</h3>
-        <span class="precio">1,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="FuzeTea" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/fuzetea.jpeg" alt="FuzeTea" class="img-producto">
-      <div class="texto">
-        <h3>FuzeTea 330ml</h3>
-        <span class="precio">1,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
- 
-  <article class="item" data-nombre="Acuarius Limón" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/acuarius.jpeg" alt="Acuarius Limón" class="img-producto">
-      <div class="texto">
-        <h3>Acuarius 330ml</h3>
-        <span class="precio">1,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
- 
-  <article class="item" data-nombre="Acuarius Naranja" data-precio="1.5">
-    <div class="info-producto">
-      <img src="images/acuarius_naranja.jpeg" alt="Acuarius Naranja" class="img-producto">
-      <div class="texto">
-        <h3>Acuarius 330ml</h3>
-        <span class="precio">1,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Monster 500ml" data-precio="2.0">
-    <div class="info-producto">
-      <img src="images/monster.jpeg" alt="Monster 500ml" class="img-producto">
-      <div class="texto">
-        <h3>Monster 500ml</h3>
-        <span class="precio">2,00 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Red Bull" data-precio="2.5">
-    <div class="info-producto">
-      <img src="images/redbull.jpeg" alt="Red Bull" class="img-producto">
-      <div class="texto">
-        <h3>Red Bull</h3>
-        <span class="precio">2,50 € / unidad</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-  <article class="item" data-nombre="Vino Protos" data-precio="17.5">
-    <div class="info-producto">
-      <img src="images/vino_protos.jpeg" alt="Vino Protos" class="img-producto">
-      <div class="texto">
-        <h3>Vino Protos</h3>
-        <span class="precio">17,50 € / botella</span>
-      </div>
-    </div>
-    <div class="acciones">
-      <button class="reset">x</button>
-      <button class="menos"><</button>
-      <span class="cantidad">0</span>
-      <button class="mas">></button>
-      <button class="multiplicar">+10</button>
-    </div>
-  </article>
-
-</section>
-
-
-
-
+      <main class="contenido" id="catalogo">
+        <section class="seccion" id="mesa-dulce" aria-labelledby="titulo-mesa-dulce">
+          <div class="encabezado-seccion"><span class="icono-seccion" aria-hidden="true">🍰</span><div><h2 id="titulo-mesa-dulce">Mesa dulce</h2><p>Postres y opciones dulces para cerrar la celebración.</p></div></div>
+          <article class="item" data-categoria="mesa-dulce" data-nombre="Flan" data-precio="1.5" id="producto-flan">
+<div class="info-producto">
+<img alt="Flan" class="img-producto" src="images/flan.jpeg"/>
+<div class="texto">
+<h3>Flan</h3>
+<p>Flan tradicional.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Flan" class="reset" type="button">x</button>
+<button aria-label="Restar Flan" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Flan" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Flanes" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-dulce" data-nombre="Natillas" data-precio="1.9" id="producto-natillas">
+<div class="info-producto">
+<img alt="Natillas" class="img-producto" src="images/natillas.jpeg"/>
+<div class="texto">
+<h3>Natillas</h3>
+<p>Postre cremoso tradicional.</p>
+<span class="precio">1,90 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Natillas" class="reset" type="button">x</button>
+<button aria-label="Restar Natillas" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Natillas" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Natillas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-dulce" data-nombre="Fruta" data-precio="2.5" id="producto-fruta">
+<div class="info-producto">
+<img alt="Fruta variada" class="img-producto" src="images/fruta.jpeg"/>
+<div class="texto">
+<h3>Fruta</h3>
+<p>Fruta para terminar la comida.</p>
+<span class="precio">2,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Fruta" class="reset" type="button">x</button>
+<button aria-label="Restar Fruta" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Fruta" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Fruta" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-dulce" data-nombre="Tarta de Chocolate" data-precio="3" id="producto-tarta-de-chocolate">
+<div class="info-producto">
+<img alt="Tarta de chocolate" class="img-producto" src="images/tarta-chocolate.jpeg"/>
+<div class="texto">
+<h3>Tarta de Chocolate</h3>
+<p>Tarta de chocolate para celebraciones.</p>
+<span class="precio">3,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Tarta de Chocolate" class="reset" type="button">x</button>
+<button aria-label="Restar Tarta de Chocolate" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Tarta de Chocolate" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Tarta de Chocolate" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-dulce" data-nombre="Cheesecake" data-precio="3.5" id="producto-cheesecake">
+<div class="info-producto">
+<img alt="Cheesecake" class="img-producto" src="images/cheesecake.jpeg"/>
+<div class="texto">
+<h3>Cheesecake</h3>
+<p>Tarta de queso para los amantes del dulce.</p>
+<span class="precio">3,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Cheesecake" class="reset" type="button">x</button>
+<button aria-label="Restar Cheesecake" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Cheesecake" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Cheesecake" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+        </section>
+
+        <section class="seccion" id="mesa-salada" aria-labelledby="titulo-mesa-salada">
+          <div class="encabezado-seccion"><span class="icono-seccion" aria-hidden="true">🥗</span><div><h2 id="titulo-mesa-salada">Mesa salada</h2><p>Entrantes, bocados, ensaladas y especialidades para compartir.</p></div></div>
+          <article class="item" data-categoria="mesa-salada" data-nombre="Canapé Tosta" data-precio="1" id="producto-canapé-tosta">
+<div class="info-producto">
+<img alt="Canapé sobre tosta" class="img-producto" src="images/Canape_tosta.jpeg"/>
+<div class="texto">
+<h3>Canapé Tosta</h3>
+<p>Pequeña tosta ideal para celebraciones y aperitivos.</p>
+<span class="precio">1,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Canapé Tosta" class="reset" type="button">x</button>
+<button aria-label="Restar Canapé Tosta" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Canapé Tosta" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Canapés Tosta" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Canapé Volavanes" data-precio="1.25" id="producto-canapé-volavanes">
+<div class="info-producto">
+<img alt="Canapés de volovanes" class="img-producto" src="images/Canape_volavanes.jpeg"/>
+<div class="texto">
+<h3>Canapé Volovanes</h3>
+<p>Volovanes rellenos para aperitivos y eventos.</p>
+<span class="precio">1,25 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Canapé Volavanes" class="reset" type="button">x</button>
+<button aria-label="Restar Canapé Volavanes" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Canapé Volavanes" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Canapés Volavanes" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Canapé Tartaleta" data-precio="2.5" id="producto-canapé-tartaleta">
+<div class="info-producto">
+<img alt="Canapés de tartaleta" class="img-producto" src="images/Canape_tartaleta.jpeg"/>
+<div class="texto">
+<h3>Canapé Tartaleta</h3>
+<p>Tartaletas saladas para todo tipo de celebraciones.</p>
+<span class="precio">2,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Canapé Tartaleta" class="reset" type="button">x</button>
+<button aria-label="Restar Canapé Tartaleta" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Canapé Tartaleta" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Canapés Tartaleta" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Canapé Quiché" data-precio="2.5" id="producto-canapé-quiché">
+<div class="info-producto">
+<img alt="Canapés de quiché" class="img-producto" src="images/canape_quiche.jpeg"/>
+<div class="texto">
+<h3>Canapé Quiché</h3>
+<p>Bocados salados inspirados en la quiché tradicional.</p>
+<span class="precio">2,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Canapé Quiché" class="reset" type="button">x</button>
+<button aria-label="Restar Canapé Quiché" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Canapé Quiché" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Canapés Quiché" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Aguacate Malagueño" data-precio="2.5" id="producto-aguacate-malagueño">
+<div class="info-producto">
+<img alt="Preparación con aguacate" class="img-producto" src="images/aguacate.jpeg"/>
+<div class="texto">
+<h3>Aguacate Malagueño</h3>
+<p>Una opción fresca con aguacate.</p>
+<span class="precio">2,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Aguacate Malagueño" class="reset" type="button">x</button>
+<button aria-label="Restar Aguacate Malagueño" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Aguacate Malagueño" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Aguacates Malagueños" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Jamón iberico" data-precio="10" id="producto-jamón-iberico">
+<div class="info-producto">
+<img alt="Jamón ibérico" class="img-producto" src="images/jamon.jpeg"/>
+<div class="texto">
+<h3>Jamón Ibérico</h3>
+<p>Jamón ibérico para compartir.</p>
+<span class="precio">10,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Jamón Ibérico" class="reset" type="button">x</button>
+<button aria-label="Restar Jamón Ibérico" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Jamón Ibérico" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Jamón Ibérico" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Lomo Ibérico" data-precio="4" id="producto-lomo-ibérico">
+<div class="info-producto">
+<img alt="Lomo ibérico" class="img-producto" src="images/lomo.jpeg"/>
+<div class="texto">
+<h3>Lomo Ibérico</h3>
+<p>Lomo ibérico para servir como aperitivo.</p>
+<span class="precio">4,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Lomo Ibérico" class="reset" type="button">x</button>
+<button aria-label="Restar Lomo Ibérico" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Lomo Ibérico" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Lomo Ibérico" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Chorizo Ibérico" data-precio="4" id="producto-chorizo-ibérico">
+<div class="info-producto">
+<img alt="Chorizo ibérico" class="img-producto" src="images/lomo.jpeg"/>
+<div class="texto">
+<h3>Chorizo Ibérico</h3>
+<p>Chorizo ibérico para aperitivos.</p>
+<span class="precio">4,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Chorizo Ibérico" class="reset" type="button">x</button>
+<button aria-label="Restar Chorizo Ibérico" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Chorizo Ibérico" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Chorizo Ibérico" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Queso Semicurado" data-precio="5" id="producto-queso-semicurado">
+<div class="info-producto">
+<img alt="Queso semicurado" class="img-producto" src="images/queso.jpeg"/>
+<div class="texto">
+<h3>Queso Semicurado</h3>
+<p>Queso semicurado para compartir.</p>
+<span class="precio">5,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Queso Semicurado" class="reset" type="button">x</button>
+<button aria-label="Restar Queso Semicurado" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Queso Semicurado" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Queso Semicurado" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Hojaldre Dog" data-precio="2" id="producto-hojaldre-dog">
+<div class="info-producto">
+<img alt="Perritos de hojaldre" class="img-producto" src="images/perritos.jpeg"/>
+<div class="texto">
+<h3>Hojaldre Dog</h3>
+<p>Bocados de hojaldre con salchicha.</p>
+<span class="precio">2,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Hojaldre Dog" class="reset" type="button">x</button>
+<button aria-label="Restar Hojaldre Dog" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Hojaldre Dog" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Hojaldre Dog" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Mini Wraps Salmón" data-precio="2" id="producto-mini-wraps-salmón">
+<div class="info-producto">
+<img alt="Mini wraps" class="img-producto" src="images/aguacate.jpeg"/>
+<div class="texto">
+<h3>Mini Wraps Salmón</h3>
+<p>Pequeños wraps para aperitivos.</p>
+<span class="precio">2,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Mini Wraps Salmón" class="reset" type="button">x</button>
+<button aria-label="Restar Mini Wraps Salmón" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Mini Wraps Salmón" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Mini Wraps Salmón" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Saladitos" data-precio="1" id="producto-saladitos">
+<div class="info-producto">
+<img alt="Saladitos variados" class="img-producto" src="images/Canape_volavanes.jpeg"/>
+<div class="texto">
+<h3>Saladitos</h3>
+<p>Bocados salados variados.</p>
+<span class="precio">1,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Saladitos" class="reset" type="button">x</button>
+<button aria-label="Restar Saladitos" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Saladitos" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Saladitos" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Empanadillas" data-precio="1.5" id="producto-empanadillas">
+<div class="info-producto">
+<img alt="Empanadillas" class="img-producto" src="images/canape_quiche.jpeg"/>
+<div class="texto">
+<h3>Empanadillas</h3>
+<p>Empanadillas para compartir.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Empanadillas" class="reset" type="button">x</button>
+<button aria-label="Restar Empanadillas" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Empanadillas" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Empanadillas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Croquetas" data-precio="1" id="producto-croquetas">
+<div class="info-producto">
+<img alt="Croquetas caseras" class="img-producto" src="images/croqueta.jpeg"/>
+<div class="texto">
+<h3>Croquetas</h3>
+<p>Croquetas para aperitivos y celebraciones.</p>
+<span class="precio">1,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Croquetas" class="reset" type="button">x</button>
+<button aria-label="Restar Croquetas" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Croquetas" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Croquetas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Croquetas Premium" data-precio="1.5" id="producto-croquetas-premium">
+<div class="info-producto">
+<img alt="Croquetas premium" class="img-producto" src="images/croqueta.jpeg"/>
+<div class="texto">
+<h3>Croquetas Premium</h3>
+<p>Una opción especial para tu menú.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Croquetas Premium" class="reset" type="button">x</button>
+<button aria-label="Restar Croquetas Premium" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Croquetas Premium" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Croquetas Premium" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Miniburguer" data-precio="2" id="producto-miniburguer">
+<div class="info-producto">
+<img alt="Mini hamburguesas" class="img-producto" src="images/miniburguer.jpeg"/>
+<div class="texto">
+<h3>Miniburguer</h3>
+<p>Mini hamburguesas para eventos.</p>
+<span class="precio">2,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Miniburguer" class="reset" type="button">x</button>
+<button aria-label="Restar Miniburguer" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Miniburguer" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Miniburguer" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Minibrioches" data-precio="2" id="producto-minibrioches">
+<div class="info-producto">
+<img alt="Minibrioches" class="img-producto" src="images/miniburguer.jpeg"/>
+<div class="texto">
+<h3>Minibrioches</h3>
+<p>Pequeños bocados de pan brioche.</p>
+<span class="precio">2,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Minibrioches" class="reset" type="button">x</button>
+<button aria-label="Restar Minibrioches" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Minibrioches" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Minibrioches" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Pinchitos" data-precio="1.5" id="producto-pinchitos">
+<div class="info-producto">
+<img alt="Pinchitos" class="img-producto" src="images/perritos.jpeg"/>
+<div class="texto">
+<h3>Pinchitos</h3>
+<p>Pinchitos para completar el aperitivo.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Pinchitos" class="reset" type="button">x</button>
+<button aria-label="Restar Pinchitos" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Pinchitos" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Pinchitos" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Ensaladilla Rusa" data-precio="1.5" id="producto-ensaladilla-rusa">
+<div class="info-producto">
+<img alt="Ensaladilla rusa" class="img-producto" src="images/ensaladilla.jpeg"/>
+<div class="texto">
+<h3>Ensaladilla Rusa</h3>
+<p>Ensaladilla rusa para celebraciones.</p>
+<span class="precio">1,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Ensaladilla Rusa" class="reset" type="button">x</button>
+<button aria-label="Restar Ensaladilla Rusa" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Ensaladilla Rusa" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Ensaladilla Rusa" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Tortilla de Patatas" data-precio="15" id="producto-tortilla-de-patatas">
+<div class="info-producto">
+<img alt="Tortilla de patatas" class="img-producto" src="images/tortilla_patata.jpeg"/>
+<div class="texto">
+<h3>Tortilla de Patatas</h3>
+<p>Tortilla de patatas para compartir.</p>
+<span class="precio">15,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Tortilla de Patatas" class="reset" type="button">x</button>
+<button aria-label="Restar Tortilla de Patatas" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Tortilla de Patatas" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Tortillas de Patatas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Huevo Relleno" data-precio="2.5" id="producto-huevo-relleno">
+<div class="info-producto">
+<img alt="Huevos rellenos" class="img-producto" src="images/huevorelleno.jpeg"/>
+<div class="texto">
+<h3>Huevo Relleno</h3>
+<p>Huevos rellenos preparados para servir.</p>
+<span class="precio">2,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Huevo Relleno" class="reset" type="button">x</button>
+<button aria-label="Restar Huevo Relleno" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Huevo Relleno" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Huevos Rellenos" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Ensalada Clásica" data-precio="1.5" id="producto-ensalada-clásica">
+<div class="info-producto">
+<img alt="Ensalada clásica" class="img-producto" src="images/aguacate.jpeg"/>
+<div class="texto">
+<h3>Ensalada Clásica</h3>
+<p>Una ensalada fresca y sencilla.</p>
+<span class="precio">1,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Ensalada Clásica" class="reset" type="button">x</button>
+<button aria-label="Restar Ensalada Clásica" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Ensalada Clásica" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Ensalada Clásica" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Ensalada César" data-precio="1.9" id="producto-ensalada-césar">
+<div class="info-producto">
+<img alt="Ensalada César" class="img-producto" src="images/aguacate.jpeg"/>
+<div class="texto">
+<h3>Ensalada César</h3>
+<p>Ensalada inspirada en la receta César.</p>
+<span class="precio">1,90 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Ensalada César" class="reset" type="button">x</button>
+<button aria-label="Restar Ensalada César" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Ensalada César" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Ensalada César" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Ensalada de Aguacate" data-precio="1.9" id="producto-ensalada-de-aguacate">
+<div class="info-producto">
+<img alt="Ensalada de aguacate" class="img-producto" src="images/aguacate.jpeg"/>
+<div class="texto">
+<h3>Ensalada de Aguacate</h3>
+<p>Ensalada fresca con aguacate.</p>
+<span class="precio">1,90 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Ensalada de Aguacate" class="reset" type="button">x</button>
+<button aria-label="Restar Ensalada de Aguacate" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Ensalada de Aguacate" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Ensalada de Aguacate" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Ensalada Mediterránea" data-precio="1.5" id="producto-ensalada-mediterránea">
+<div class="info-producto">
+<img alt="Ensalada mediterránea" class="img-producto" src="images/aguacate.jpeg"/>
+<div class="texto">
+<h3>Ensalada Mediterránea</h3>
+<p>Una combinación de ingredientes frescos.</p>
+<span class="precio">1,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Ensalada Mediterránea" class="reset" type="button">x</button>
+<button aria-label="Restar Ensalada Mediterránea" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Ensalada Mediterránea" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Ensalada Mediterránea" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Ensalada de Quinoa" data-precio="1.9" id="producto-ensalada-de-quinoa">
+<div class="info-producto">
+<img alt="Ensalada de quinoa" class="img-producto" src="images/aguacate.jpeg"/>
+<div class="texto">
+<h3>Ensalada de Quinoa</h3>
+<p>Ensalada con quinoa.</p>
+<span class="precio">1,90 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Ensalada de Quinoa" class="reset" type="button">x</button>
+<button aria-label="Restar Ensalada de Quinoa" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Ensalada de Quinoa" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Ensalada de Quinoa" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Ensalada Tropical" data-precio="1.5" id="producto-ensalada-tropical">
+<div class="info-producto">
+<img alt="Ensalada tropical" class="img-producto" src="images/aguacate.jpeg"/>
+<div class="texto">
+<h3>Ensalada Tropical</h3>
+<p>Una ensalada con un toque tropical.</p>
+<span class="precio">1,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Ensalada Tropical" class="reset" type="button">x</button>
+<button aria-label="Restar Ensalada Tropical" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Ensalada Tropical" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Ensalada Tropical" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Arepa" data-precio="5" id="producto-arepa">
+<div class="info-producto">
+<img alt="Arepa venezolana" class="img-producto" src="images/arepa.jpeg"/>
+<div class="texto">
+<h3>Arepa</h3>
+<p>Arepa tradicional para completar tu menú.</p>
+<span class="precio">5,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Arepa" class="reset" type="button">x</button>
+<button aria-label="Restar Arepa" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Arepa" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Arepas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Maki" data-precio="1.25" id="producto-maki">
+<div class="info-producto">
+<img alt="Maki" class="img-producto" src="images/maki.jpeg"/>
+<div class="texto">
+<h3>Maki</h3>
+<p>Bocados de maki para compartir.</p>
+<span class="precio">1,25 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Maki" class="reset" type="button">x</button>
+<button aria-label="Restar Maki" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Maki" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Makis" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Uramaki" data-precio="1.25" id="producto-uramaki">
+<div class="info-producto">
+<img alt="Uramaki" class="img-producto" src="images/maki.jpeg"/>
+<div class="texto">
+<h3>Uramaki</h3>
+<p>Una variedad de sushi enrollado.</p>
+<span class="precio">1,25 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Uramaki" class="reset" type="button">x</button>
+<button aria-label="Restar Uramaki" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Uramaki" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Uramakis" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Niguiri" data-precio="2" id="producto-niguiri">
+<div class="info-producto">
+<img alt="Nigiri" class="img-producto" src="images/maki.jpeg"/>
+<div class="texto">
+<h3>Nigiri</h3>
+<p>Bocados de sushi de estilo tradicional.</p>
+<span class="precio">2,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Nigiri" class="reset" type="button">x</button>
+<button aria-label="Restar Nigiri" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Nigiri" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Nigiris" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Gyoza" data-precio="2" id="producto-gyoza">
+<div class="info-producto">
+<img alt="Gyozas" class="img-producto" src="images/maki.jpeg"/>
+<div class="texto">
+<h3>Gyoza</h3>
+<p>Empanadillas de inspiración asiática.</p>
+<span class="precio">2,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Gyoza" class="reset" type="button">x</button>
+<button aria-label="Restar Gyoza" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Gyoza" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Gyozas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Cocacola 330ml" data-precio="1.5" id="producto-cocacola-330ml">
+<div class="info-producto">
+<img alt="Coca-Cola" class="img-producto" src="images/cocacola.jpeg"/>
+<div class="texto">
+<h3>Coca-Cola 330 ml</h3>
+<p>Lata de Coca-Cola.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Coca-Cola" class="reset" type="button">x</button>
+<button aria-label="Restar Coca-Cola" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Coca-Cola" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Coca-Colas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Fanta 330ml" data-precio="1.5" id="producto-fanta-330ml">
+<div class="info-producto">
+<img alt="Fanta" class="img-producto" src="images/fanta.jpeg"/>
+<div class="texto">
+<h3>Fanta 330 ml</h3>
+<p>Lata de Fanta.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Fanta" class="reset" type="button">x</button>
+<button aria-label="Restar Fanta" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Fanta" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Fantas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Tónica 330ml" data-precio="1.5" id="producto-tónica-330ml">
+<div class="info-producto">
+<img alt="Tónica" class="img-producto" src="images/tonica.jpeg"/>
+<div class="texto">
+<h3>Tónica 330 ml</h3>
+<p>Lata de tónica.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Tónica" class="reset" type="button">x</button>
+<button aria-label="Restar Tónica" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Tónica" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Tónicas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Cerveza Cruzcampo 330ml" data-precio="1.5" id="producto-cerveza-cruzcampo-330ml">
+<div class="info-producto">
+<img alt="Cerveza Cruzcampo" class="img-producto" src="images/cerveza.jpeg"/>
+<div class="texto">
+<h3>Cerveza Cruzcampo 330 ml</h3>
+<p>Lata de cerveza Cruzcampo.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Cerveza Cruzcampo" class="reset" type="button">x</button>
+<button aria-label="Restar Cerveza Cruzcampo" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Cerveza Cruzcampo" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 cervezas Cruzcampo" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Cerveza Estrella Galicia 330ml" data-precio="1.5" id="producto-cerveza-estrella-galicia-330ml">
+<div class="info-producto">
+<img alt="Cerveza Estrella Galicia" class="img-producto" src="images/cerveza.jpeg"/>
+<div class="texto">
+<h3>Cerveza Estrella Galicia 330 ml</h3>
+<p>Lata de cerveza Estrella Galicia.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Cerveza Estrella Galicia" class="reset" type="button">x</button>
+<button aria-label="Restar Cerveza Estrella Galicia" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Cerveza Estrella Galicia" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 cervezas Estrella Galicia" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Cerveza San Miguel 330ml" data-precio="1.5" id="producto-cerveza-san-miguel-330ml">
+<div class="info-producto">
+<img alt="Cerveza San Miguel" class="img-producto" src="images/cerveza.jpeg"/>
+<div class="texto">
+<h3>Cerveza San Miguel 330 ml</h3>
+<p>Lata de cerveza San Miguel.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Cerveza San Miguel" class="reset" type="button">x</button>
+<button aria-label="Restar Cerveza San Miguel" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Cerveza San Miguel" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 cervezas San Miguel" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="FuzeTea" data-precio="1.5" id="producto-fuzetea">
+<div class="info-producto">
+<img alt="FuzeTea" class="img-producto" src="images/fuzetea.jpeg"/>
+<div class="texto">
+<h3>FuzeTea</h3>
+<p>Bebida de té frío.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar FuzeTea" class="reset" type="button">x</button>
+<button aria-label="Restar FuzeTea" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir FuzeTea" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 FuzeTea" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Acuarius Limón" data-precio="1.5" id="producto-acuarius-limón">
+<div class="info-producto">
+<img alt="Aquarius de limón" class="img-producto" src="images/acuarius.jpeg"/>
+<div class="texto">
+<h3>Aquarius Limón</h3>
+<p>Bebida refrescante de limón.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Aquarius Limón" class="reset" type="button">x</button>
+<button aria-label="Restar Aquarius Limón" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Aquarius Limón" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Aquarius Limón" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Acuarius Naranja" data-precio="1.5" id="producto-acuarius-naranja">
+<div class="info-producto">
+<img alt="Aquarius de naranja" class="img-producto" src="images/acuarius.jpeg"/>
+<div class="texto">
+<h3>Aquarius Naranja</h3>
+<p>Bebida refrescante de naranja.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Aquarius Naranja" class="reset" type="button">x</button>
+<button aria-label="Restar Aquarius Naranja" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Aquarius Naranja" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Aquarius Naranja" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Monster 500ml" data-precio="2" id="producto-monster-500ml">
+<div class="info-producto">
+<img alt="Monster" class="img-producto" src="images/monster.jpeg"/>
+<div class="texto">
+<h3>Monster 500 ml</h3>
+<p>Lata de bebida energética.</p>
+<span class="precio">2,00 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Monster" class="reset" type="button">x</button>
+<button aria-label="Restar Monster" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Monster" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Monster" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Red Bull" data-precio="2.5" id="producto-red-bull">
+<div class="info-producto">
+<img alt="Red Bull" class="img-producto" src="images/redbull.jpeg"/>
+<div class="texto">
+<h3>Red Bull</h3>
+<p>Bebida energética.</p>
+<span class="precio">2,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Red Bull" class="reset" type="button">x</button>
+<button aria-label="Restar Red Bull" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Red Bull" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Red Bull" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-salada" data-nombre="Vino Protos" data-precio="17.5" id="producto-vino-protos">
+<div class="info-producto">
+<img alt="Vino Protos" class="img-producto" src="images/vino.jpeg"/>
+<div class="texto">
+<h3>Vino Protos</h3>
+<p>Botella de vino Protos.</p>
+<span class="precio">17,50 € / botella</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Vino Protos" class="reset" type="button">x</button>
+<button aria-label="Restar Vino Protos" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Vino Protos" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 botellas de Vino Protos" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+        </section>
+
+        <section class="seccion" id="platos-calientes" aria-labelledby="titulo-platos-calientes">
+          <div class="encabezado-seccion"><span class="icono-seccion" aria-hidden="true">🍲</span><div><h2 id="titulo-platos-calientes">Platos calientes</h2><p>Arroces, carnes, guisos y platos preparados para tu evento.</p></div></div>
+          <article class="item" data-categoria="platos-calientes" data-nombre="Paella de carne" data-precio="12.5" id="producto-paella-de-carne">
+<div class="info-producto">
+<img alt="Paella de carne" class="img-producto" src="images/paella.jpeg"/>
+<div class="texto">
+<h3>Paella de carne</h3>
+<p>Paella preparada para compartir.</p>
+<span class="precio">12,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Paella de carne" class="reset" type="button">x</button>
+<button aria-label="Restar Paella de carne" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Paella de carne" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Paella de carne" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Paella de marisco" data-precio="15" id="producto-paella-de-marisco">
+<div class="info-producto">
+<img alt="Paella de marisco" class="img-producto" src="images/Paella_marisco.jpeg"/>
+<div class="texto">
+<h3>Paella de marisco</h3>
+<p>Paella con sabor a mar.</p>
+<span class="precio">15,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Paella de marisco" class="reset" type="button">x</button>
+<button aria-label="Restar Paella de marisco" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Paella de marisco" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Paella de marisco" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Paella mixta" data-precio="17.5" id="producto-paella-mixta">
+<div class="info-producto">
+<img alt="Paella mixta" class="img-producto" src="images/Paella_marisco.jpeg"/>
+<div class="texto">
+<h3>Paella mixta</h3>
+<p>Una paella con combinación de ingredientes.</p>
+<span class="precio">17,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Paella mixta" class="reset" type="button">x</button>
+<button aria-label="Restar Paella mixta" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Paella mixta" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Paella mixta" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Arroz amarillo con carne y setas" data-precio="14" id="producto-arroz-amarillo-con-carne-y-setas">
+<div class="info-producto">
+<img alt="Arroz amarillo con carne y setas" class="img-producto" src="images/paella.jpeg"/>
+<div class="texto">
+<h3>Arroz amarillo con carne y setas</h3>
+<p>Arroz con carne y setas.</p>
+<span class="precio">14,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Arroz amarillo con carne y setas" class="reset" type="button">x</button>
+<button aria-label="Restar Arroz amarillo con carne y setas" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Arroz amarillo con carne y setas" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Arroz amarillo con carne y setas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Migas" data-precio="17.5" id="producto-migas">
+<div class="info-producto">
+<img alt="Migas" class="img-producto" src="images/paella.jpeg"/>
+<div class="texto">
+<h3>Migas</h3>
+<p>Plato tradicional para compartir.</p>
+<span class="precio">17,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Migas" class="reset" type="button">x</button>
+<button aria-label="Restar Migas" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Migas" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Migas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Sopa Castellana" data-precio="10" id="producto-sopa-castellana">
+<div class="info-producto">
+<img alt="Sopa castellana" class="img-producto" src="images/puchero.jpeg"/>
+<div class="texto">
+<h3>Sopa Castellana</h3>
+<p>Sopa caliente de estilo tradicional.</p>
+<span class="precio">10,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Sopa Castellana" class="reset" type="button">x</button>
+<button aria-label="Restar Sopa Castellana" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Sopa Castellana" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Sopa Castellana" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Crema de Calabaza" data-precio="10" id="producto-crema-de-calabaza">
+<div class="info-producto">
+<img alt="Crema de calabaza" class="img-producto" src="images/puchero.jpeg"/>
+<div class="texto">
+<h3>Crema de Calabaza</h3>
+<p>Crema suave para servir caliente.</p>
+<span class="precio">10,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Crema de Calabaza" class="reset" type="button">x</button>
+<button aria-label="Restar Crema de Calabaza" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Crema de Calabaza" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Crema de Calabaza" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Puchero" data-precio="10" id="producto-puchero">
+<div class="info-producto">
+<img alt="Puchero" class="img-producto" src="images/puchero.jpeg"/>
+<div class="texto">
+<h3>Puchero</h3>
+<p>Plato de cuchara tradicional.</p>
+<span class="precio">10,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Puchero" class="reset" type="button">x</button>
+<button aria-label="Restar Puchero" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Puchero" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Puchero" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Cazuela de fideos" data-precio="15" id="producto-cazuela-de-fideos">
+<div class="info-producto">
+<img alt="Cazuela de fideos" class="img-producto" src="images/puchero.jpeg"/>
+<div class="texto">
+<h3>Cazuela de fideos</h3>
+<p>Cazuela caliente de fideos.</p>
+<span class="precio">15,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Cazuela de fideos" class="reset" type="button">x</button>
+<button aria-label="Restar Cazuela de fideos" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Cazuela de fideos" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Cazuela de fideos" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Cazuela de patatas" data-precio="14" id="producto-cazuela-de-patatas">
+<div class="info-producto">
+<img alt="Cazuela de patatas" class="img-producto" src="images/puchero.jpeg"/>
+<div class="texto">
+<h3>Cazuela de patatas</h3>
+<p>Plato caliente de patatas.</p>
+<span class="precio">14,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Cazuela de patatas" class="reset" type="button">x</button>
+<button aria-label="Restar Cazuela de patatas" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Cazuela de patatas" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Cazuela de patatas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Solomillo de ternera" data-precio="18.5" id="producto-solomillo-de-ternera">
+<div class="info-producto">
+<img alt="Solomillo de ternera" class="img-producto" src="images/solomillo-ternera.jpeg"/>
+<div class="texto">
+<h3>Solomillo de ternera</h3>
+<p>Solomillo de ternera para una ocasión especial.</p>
+<span class="precio">18,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Solomillo de ternera" class="reset" type="button">x</button>
+<button aria-label="Restar Solomillo de ternera" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Solomillo de ternera" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Solomillo de ternera" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Entrecot a la brasa" data-precio="16.9" id="producto-entrecot-a-la-brasa">
+<div class="info-producto">
+<img alt="Entrecot a la brasa" class="img-producto" src="images/entrecot-brasa.jpeg"/>
+<div class="texto">
+<h3>Entrecot a la brasa</h3>
+<p>Entrecot preparado a la brasa.</p>
+<span class="precio">16,90 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Entrecot a la brasa" class="reset" type="button">x</button>
+<button aria-label="Restar Entrecot a la brasa" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Entrecot a la brasa" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Entrecot a la brasa" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Pollo al horno especiado" data-precio="12.5" id="producto-pollo-al-horno-especiado">
+<div class="info-producto">
+<img alt="Pollo al horno especiado" class="img-producto" src="images/pollo-horno.jpeg"/>
+<div class="texto">
+<h3>Pollo al horno especiado</h3>
+<p>Pollo al horno con especias.</p>
+<span class="precio">12,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Pollo al horno especiado" class="reset" type="button">x</button>
+<button aria-label="Restar Pollo al horno especiado" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Pollo al horno especiado" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Pollo al horno especiado" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Carrillada ibérica" data-precio="15.9" id="producto-carrillada-ibérica">
+<div class="info-producto">
+<img alt="Carrillada ibérica" class="img-producto" src="images/carrillada-iberica.jpeg"/>
+<div class="texto">
+<h3>Carrillada ibérica</h3>
+<p>Carrillada preparada para servir.</p>
+<span class="precio">15,90 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Carrillada ibérica" class="reset" type="button">x</button>
+<button aria-label="Restar Carrillada ibérica" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Carrillada ibérica" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Carrillada ibérica" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="platos-calientes" data-nombre="Costillas BBQ" data-precio="14.5" id="producto-costillas-bbq">
+<div class="info-producto">
+<img alt="Costillas BBQ" class="img-producto" src="images/costillas-bbq.jpeg"/>
+<div class="texto">
+<h3>Costillas BBQ</h3>
+<p>Costillas con salsa barbacoa.</p>
+<span class="precio">14,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Costillas BBQ" class="reset" type="button">x</button>
+<button aria-label="Restar Costillas BBQ" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Costillas BBQ" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Costillas BBQ" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+        </section>
+
+        <section class="seccion" id="otros-servicios" aria-labelledby="titulo-otros-servicios">
+          <div class="encabezado-seccion"><span class="icono-seccion" aria-hidden="true">✨</span><div><h2 id="titulo-otros-servicios">Otros servicios</h2><p>Completa tu evento con servicios adicionales. El precio se confirmará según las necesidades y la ubicación.</p></div></div>
+          <article class="item item-servicio" id="servicio-transporte" data-nombre="Transporte y entrega" data-precio="0" data-categoria="otros-servicios" data-consulta="true">
+            <div class="info-producto"><div class="texto"><h3>Transporte y entrega</h3><p>Entrega del pedido en el lugar del evento, según distancia y condiciones.</p><span class="precio precio-consulta">Precio a consultar</span></div></div>
+            <div class="acciones"><button type="button" class="reset" aria-label="Eliminar Transporte y entrega">×</button><button type="button" class="menos" aria-label="Restar Transporte y entrega">−</button><span class="cantidad" aria-live="polite">0</span><button type="button" class="mas" aria-label="Añadir Transporte y entrega">+</button></div>
+          </article>
+          <article class="item item-servicio" id="servicio-camarero" data-nombre="Servicio de camarero" data-precio="0" data-categoria="otros-servicios" data-consulta="true">
+            <div class="info-producto"><div class="texto"><h3>Servicio de camarero</h3><p>Personal de apoyo durante el servicio, sujeto a disponibilidad y duración.</p><span class="precio precio-consulta">Precio a consultar</span></div></div>
+            <div class="acciones"><button type="button" class="reset" aria-label="Eliminar Servicio de camarero">×</button><button type="button" class="menos" aria-label="Restar Servicio de camarero">−</button><span class="cantidad" aria-live="polite">0</span><button type="button" class="mas" aria-label="Añadir Servicio de camarero">+</button></div>
+          </article>
+          <article class="item item-servicio" id="servicio-espacio" data-nombre="Uso del espacio" data-precio="0" data-categoria="otros-servicios" data-consulta="true">
+            <div class="info-producto"><div class="texto"><h3>Uso del espacio</h3><p>Consulta la disponibilidad del espacio para celebrar tu evento.</p><span class="precio precio-consulta">Precio a consultar</span></div></div>
+            <div class="acciones"><button type="button" class="reset" aria-label="Eliminar Uso del espacio">×</button><button type="button" class="menos" aria-label="Restar Uso del espacio">−</button><span class="cantidad" aria-live="polite">0</span><button type="button" class="mas" aria-label="Añadir Uso del espacio">+</button></div>
+          </article>
+          <article class="item item-servicio" id="servicio-mesas-sillas" data-nombre="Alquiler de mesas y sillas" data-precio="0" data-categoria="otros-servicios" data-consulta="true">
+            <div class="info-producto"><div class="texto"><h3>Alquiler de mesas y sillas</h3><p>Consulta el alquiler de mobiliario según el número de asistentes y el lugar.</p><span class="precio precio-consulta">Precio a consultar</span></div></div>
+            <div class="acciones"><button type="button" class="reset" aria-label="Eliminar Alquiler de mesas y sillas">×</button><button type="button" class="menos" aria-label="Restar Alquiler de mesas y sillas">−</button><span class="cantidad" aria-live="polite">0</span><button type="button" class="mas" aria-label="Añadir Alquiler de mesas y sillas">+</button></div>
+          </article>
+          <p class="nota-servicios">Los servicios marcados como «Precio a consultar» se incluirán en la solicitud, pero no sumarán al total hasta confirmar su coste.</p>
+        </section>
       </main>
 
-      <!-- ✅ RESUMEN PRESUPUESTO -->
-      <aside class="resumen">
-        <h2>Tu presupuesto</h2>
-        <ul id="lista"></ul>
-        <p id="total">Total: 0 €</p>
-        <button onclick="continuar()">Continuar</button>
+      <!-- Resumen compacto y desplegable; el JS actualizará total, contador y líneas -->
+      <aside class="resumen" id="presupuesto" aria-labelledby="titulo-presupuesto">
+        <details class="desplegable-presupuesto" id="detallesPresupuesto">
+          <summary class="cabecera-resumen">
+            <span class="resumen-titulos"><strong id="titulo-presupuesto">Tu presupuesto</strong><small id="textoResumen">Todavía no has añadido productos</small></span>
+            <span class="resumen-importes"><strong id="total">Total: 0,00 €</strong><span class="flecha-resumen" aria-hidden="true">⌄</span></span>
+          </summary>
+          <div class="contenido-resumen">
+            <p class="resumen-ayuda">Pulsa sobre cualquier producto de la lista para volver a su ficha y cambiar la cantidad.</p>
+            <ul id="lista" aria-label="Productos y servicios seleccionados"></ul>
+            <p id="mensajeCarritoVacio" class="carrito-vacio">Tu selección aparecerá aquí.</p>
+            <div class="acciones-resumen">
+              <button type="button" class="btn-continuar" onclick="continuar()">Continuar al resumen</button>
+              <a class="seguir-eligiendo" href="#catalogo">Seguir eligiendo</a>
+            </div>
+          </div>
+        </details>
       </aside>
+    </div>
 
-    </section>
+    <footer class="pie-selector"><p>Presupuesto orientativo sujeto a disponibilidad y confirmación de los servicios solicitados.</p><a href="#inicio">Volver arriba ↑</a></footer>
+  </div>
 
-  </section>
+  <!-- Visor accesible para ampliar las fotografías de los productos -->
+  <div id="visorImagen" class="visor-imagen" role="dialog" aria-modal="true" aria-label="Imagen ampliada" aria-hidden="true" hidden>
+    <button type="button" id="cerrarVisor" class="cerrar-visor" aria-label="Cerrar imagen ampliada">×</button>
+    <img id="imagenGrande" alt="Imagen ampliada del producto">
+  </div>
 
-  <!-- JS -->
-<script src="productos.js"></script>
-<script type="module" src="selector.js"></script>
-
-<div id="visorImagen" class="visor-imagen">
-  <img id="imagenGrande">
-</div>
-
+  <!-- Catálogo único en HTML. No incluir productos.js: generaría duplicados. -->
+  <script src="selector.js" defer></script>
 </body>
 </html>
