@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#073b4c">
-  <meta name="description" content="Personaliza tu presupuesto de catering en Málaga: mesa dulce, mesa salada, platos calientes y servicios para tu evento con Catering Gil & Román.">
+  <meta name="description" content="Personaliza tu presupuesto de catering en Málaga: mesa salada, mesa dulce, platos calientes y servicios para tu evento con Catering Gil & Román.">
   <title>Personaliza tu menú | Catering Gil &amp; Román</title>
   <link rel="stylesheet" href="selector.css">
 </head>
@@ -15,8 +15,8 @@
   <header class="barra-superior" id="inicio">
     <a class="marca" href="#inicio" aria-label="Catering Gil y Román, inicio">Gil <span>&amp;</span> Román</a>
     <nav class="navegacion-categorias" aria-label="Categorías del menú">
-      <a href="#mesa-dulce">Mesa dulce</a>
       <a href="#mesa-salada">Mesa salada</a>
+      <a href="#mesa-dulce">Mesa dulce</a>
       <a href="#platos-calientes">Platos calientes</a>
       <a href="#otros-servicios">Otros servicios</a>
     </nav>
@@ -39,103 +39,15 @@
       <!-- Navegación secundaria; en móvil puede convertirse en accesos desplazables -->
       <aside class="sidebar" aria-label="Acceso rápido a categorías">
         <h2>Explora la carta</h2>
-        <a href="#mesa-dulce">🍰 Mesa dulce <span>Postres y tartas</span></a>
         <a href="#mesa-salada">🥗 Mesa salada <span>Entrantes, ensaladas y más</span></a>
+        <a href="#mesa-dulce">🍰 Mesa dulce <span>Postres y tartas</span></a>
         <a href="#platos-calientes">🍲 Platos calientes <span>Arroces, carnes y guisos</span></a>
         <a href="#otros-servicios">✨ Otros servicios <span>Personal para el evento y alquileres</span></a>
         <p class="ayuda-categorias">Puedes modificar las cantidades en cualquier momento desde cada producto o desde tu presupuesto.</p>
       </aside>
 
       <main class="contenido" id="catalogo">
-        <section class="seccion" id="mesa-dulce" aria-labelledby="titulo-mesa-dulce">
-          <div class="encabezado-seccion"><span class="icono-seccion" aria-hidden="true">🍰</span><div><h2 id="titulo-mesa-dulce">Mesa dulce</h2><p>Postres y opciones dulces para cerrar la celebración.</p></div></div>
-          <article class="item" data-categoria="mesa-dulce" data-nombre="Flan" data-precio="1.5" id="producto-flan">
-<div class="info-producto">
-<img alt="Flan" class="img-producto" src="images/flan.jpeg"/>
-<div class="texto">
-<h3>Flan</h3>
-<p>Flan tradicional.</p>
-<span class="precio">1,50 € / unidad</span>
-</div>
-</div>
-<div class="acciones">
-<button aria-label="Eliminar Flan" class="reset" type="button">x</button>
-<button aria-label="Restar Flan" class="menos" type="button">−</button>
-<span class="cantidad">0</span>
-<button aria-label="Añadir Flan" class="mas" type="button">+</button>
-<button aria-label="Añadir 10 Flanes" class="multiplicar" type="button">+10</button>
-</div>
-</article>
-<article class="item" data-categoria="mesa-dulce" data-nombre="Natillas" data-precio="1.9" id="producto-natillas">
-<div class="info-producto">
-<img alt="Natillas" class="img-producto" src="images/natillas.jpeg"/>
-<div class="texto">
-<h3>Natillas</h3>
-<p>Postre cremoso tradicional.</p>
-<span class="precio">1,90 € / unidad</span>
-</div>
-</div>
-<div class="acciones">
-<button aria-label="Eliminar Natillas" class="reset" type="button">x</button>
-<button aria-label="Restar Natillas" class="menos" type="button">−</button>
-<span class="cantidad">0</span>
-<button aria-label="Añadir Natillas" class="mas" type="button">+</button>
-<button aria-label="Añadir 10 Natillas" class="multiplicar" type="button">+10</button>
-</div>
-</article>
-<article class="item" data-categoria="mesa-dulce" data-nombre="Fruta" data-precio="2.5" id="producto-fruta">
-<div class="info-producto">
-<img alt="Fruta variada" class="img-producto" src="images/fruta.jpeg"/>
-<div class="texto">
-<h3>Fruta</h3>
-<p>Fruta para terminar la comida.</p>
-<span class="precio">2,50 € / ración</span>
-</div>
-</div>
-<div class="acciones">
-<button aria-label="Eliminar Fruta" class="reset" type="button">x</button>
-<button aria-label="Restar Fruta" class="menos" type="button">−</button>
-<span class="cantidad">0</span>
-<button aria-label="Añadir Fruta" class="mas" type="button">+</button>
-<button aria-label="Añadir 10 raciones de Fruta" class="multiplicar" type="button">+10</button>
-</div>
-</article>
-<article class="item" data-categoria="mesa-dulce" data-nombre="Tarta de Chocolate" data-precio="3" id="producto-tarta-de-chocolate">
-<div class="info-producto">
-<img alt="Tarta de chocolate" class="img-producto" src="images/tarta-chocolate.jpeg"/>
-<div class="texto">
-<h3>Tarta de Chocolate</h3>
-<p>Tarta de chocolate para celebraciones.</p>
-<span class="precio">3,00 € / ración</span>
-</div>
-</div>
-<div class="acciones">
-<button aria-label="Eliminar Tarta de Chocolate" class="reset" type="button">x</button>
-<button aria-label="Restar Tarta de Chocolate" class="menos" type="button">−</button>
-<span class="cantidad">0</span>
-<button aria-label="Añadir Tarta de Chocolate" class="mas" type="button">+</button>
-<button aria-label="Añadir 10 raciones de Tarta de Chocolate" class="multiplicar" type="button">+10</button>
-</div>
-</article>
-<article class="item" data-categoria="mesa-dulce" data-nombre="Cheesecake" data-precio="3.5" id="producto-cheesecake">
-<div class="info-producto">
-<img alt="Cheesecake" class="img-producto" src="images/cheesecake.jpeg"/>
-<div class="texto">
-<h3>Cheesecake</h3>
-<p>Tarta de queso para los amantes del dulce.</p>
-<span class="precio">3,50 € / ración</span>
-</div>
-</div>
-<div class="acciones">
-<button aria-label="Eliminar Cheesecake" class="reset" type="button">x</button>
-<button aria-label="Restar Cheesecake" class="menos" type="button">−</button>
-<span class="cantidad">0</span>
-<button aria-label="Añadir Cheesecake" class="mas" type="button">+</button>
-<button aria-label="Añadir 10 raciones de Cheesecake" class="multiplicar" type="button">+10</button>
-</div>
-</article>
-        </section>
-
+ 
         <section class="seccion" id="mesa-salada" aria-labelledby="titulo-mesa-salada">
           <div class="encabezado-seccion"><span class="icono-seccion" aria-hidden="true">🥗</span><div><h2 id="titulo-mesa-salada">Mesa salada</h2><p>Entrantes, bocados, ensaladas y especialidades para compartir.</p></div></div>
           <article class="item" data-categoria="mesa-salada" data-nombre="Canapé Tosta" data-precio="1" id="producto-canapé-tosta">
@@ -310,7 +222,7 @@
 </article>
 <article class="item" data-categoria="mesa-salada" data-nombre="Mini Wraps Salmón" data-precio="2" id="producto-mini-wraps-salmón">
 <div class="info-producto">
-<img alt="Mini wraps" class="img-producto" src="images/aguacate.jpeg"/>
+<img alt="Mini wraps" class="img-producto" src="images/wraps.jpeg"/>
 <div class="texto">
 <h3>Mini Wraps Salmón</h3>
 <p>Pequeños wraps para aperitivos.</p>
@@ -327,7 +239,7 @@
 </article>
 <article class="item" data-categoria="mesa-salada" data-nombre="Saladitos" data-precio="1" id="producto-saladitos">
 <div class="info-producto">
-<img alt="Saladitos variados" class="img-producto" src="images/Canape_volavanes.jpeg"/>
+<img alt="Saladitos variados" class="img-producto" src="images/saladitos.jpeg"/>
 <div class="texto">
 <h3>Saladitos</h3>
 <p>Bocados salados variados.</p>
@@ -344,7 +256,7 @@
 </article>
 <article class="item" data-categoria="mesa-salada" data-nombre="Empanadillas" data-precio="1.5" id="producto-empanadillas">
 <div class="info-producto">
-<img alt="Empanadillas" class="img-producto" src="images/canape_quiche.jpeg"/>
+<img alt="Empanadillas" class="img-producto" src="images/empanadillas.jpeg"/>
 <div class="texto">
 <h3>Empanadillas</h3>
 <p>Empanadillas para compartir.</p>
@@ -412,7 +324,7 @@
 </article>
 <article class="item" data-categoria="mesa-salada" data-nombre="Minibrioches" data-precio="2" id="producto-minibrioches">
 <div class="info-producto">
-<img alt="Minibrioches" class="img-producto" src="images/miniburguer.jpeg"/>
+<img alt="Minibrioches" class="img-producto" src="images/minibrioches.jpeg"/>
 <div class="texto">
 <h3>Minibrioches</h3>
 <p>Pequeños bocados de pan brioche.</p>
@@ -429,7 +341,7 @@
 </article>
 <article class="item" data-categoria="mesa-salada" data-nombre="Pinchitos" data-precio="1.5" id="producto-pinchitos">
 <div class="info-producto">
-<img alt="Pinchitos" class="img-producto" src="images/perritos.jpeg"/>
+<img alt="Pinchitos" class="img-producto" src="images/pinchitos.jpeg"/>
 <div class="texto">
 <h3>Pinchitos</h3>
 <p>Pinchitos para completar el aperitivo.</p>
@@ -820,7 +732,7 @@
 </article>
 <article class="item" data-categoria="mesa-salada" data-nombre="Acuarius Naranja" data-precio="1.5" id="producto-acuarius-naranja">
 <div class="info-producto">
-<img alt="Aquarius de naranja" class="img-producto" src="images/acuarius.jpeg"/>
+<img alt="Aquarius de naranja" class="img-producto" src="images/acuarius_naranja.jpeg"/>
 <div class="texto">
 <h3>Aquarius Naranja</h3>
 <p>Bebida refrescante de naranja.</p>
@@ -871,7 +783,7 @@
 </article>
 <article class="item" data-categoria="mesa-salada" data-nombre="Vino Protos" data-precio="17.5" id="producto-vino-protos">
 <div class="info-producto">
-<img alt="Vino Protos" class="img-producto" src="images/vino.jpeg"/>
+<img alt="Vino Protos" class="img-producto" src="images/vino_protos.jpeg"/>
 <div class="texto">
 <h3>Vino Protos</h3>
 <p>Botella de vino Protos.</p>
@@ -887,6 +799,98 @@
 </div>
 </article>
         </section>
+
+
+               <section class="seccion" id="mesa-dulce" aria-labelledby="titulo-mesa-dulce">
+          <div class="encabezado-seccion"><span class="icono-seccion" aria-hidden="true">🍰</span><div><h2 id="titulo-mesa-dulce">Mesa dulce</h2><p>Postres y opciones dulces para cerrar la celebración.</p></div></div>
+          <article class="item" data-categoria="mesa-dulce" data-nombre="Flan" data-precio="1.5" id="producto-flan">
+<div class="info-producto">
+<img alt="Flan" class="img-producto" src="images/flan.jpeg"/>
+<div class="texto">
+<h3>Flan</h3>
+<p>Flan tradicional.</p>
+<span class="precio">1,50 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Flan" class="reset" type="button">x</button>
+<button aria-label="Restar Flan" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Flan" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Flanes" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-dulce" data-nombre="Natillas" data-precio="1.9" id="producto-natillas">
+<div class="info-producto">
+<img alt="Natillas" class="img-producto" src="images/natillas.jpeg"/>
+<div class="texto">
+<h3>Natillas</h3>
+<p>Postre cremoso tradicional.</p>
+<span class="precio">1,90 € / unidad</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Natillas" class="reset" type="button">x</button>
+<button aria-label="Restar Natillas" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Natillas" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 Natillas" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-dulce" data-nombre="Fruta" data-precio="2.5" id="producto-fruta">
+<div class="info-producto">
+<img alt="Fruta variada" class="img-producto" src="images/fruta.jpeg"/>
+<div class="texto">
+<h3>Fruta</h3>
+<p>Fruta para terminar la comida.</p>
+<span class="precio">2,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Fruta" class="reset" type="button">x</button>
+<button aria-label="Restar Fruta" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Fruta" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Fruta" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-dulce" data-nombre="Tarta de Chocolate" data-precio="3" id="producto-tarta-de-chocolate">
+<div class="info-producto">
+<img alt="Tarta de chocolate" class="img-producto" src="images/tarta-chocolate.jpeg"/>
+<div class="texto">
+<h3>Tarta de Chocolate</h3>
+<p>Tarta de chocolate para celebraciones.</p>
+<span class="precio">3,00 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Tarta de Chocolate" class="reset" type="button">x</button>
+<button aria-label="Restar Tarta de Chocolate" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Tarta de Chocolate" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Tarta de Chocolate" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+<article class="item" data-categoria="mesa-dulce" data-nombre="Cheesecake" data-precio="3.5" id="producto-cheesecake">
+<div class="info-producto">
+<img alt="Cheesecake" class="img-producto" src="images/cheesecake.jpeg"/>
+<div class="texto">
+<h3>Cheesecake</h3>
+<p>Tarta de queso para los amantes del dulce.</p>
+<span class="precio">3,50 € / ración</span>
+</div>
+</div>
+<div class="acciones">
+<button aria-label="Eliminar Cheesecake" class="reset" type="button">x</button>
+<button aria-label="Restar Cheesecake" class="menos" type="button">−</button>
+<span class="cantidad">0</span>
+<button aria-label="Añadir Cheesecake" class="mas" type="button">+</button>
+<button aria-label="Añadir 10 raciones de Cheesecake" class="multiplicar" type="button">+10</button>
+</div>
+</article>
+        </section>
+
+
 
         <section class="seccion" id="platos-calientes" aria-labelledby="titulo-platos-calientes">
           <div class="encabezado-seccion"><span class="icono-seccion" aria-hidden="true">🍲</span><div><h2 id="titulo-platos-calientes">Platos calientes</h2><p>Arroces, carnes, guisos y platos preparados para tu evento.</p></div></div>
@@ -960,7 +964,7 @@
 </article>
 <article class="item" data-categoria="platos-calientes" data-nombre="Migas" data-precio="17.5" id="producto-migas">
 <div class="info-producto">
-<img alt="Migas" class="img-producto" src="images/paella.jpeg"/>
+<img alt="Migas" class="img-producto" src="images/migas.jpeg"/>
 <div class="texto">
 <h3>Migas</h3>
 <p>Plato tradicional para compartir.</p>
